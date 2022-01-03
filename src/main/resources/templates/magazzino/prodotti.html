@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- TODO: Documentazione -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="common-fragments.html :: headerfiles"></head>
+<body>
+<header th:insert="magazzino-fragments.html :: nav"></header>
+<div class="container-fluid">
+    <div class="row">
+        <h1>Lista Prodotti</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <a th:href="@{/magazzino/prodotti/new}" class="btn btn-primary btn-sm mb-3"> Aggiungi Prodotto </a>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th> Nome </th>
+            <th> Tipologia </th>
+            <th> Marca </th>
+            <th> Fornitura </th>
+            <th>&emsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="prodotto: ${prodotti}">
+            <td th:text="${prodotto.getNome()}"></td>
+            <td th:text="${prodotto.getTipologia()}"></td>
+            <td th:text="${prodotto.getMarca()}"></td>
+            <td>
+                <a th:href="@{/magazzino/forniture/prodotto/{id} (id=${prodotto.id})}" class="btn btn-primary"> visualizza </a>
+            </td>
+            <td>
+                <!-- TODO: da regolare il sizing -->
+                <div class="row">
+                    <div class="col">
+                        <a th:href="@{/magazzino/prodotti/edit/{id} (id=${prodotto.id})}" class="btn btn-primary sm">
+                            Modifica </a>
+                    </div>
+                    <br>
+                    <div class="col">
+                        <a th:href="@{/magazzino/prodotti/delete/{id} (id=${prodotto.id})}" class="btn btn-danger sm">
+                            Elimina </a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+<!--
+<a th:href="@{/magazzino/prodotti/edit/{id} (id=${prodotto.id})}" class="btn btn-primary">Modifica</a>
+<a th:href="@{/magazzino/prodotti/delete/{id} (id=${prodotto.id})}" class="btn btn-danger">Elimina</a>
+-->

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!-- TODO: Documentazione -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head></head>
+<body>
+<!-- Fragment #2 : Navbar contains nav links -->
+<div th:fragment="nav">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">Gestione Ristorante/Magazzino</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">               <!-- TODO: da modificare -->
+                        <a class="nav-link active" aria-current="page" href="">Home (Da modificare)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/magazzino/fornitori}">Fornitori</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/magazzino/prodotti}">Prodotti</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/magazzino/ordini}">Ordini</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/magazzino/forniture}">Forniture</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+</div>
+
+<!-- Fragment #3 : input fornitori -->
+<div th:fragment="input_fornitore">
+    <div class="form-group">
+        <label for="piva"> partita iva</label>
+        <input
+                type="text"
+                id="piva"
+                th:field="*{piva}"
+                class="form-control"
+                placeholder="Inserisci partita iva"
+        />
+    </div>
+
+    <div class="form-group">
+        <label for="nomeAzienda"> nome azienda</label>
+        <input
+                type="text"
+                id="nomeAzienda"
+                th:field="*{nomeAzienda}"
+                class="form-control"
+                placeholder="Inserisci fornitore nome azienda"
+        />
+    </div>
+
+    <div class="form-group">
+        <label for="sedeLegale"> sede legale</label>
+        <input
+                type="text"
+                id="sedeLegale"
+                th:field="*{sedeLegale}"
+                class="form-control"
+                placeholder="Inserisci fornitore sede legale"
+        />
+    </div>
+
+    <div class="form-group">
+        <label for="citta"> citta'</label>
+        <input
+                type="text"
+                id="citta"
+                th:field="*{citta}"
+                class="form-control"
+                placeholder="Inserisci fornitore citta'"
+        />
+    </div>
+    <br>
+    <div class="footer-body">
+        <button type="submit" class="btn btn-primary"> Crea</button>
+    </div>
+</div>
+
+<!-- Fragment #4 : input ordine -->
+<div th:fragment="input_ordine">
+    <div class="form-group">
+        <label for="codiceOrdine"> Codice ordine </label>
+        <input
+                type="text"
+                id="codiceOrdine"
+                th:field="*{codiceOrdine}"
+                class="form-control"
+                placeholder="Inserisci codice ordine"
+        />
+    </div>
+
+    <div class="form-group">
+        <label for="dataRichiesta"> Data richiesta ordine </label>
+        <input
+                type="date"
+                id="dataRichiesta"
+                th:field="*{dataRichiesta}"
+                class="form-control"
+                placeholder="Inserisci data richiesta ordine"
+        />
+    </div>
+
+    <div class="form-group">
+        <p>
+            <br>
+            <label for="ordineEvaso"> Evaso (DA IMPLEMENTARE) </label>
+            <input
+                    type="checkbox"
+                    id="ordineEvaso"
+                    th:field="*{ordineEvaso}"
+            />
+        </p>
+    </div>
+
+    <div class="form-group">
+        <label for="nota"> Nota ordine </label>
+        <textarea
+                id="nota"
+                th:field="*{nota}"
+                class="form-control"
+                rows="5"
+        ></textarea>
+
+    </div>
+    <br>
+    <div class="footer-body">
+        <button type="submit" class="btn btn-primary"> Aggiorna</button>
+    </div>
+</div>
+
+<!-- Fragment #5 : input prodotto -->
+<div th:fragment="input_prodotto">
+    <div class="form-group">
+        <label for="nome"> Nome </label>
+        <input
+                type="text"
+                id="nome"
+                th:field="*{nome}"
+                class="form-control"
+                placeholder="Inserisci nome prodotto"
+        />
+    </div>
+    <div class="form-group">
+        <label for="tipologia"> Tipologia </label>
+        <input
+                type="text"
+                id="tipologia"
+                th:field="*{tipologia}"
+                class="form-control"
+                placeholder="Inserisci tipologia prodotto"
+        />
+    </div>
+
+    <div class="form-group">
+        <label for="marca"> Marca </label>
+        <input
+                type="text"
+                id="marca"
+                th:field="*{marca}"
+                class="form-control"
+                placeholder="Inserisci marca"
+        />
+    </div>
+
+    <br>
+    <div class="footer-body">
+        <button type="submit" class="btn btn-primary"> Crea</button>
+    </div>
+</div>
+
+<!-- Fragment #6 : bottone aggiungi fornitura di fornitore -->
+<div class="row" th:fragment="aggiunge_fornitura_fornitore">
+    <div class="col-lg-3">
+        <a th:href="@{'/magazzino/forniture/fornitore/' + ${id} + '/new'}" class="btn btn-primary btn-sm mb-3">Aggiungi fornitura</a>
+    </div>
+</div>
+
+<!--
+<div class="row" th:fragment="">
+    <div class="col">
+        <a th:href="@{/magazzino/fornitori/edit/{id} (id=${entry.key.getId()})}" class="btn btn-primary sm">
+            modifica </a>
+    </div>
+    <br>
+    <div class="col">
+        <a th:href="@{/magazzino/fornitori/delete/{id} (id=${entry.key.getId()})}" class="btn btn-danger sm">
+            elimina </a>
+    </div>
+</div>
+-->
+</body>
+</html>

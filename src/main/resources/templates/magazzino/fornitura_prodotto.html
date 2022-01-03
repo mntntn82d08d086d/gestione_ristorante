@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- TODO: Documentazione -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="common-fragments.html :: headerfiles"></head>
+<body>
+<header th:insert="magazzino-fragments.html :: nav"></header>
+
+<div class="container-fluid" th:if="${fornitura.isEmpty()}">
+    <div class="row">
+        <h1 th:text="'Fornitura non presente'"></h1>
+        <!-- TODO: eventualità da implementare -->
+    </div>
+</div>
+
+<div class="container-fluid" th:unless="${fornitura.isEmpty()}">
+    <div class="row">
+        <h1 th:text="'Dettagli fornitura ' + ${prodotto.getNome()}"></h1>
+    </div>
+    <br>
+    <div class="card">
+        <h5 class="card-header"> Fornitura </h5>
+        <div class="card-body">
+            <h6 class="card-title" th:text="'Prezzo unitario: ' + ${fornitura.get().getPrezzoUnitario()}"></h6>
+            <h6 class="card-title" th:text="'Tempo consegna: ' + ${fornitura.get().getTempoConsegna()} + ' giorno/i'"></h6>
+            <!-- TODO: da implementare -->
+            <a th:href="'/magazzino/fornitura/prodotto/edit/' + ${prodotto.getId()}" class="btn btn-primary"> modifica </a>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <h5 class="card-header"> Fornitore </h5>
+        <div class="card-body">
+            <h6 class="card-title" th:text="'Nome: ' + ${fornitore.getNomeAzienda()}"></h6>
+            <h6 class="card-title" th:text="'Indirizzo: ' + ${fornitore.getSedeLegale()} + ' '
+                + ${fornitore.getCitta()}"></h6>
+            <th:block th:each="contatto, i: ${fornitore.getContatti()}">
+                <h6 class="card-title" th:text="'Contatto ' + ${i.index+1} + ': '
+                + ${contatto.getTipologia()} + ' ' + ${contatto.getSuffix()} + ' '
+                + ${contatto.getContatto()} "></h6>
+            </th:block>
+            <!-- TODO: da implementare -->
+            <a th:href="'/magazzino/fornitori/details/' + ${fornitore.getId()}" class="btn btn-primary"> visualizza </a>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <h5 class="card-header"> Prodotto </h5>
+        <div class="card-body">
+            <h6 class="card-title" th:text="'Nome: ' + ${prodotto.getNome()}"></h6>
+            <h6 class="card-title" th:text="'Tipologia: ' + ${prodotto.getTipologia()}"></h6>
+            <h6 class="card-title" th:text="'Marca: ' + ${prodotto.getMarca()}"></h6>
+            <!-- TODO: da implementare -->
+            <a th:href="'/magazzino/prodotti/details/' + ${prodotto.getId()}" class="btn btn-primary"> visualizza </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

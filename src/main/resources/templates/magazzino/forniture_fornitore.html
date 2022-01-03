@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!-- TODO: Documentazione -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="common-fragments.html :: headerfiles"></head>
+<body>
+<header th:insert="magazzino-fragments.html :: nav"></header>
+<div class="container-fluid" th:if="${forniture.isEmpty()}">
+    <div class="row">
+        <h1 th:text="'Forniture non presenti'"></h1>
+        <!-- TODO: eventualità da implementare -->
+    </div>
+    <header th:insert="magazzino-fragments.html :: aggiunge_fornitura"></header>
+</div>
+
+<div class="container-fluid" th:unless="${forniture.isEmpty()}">
+    <div class="row">
+        <h1 th:text="'Fornitura Fornitore: ' + ${forniture.get(0).getFornitore().getNomeAzienda()}"></h1>
+    </div>
+    <header th:insert="magazzino-fragments.html :: aggiunge_fornitura_fornitore"></header>
+</div>
+
+</body>
+</html>

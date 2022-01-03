@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!-- TODO: Documentazione -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="common-fragments.html :: headerfiles"></head>
+<body>
+<header th:insert="magazzino-fragments.html :: nav"></header>
+<div class="container-fuild">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center"> Crea nuovo fornitore</h1>
+            <div class="card-body">
+                <form th:action="@{/magazzino/fornitori/new}" th:object="${fornitore}" method="POST">
+                    <header th:insert="magazzino-fragments.html :: input_fornitore"></header>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

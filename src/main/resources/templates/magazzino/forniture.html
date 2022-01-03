@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- TODO: Documentazione -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="common-fragments.html :: headerfiles"></head>
+<body>
+<header th:insert="magazzino-fragments.html :: nav"></header>
+<div class="container-fluid">
+    <div class="row">
+        <h1>Lista Forniture</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <a th:href="@{/magazzino/forniture/new}" class="btn btn-primary btn-sm mb-3">Aggiungi fornitura</a>
+        </div>
+    </div>
+
+    <th:block th:each="relazione: ${forniture}">
+    <div class="row border">
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> Fornitore </h5>
+                    <p class="card-text" th:text="'Nome: ' + ${relazione.getFornitore().getNomeAzienda()}"></p>
+                    <p class="card-text" th:text="'Indirizzo: ' + ${relazione.getFornitore().getSedeLegale()}"></p>
+                    <p class="card-text" th:text="'Città: ' + ${relazione.getFornitore().getCitta()}"></p>
+                    <a th:href="'/fornitori/details/' + ${relazione.getFornitore().getId()}" class="btn btn-primary">
+                        visualizza </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> Prodotto </h5>
+                    <p class="card-text" th:text="'Nome: ' + ${relazione.getProdotto().getNome()}"></p>
+                    <p class="card-text" th:text="'Tipologia: ' + ${relazione.getProdotto().getTipologia()}"></p>
+                    <p class="card-text" th:text="'Marca: ' + ${relazione.getProdotto().getMarca()}"></p>
+                    <a th:href="'/prodotti/details/' + ${relazione.getProdotto().getId()}" class="btn btn-primary">
+                        visualizza </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> Fornitura </h5>
+                    <p class="card-text" th:text="'Prezzo unitario: ' + ${relazione.getPrezzoUnitario()}"></p>
+                    <p class="card-text" th:text="'Tempo consegna: ' + ${relazione.getTempoConsegna()}"></p>
+                    <a th:href="'/prodotti/details/' + ${relazione.getProdotto().getId()}" class="btn btn-primary">
+                        visualizza </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <!-- TODO: da implementare -->
+                    <p><a href="#" class="btn btn-primary"> fai ordine </a></p>
+                    <p><a href="#" class="btn btn-primary"> elimina relazione </a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </th:block>
+</div>
+</body>
+</html>

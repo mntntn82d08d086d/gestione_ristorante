@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- TODO: Documentazione -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="magazzino-fragments.html :: headerfiles"></head>
+<body>
+<header th:insert="magazzino-fragments.html :: nav"></header>
+<div class="container-fluid">
+    <div class="row">
+        <h1>Lista Ordini</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <a th:href="@{/magazzino/ordini/new}" class="btn btn-primary btn-sm mb-3"> Aggiungi ordine </a>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered align-middle">
+        <thead class="table-dark">
+        <tr>
+            <th> Codice Ordine </th>
+            <th> Data Richiesta </th>
+            <th> Ordine Evaso </th>
+            <th> Nota </th>
+            <th> Fornitori </th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ordine: ${ordini}">
+            <td th:text="${ordine.getCodiceOrdine()}"></td>
+            <td th:text="${ordine.getDataRichiesta()}"></td>
+
+            <td >
+                <th:block th:if="${ordine.getOrdineEvaso()}">
+                    <span>
+                    <input class="btn-check" type="checkbox" id="evaso"
+                       th:checked="${ordine.getOrdineEvaso()}" autocomplete="off" disabled/>
+                    <label class="btn btn-primary btn-sm mb-3" for="evaso">evaso</label>
+                    </span>
+                    <span>&nbsp;</span>
+                    <span>
+                        <a th:href="@{/magazzino/ordini/{id}/dettali_ordine (id=${ordine.id})}"
+                           class="btn btn-primary btn-sm mb-3"> visualizza </a>
+                    </span>
+                </th:block>
+                <th:block th:unless="${ordine.getOrdineEvaso()}">
+                    <input class="btn-check" type="checkbox"
+                       th:checked="${ordine.getOrdineEvaso()}" />
+                    <span>
+                        <a th:href="@{/magazzino/ordini/{id}/dettali_ordine (id=${ordine.id})}"
+                           class="btn btn-primary btn-sm mb-3"> evadi ordine </a>
+                    </span>
+                </th:block>
+            </td>
+
+            <td th:text="${ordine.getNota()}"></td>
+            <td>
+<!--
+                <p th:each="contatto: ${fornitore.contatti}">
+                    <span th:text="${contatto.tipologia}"></span>
+                    <span th:text="${contatto.suffix}"></span>
+                    <span th:text="${contatto.contatto}"></span>
+                    <a th:href="@{/fornitori/edit/{id}/contatto (id=${fornitore.id})}"
+                       class="btn btn-primary btn-sm mb-3">Aggiorna</a>
+                </p>
+                <p>
+                    <a th:href="@{/fornitori/edit/{id}/nuovo_contatto (id=${fornitore.id})}"
+                       class="btn btn-primary btn-sm mb-3">Aggiungi</a>
+                </p>
+-->
+                <!-- TODO: da implementare -->
+                <a th:href="@{/magazzino/ordini/{id}/dettali_ordine (id=${ordine.id})}"
+                   class="btn btn-primary btn-sm mb-3"> visualizza </a>
+            </td>
+            <td>
+                <a th:href="@{/magazzino/ordini/edit/{id} (id=${ordine.id})}" class="btn btn-primary">Modifica</a>
+                <a th:href="@{/magazzino/ordini/delete/{id} (id=${ordine.id})}" class="btn btn-danger">Elimina</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

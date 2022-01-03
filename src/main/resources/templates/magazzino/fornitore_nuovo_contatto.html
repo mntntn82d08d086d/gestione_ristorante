@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- TODO: Documentazione -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="magazzino-fragments.html :: headerfiles"></head>
+<body>
+<header th:insert="magazzino-fragments.html :: nav"></header>
+<div class="container-fuild">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center">Fornitore</h1>
+            <div class="card-body">
+                <h6 th:text="'partita iva: ' + ${fornitore.piva}"></h6>
+                <h6 th:text="'nome azienda: ' + ${fornitore.nomeAzienda}"></h6>
+                <h6 th:text="'sede legale: ' + ${fornitore.sedeLegale}"></h6>
+                <h6 th:text="'citta\': ' + ${fornitore.citta}"></h6>
+                <h4>Contatto</h4>
+                <form th:action="@{/fornitori/{id}/contatto (id=${fornitore.getId()})}" th:object="${contatto}" method="POST">
+                    <div class="form-group">
+                        <label> tipologia </label>
+                        <select th:field="*{tipologia}" class="form-select"
+                                aria-label="Default select example">
+                            <option th:value="${contatto}">&nbsp;</option>
+                            <option th:value="${contatto.tipologia.TELEFONO}" th:text="${contatto.tipologia.TELEFONO}"></option>
+                            <option th:value="${contatto.tipologia.EMAIL}" th:text="${contatto.tipologia.EMAIL}"></option>
+                            <option th:value="${contatto.tipologia.FAX}" th:text="${contatto.tipologia.FAX}"></option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label> suffisso </label>
+                        <select th:field="*{suffix}" class="form-select"
+                                aria-label="Default select example">
+                            <option th:value="${suffix.NS}" th:text="${suffix.NS}"></option>
+                            <option th:value="${suffix.PRINCIPALE}" th:text="${suffix.PRINCIPALE}"></option>
+                            <option th:value="${suffix.SECONDARIO}" th:text="${suffix.SECONDARIO}"></option>
+                            <option th:value="${suffix.LAVORO}" th:text="${suffix.LAVORO}"></option>
+                            <option th:value="${suffix.PERSONALE}" th:text="${suffix.PERSONALE}"></option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="contatto"> contatto </label>
+                        <input
+                                type="text"
+                                id="contatto"
+                                th:field="*{contatto}"
+                                class="form-control"
+                                placeholder="Inserisci contatto fornitore"
+                        />
+                    </div>
+                    <br>
+                    <div class="footer-body">
+                        <button type="submit" class="btn btn-primary"> Crea </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
