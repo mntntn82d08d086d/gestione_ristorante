@@ -66,5 +66,10 @@ public class R_FPController {
     // /magazzino/forniture/new
 
     // TODO: da implementare
-    // /magazzino/forniture/fornitore/{id}/new
+    @GetMapping("/magazzino/forniture/fornitore/{id}/new")
+    public String createFornituraFornitore(@PathVariable("id") Long id, Model model) {
+        Fornitore fornitore = fornitoreService.getFornitoreById(id);
+
+        return "magazzino/create_fornitura_fornitore";
+    }
 }

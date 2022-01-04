@@ -2,6 +2,8 @@ package org.labsis.gestione_ristorante.controller.magazzino;
 
 import org.labsis.gestione_ristorante.entity.common.Contatto;
 import org.labsis.gestione_ristorante.entity.magazzino.Fornitore;
+import org.labsis.gestione_ristorante.entity.magazzino.Prodotto;
+import org.labsis.gestione_ristorante.entity.magazzino.R_FP;
 import org.labsis.gestione_ristorante.service.common.ContattoService;
 import org.labsis.gestione_ristorante.service.magazzino.FornitoreService;
 import org.labsis.gestione_ristorante.service.magazzino.R_FPService;
@@ -28,35 +30,46 @@ public class FornitoreController {
     private ContattoService contattoService;
 
     @Autowired
-    private R_FPService relazioniFpService;
+    private R_FPService rFpService;
 
+    // TODO: da implementare la presentazione delle forniture
     @GetMapping(value = "/magazzino/fornitori")
     public String getAllFornitori(Model model) {
         Map<Fornitore, Integer> map = new HashMap<>();
         List<Fornitore> fornitori = service.getAllFornitori();
         for(Fornitore f : fornitori) {
-            Integer countForniture = relazioniFpService.countFornitureByFornitoreId(f.getId());
+            Integer countForniture = rFpService.countFornitureByFornitoreId(f.getId());
             map.put(f,countForniture);
         }
         model.addAttribute("fornitori", map);
         return "magazzino/fornitori";
     }
 
+    // TODO: da implementare l'eventualità di aggiungere una fornitura
     @GetMapping("/magazzino/fornitori/new")
     public String createFornitore(Model model) {
-
-        // create fornitore object to hold fornitore form data
         Fornitore fornitore = new Fornitore();
+/*
+        Prodotto prodotto = new Prodotto();
+        R_FP fornitura = new R_FP();
+*/
         model.addAttribute("fornitore", fornitore);
+/*
+        model.addAttribute("prodotto", prodotto);
+        model.addAttribute("fornitura", fornitura);
+*/
         return "magazzino/create_fornitore";
     }
 
     @PostMapping("/magazzino/fornitori/new")
-    public String saveFornitore(@ModelAttribute("fornitore") Fornitore fornitore) {
+    public String saveFornitore(@ModelAttribute("fornitore") Fornitore fornitore/*,
+                                @ModelAttribute("prodotto") Prodotto prodotto,
+                                @ModelAttribute("fornitura") R_FP fornitura*/) {
         service.saveFornitore(fornitore);
         return "redirect:/magazzino/fornitori";
     }
 
+    // TODO: implementare l'eventualità di modifica fornitura
     @GetMapping("/magazzino/fornitori/edit/{id}")
     public String editFornitore(@PathVariable("id") Long id, Model model) {
         Fornitore fornitore = service.getFornitoreById(id);
