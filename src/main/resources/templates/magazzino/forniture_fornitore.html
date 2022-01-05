@@ -3,20 +3,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="common-fragments.html :: headerfiles"></head>
 <body>
-<header th:insert="magazzino-fragments.html :: nav"></header>
+<th:block th:insert="magazzino-fragments.html :: nav"></th:block>
 <div class="container-fluid" th:if="${forniture.isEmpty()}">
     <div class="row">
         <h1 th:text="'Forniture non presenti'"></h1>
         <!-- TODO: eventualità da implementare -->
     </div>
-    <header th:insert="magazzino-fragments.html :: aggiunge_fornitura"></header>
+    <th:block th:insert="magazzino-fragments.html :: aggiunge_fornitura"></th:block>
 </div>
 
 <div class="container-fluid" th:unless="${forniture.isEmpty()}">
     <div class="row">
         <h1 th:text="'Fornitura Fornitore: ' + ${forniture.get(0).getFornitore().getNomeAzienda()}"></h1>
     </div>
-    <header th:insert="magazzino-fragments.html :: aggiunge_fornitura_fornitore"></header>
+    <th:block th:insert="magazzino-fragments.html :: aggiunge_fornitura_fornitore"></th:block>
 </div>
 
 </body>

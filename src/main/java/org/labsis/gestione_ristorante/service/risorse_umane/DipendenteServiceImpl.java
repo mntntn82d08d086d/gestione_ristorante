@@ -1,9 +1,11 @@
 package org.labsis.gestione_ristorante.service.risorse_umane;
 
+import lombok.RequiredArgsConstructor;
 import org.labsis.gestione_ristorante.entity.risorse_umane.Dipendente;
 import org.labsis.gestione_ristorante.repository.risorse_umane.DipendenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,10 +14,12 @@ import java.util.List;
  */
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class DipendenteServiceImpl implements DipendenteService {
 
     @Autowired
-    private DipendenteRepository repository;
+    private final DipendenteRepository repository;
 
     @Override
     public List<Dipendente> getAllDipendenti() {

@@ -3,14 +3,14 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:insert="common-fragments.html :: headerfiles"></head>
 <body>
-<header th:insert="risorse_umane-fragments.html :: nav"></header>
+<th:block th:insert="risorse_umane-fragments.html :: nav"></th:block>
 <div class="container-fuild">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
             <h1 class="text-center"> Crea nuovo dipendente</h1>
             <div class="card-body">
                 <form th:action="@{/risorse_umane/dipendenti/new}" th:object="${dipendente}" method="POST">
-                    <header th:insert="risorse_umane-fragments.html :: input_dipendente"></header>
+                    <th:block th:insert="risorse_umane-fragments.html :: input_dipendente"></th:block>
                 </form>
             </div>
         </div>

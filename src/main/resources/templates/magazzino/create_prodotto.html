@@ -3,14 +3,14 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:insert="common-fragments.html :: headerfiles"></head>
 <body>
-<header th:insert="magazzino-fragments.html :: nav"></header>
+<th:block th:insert="magazzino-fragments.html :: nav"></th:block>
 <div class="container-fuild">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
             <h1 class="text-center"> Crea nuovo prodotto</h1>
             <div class="card-body">
                 <form th:action="@{/magazzino/prodotti/new}" th:object="${prodotto}" method="POST">
-                    <header th:insert="magazzino-fragments.html :: input_prodotto"></header>
+                    <th:block th:insert="magazzino-fragments.html :: input_prodotto"></th:block>
                 </form>
             </div>
         </div>

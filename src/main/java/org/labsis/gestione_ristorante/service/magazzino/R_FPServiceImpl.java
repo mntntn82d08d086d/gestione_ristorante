@@ -1,9 +1,11 @@
 package org.labsis.gestione_ristorante.service.magazzino;
 
+import lombok.RequiredArgsConstructor;
 import org.labsis.gestione_ristorante.entity.magazzino.R_FP;
 import org.labsis.gestione_ristorante.repository.magazzino.R_FPRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,10 +15,12 @@ import java.util.Optional;
  */
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class R_FPServiceImpl implements R_FPService {
 
     @Autowired
-    private R_FPRepository repository;
+    private final R_FPRepository repository;
 
     @Override
     public List<R_FP> getAllForniture() {

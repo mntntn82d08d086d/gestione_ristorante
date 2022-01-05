@@ -1,9 +1,11 @@
 package org.labsis.gestione_ristorante.service.magazzino;
 
+import lombok.RequiredArgsConstructor;
 import org.labsis.gestione_ristorante.entity.magazzino.Ordine;
 import org.labsis.gestione_ristorante.repository.magazzino.OrdineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,10 +14,12 @@ import java.util.List;
  */
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class OrdineServiceImpl implements OrdineService {
 
     @Autowired
-    private OrdineRepository repository;
+    private final OrdineRepository repository;
 
     public List<Ordine> getAllOrdine() {
         return repository.findAll();

@@ -1,19 +1,23 @@
 package org.labsis.gestione_ristorante.service.common;
 
+import lombok.RequiredArgsConstructor;
 import org.labsis.gestione_ristorante.entity.common.Contatto;
 import org.labsis.gestione_ristorante.repository.common.ContattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * TODO: Documentazione
  */
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class ContattoServiceImpl implements ContattoService {
 
     @Autowired
-    private ContattoRepository repository;
+    private final ContattoRepository repository;
 
     @Override
     public Contatto getContattoById(Long id) {

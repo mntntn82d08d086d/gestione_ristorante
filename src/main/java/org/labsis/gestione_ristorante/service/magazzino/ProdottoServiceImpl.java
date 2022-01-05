@@ -1,9 +1,11 @@
 package org.labsis.gestione_ristorante.service.magazzino;
 
+import lombok.RequiredArgsConstructor;
 import org.labsis.gestione_ristorante.entity.magazzino.Prodotto;
 import org.labsis.gestione_ristorante.repository.magazzino.ProdottoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,10 +14,12 @@ import java.util.List;
  */
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class ProdottoServiceImpl implements ProdottoService {
 
     @Autowired
-    private ProdottoRepository repository;
+    private final ProdottoRepository repository;
 
     @Override
     public List<Prodotto> getAllProdotto() {

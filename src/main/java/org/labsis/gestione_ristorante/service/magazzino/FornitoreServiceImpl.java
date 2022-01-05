@@ -1,9 +1,11 @@
 package org.labsis.gestione_ristorante.service.magazzino;
 
+import lombok.RequiredArgsConstructor;
 import org.labsis.gestione_ristorante.entity.magazzino.Fornitore;
 import org.labsis.gestione_ristorante.repository.magazzino.FornitoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,10 +15,12 @@ import java.util.List;
  */
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class FornitoreServiceImpl implements FornitoreService, Serializable {
 
     @Autowired
-    private FornitoreRepository repository;
+    private final FornitoreRepository repository;
 
     @Override
     public List<Fornitore> getAllFornitori() {
