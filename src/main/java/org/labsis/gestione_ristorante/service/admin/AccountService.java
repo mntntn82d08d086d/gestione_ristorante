@@ -1,7 +1,7 @@
 package org.labsis.gestione_ristorante.service.admin;
 
 import org.labsis.gestione_ristorante.entity.admin.Account;
-import org.labsis.gestione_ristorante.entity.admin.Role;
+import org.labsis.gestione_ristorante.entity.admin.OldRole;
 
 import java.util.List;
 
@@ -15,12 +15,12 @@ public interface AccountService {
 
     Account saveAccount(Account account);
 
-    void saveAccountRole(Long id, Role role);
+    //void saveAccountRole(Long id, OldRole role);
 
     Account getAccountById(Long id);
 
     Account updateAccount(Account account);
 
-    Role updateAccountRole(Long id, Role role);
+    OldRole updateAccountRole(Long id, OldRole oldRole);
 
 }

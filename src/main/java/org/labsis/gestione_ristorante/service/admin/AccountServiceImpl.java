@@ -3,21 +3,14 @@ package org.labsis.gestione_ristorante.service.admin;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.labsis.gestione_ristorante.entity.admin.Account;
-import org.labsis.gestione_ristorante.entity.admin.Role;
+import org.labsis.gestione_ristorante.entity.admin.OldRole;
 import org.labsis.gestione_ristorante.repository.admin.AccountRepository;
 import org.labsis.gestione_ristorante.repository.admin.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -28,7 +21,7 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 @Slf4j
-public class AccountServiceImpl implements AccountService, UserDetailsService {
+public class AccountServiceImpl implements AccountService/*, UserDetailsService */{
 
     @Autowired
     private final AccountRepository repository;
@@ -51,13 +44,15 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
     }
 
     // TODO: testare il metodo
+/*
     @Override
-    public void saveAccountRole(Long id, Role role) {
+    public void saveAccountRole(Long id, OldRole role) {
         Account account = repository.getById(id);
         account.addRole(role);
         roleRepository.save(role);
         repository.save(account);
     }
+*/
 
     // TODO: implementare il metodo con Optional
     @Override
@@ -72,10 +67,11 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
 
     // TODO: valutare l'uso del metodo
     @Override
-    public Role updateAccountRole(Long id, Role role) {
+    public OldRole updateAccountRole(Long id, OldRole oldRole) {
         return null;
     }
 
+/*
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = repository.findAccountByUsername(username);
@@ -87,8 +83,9 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         account.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getRole()));
+            authorities.add(new SimpleGrantedAuthority(role.getOldRole()));
         });
         return new User(account.getUsername(), account.getPassword(), authorities);
     }
+    */
 }

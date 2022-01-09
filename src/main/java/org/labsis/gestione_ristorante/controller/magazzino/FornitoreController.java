@@ -21,6 +21,7 @@ import java.util.Map;
  */
 
 @Controller
+@RequestMapping("/magazzino")
 public class FornitoreController {
 
     @Autowired
@@ -33,7 +34,7 @@ public class FornitoreController {
     private R_FPService rFpService;
 
     // TODO: da implementare la presentazione delle forniture
-    @GetMapping(value = "/magazzino/fornitori")
+    @GetMapping(value = "/fornitori")
     public String getAllFornitori(Model model) {
         Map<Fornitore, Integer> map = new HashMap<>();
         List<Fornitore> fornitori = service.getAllFornitori();
@@ -46,7 +47,7 @@ public class FornitoreController {
     }
 
     // TODO: da implementare l'eventualità di aggiungere una fornitura
-    @GetMapping("/magazzino/fornitori/new")
+    @GetMapping("/fornitori/new")
     public String createFornitore(Model model) {
         Fornitore fornitore = new Fornitore();
 /*
@@ -61,7 +62,7 @@ public class FornitoreController {
         return "magazzino/create_fornitore";
     }
 
-    @PostMapping("/magazzino/fornitori/new")
+    @PostMapping("/fornitori/new")
     public String saveFornitore(@ModelAttribute("fornitore") Fornitore fornitore/*,
                                 @ModelAttribute("prodotto") Prodotto prodotto,
                                 @ModelAttribute("fornitura") R_FP fornitura*/) {
@@ -70,14 +71,14 @@ public class FornitoreController {
     }
 
     // TODO: implementare l'eventualità di modifica fornitura
-    @GetMapping("/magazzino/fornitori/edit/{id}")
+    @GetMapping("/fornitori/edit/{id}")
     public String editFornitore(@PathVariable("id") Long id, Model model) {
         Fornitore fornitore = service.getFornitoreById(id);
         model.addAttribute("fornitore", fornitore);
         return "magazzino/edit_fornitore";
     }
 
-    @PostMapping("/magazzino/fornitori/edit/{id}")
+    @PostMapping("/fornitori/edit/{id}")
     public String updateFornitore(@PathVariable Long id,
                                   @ModelAttribute("fornitore") Fornitore fornitore,
                                   Model model) {
@@ -93,7 +94,7 @@ public class FornitoreController {
         return "redirect:/magazzino/fornitori";
     }
 
-    @GetMapping("/magazzino/fornitori/edit/{id}/new_contatto")
+    @GetMapping("/fornitori/edit/{id}/new_contatto")
     public String editFornitoreContatti(@PathVariable("id") Long id, Model model) {
         Fornitore fornitore = service.getFornitoreById(id);
         Contatto contatto = new Contatto();
@@ -106,7 +107,7 @@ public class FornitoreController {
         return "magazzino/fornitore_nuovo_contatto";
     }
 
-    @PostMapping("/magazzino/fornitori/{id}/update_contatto")
+    @PostMapping("/fornitori/{id}/update_contatto")
     public String addContattoFornitore(@PathVariable Long id,
                                   @ModelAttribute("fornitore") Fornitore fornitore,
                                   @ModelAttribute("contatto") Contatto contatto,
@@ -114,14 +115,14 @@ public class FornitoreController {
         // get fornitore from database by id
         Fornitore existingFornitore = service.getFornitoreById(id);
         contattoService.saveContatto(contatto);
-        existingFornitore.addContatto(contatto);
+        //existingFornitore.addContatto(contatto);
 
         // save updated fornitore object
         service.updateFornitore(existingFornitore);
         return "redirect:/magazzino/fornitori";
     }
 
-    @GetMapping("/magazzino/fornitori/delete/{id}")
+    @GetMapping("/fornitori/delete/{id}")
     public String deleteFornitoreById(@PathVariable Long id) {
         service.deleteFornitoreById(id);
         return "redirect:/magazzino/fornitori";
