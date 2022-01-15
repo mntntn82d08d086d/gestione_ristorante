@@ -1,53 +1,74 @@
 package org.labsis.gestione_ristorante.entity.admin;
 
-import lombok.*;
+import com.google.common.base.Objects;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import static javax.persistence.FetchType.*;
 
 /**
  * TODO: Documentazione
  */
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Account implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_account")
-    @SequenceGenerator(
-            name = "seq_account",
-            sequenceName = "seq_account",
-            initialValue = 1,
-            allocationSize = 100
-    )
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Column(name = "username", nullable = false, length = 90)
-    private String username;
-
-    @Column(name = "email", nullable = false, length = 90)
-    private String email;
+    @EmbeddedId
+    private AccountKey id;
 
     @Lob
     @Column(name = "password", nullable = false)
     private String password;
 
-    public Account(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
+    public Account() {
+    }
+
+    public Account(AccountKey id, String password) {
+        this.id = id;
         this.password = password;
     }
 
-/*
+    public AccountKey getId() {
+        return id;
+    }
+
+    public void setId(AccountKey id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Account)) return false;
+        Account account = (Account) o;
+        return Objects.equal(getId(), account.getId()) &&
+                Objects.equal(getPassword(), account.getPassword());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId(), getPassword());
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    /*
     @Transient
     public void addRole(OldRole role) {
         roles.add(role);
@@ -70,5 +91,6 @@ public class Account implements Serializable {
         return false;
     }
 */
+
 
 }

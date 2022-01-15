@@ -19,8 +19,10 @@ import java.util.List;
 //@RequestMapping("/api")
 public class AccountController {
 
+/*
     @Autowired
     private AccountService service;
+*/
 
 /*    @GetMapping("/users")
     public ResponseEntity<List<Account>> getAllAccount() {

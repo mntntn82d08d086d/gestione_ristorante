@@ -1,46 +1,66 @@
 package org.labsis.gestione_ristorante.entity.admin;
 
+import com.google.common.base.Objects;
 import lombok.*;
+import org.labsis.gestione_ristorante.entity.common.Utente;
 import org.labsis.gestione_ristorante.entity.common.UtenteAbstract;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Objects;
+
+import static javax.persistence.CascadeType.*;
+import static javax.persistence.FetchType.*;
 
 /**
  * TODO: Documentazione
  */
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Socio extends UtenteAbstract implements Serializable {
+public class Socio extends UtenteAbstract implements Utente {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_socio")
-    @SequenceGenerator(
-            name = "seq_socio",
-            sequenceName = "seq_socio",
-            initialValue = 1,
-            allocationSize = 100
-    )
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @OneToOne(optional = false, orphanRemoval = true)
+    private Account account;
 
-/*
-    @OneToMany(mappedBy = "socio", orphanRemoval = true)
-    private Set<R_OS> r_os = new LinkedHashSet<>();
-*/
+    public Socio() {
+        super();
+        this.account = new Account();
+    }
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
-    @JoinColumn(name = "account_id", nullable = false)
-    private Account account = new Account();
-
-    public Socio(String codiceFiscale, String nome, String cognome,
-                 Date dataDiNascita, String indirizzo, String citta, Account account) {
+    public Socio(String codiceFiscale, String nome, String cognome, Date dataDiNascita, String indirizzo, String citta, Account account) {
         super(codiceFiscale, nome, cognome, dataDiNascita, indirizzo, citta);
         this.account = account;
+    }
+
+    @Override
+    public Account getAccount() {
+        return account;
+    }
+
+    @Override
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Socio)) return false;
+        if (!super.equals(o)) return false;
+        Socio socio = (Socio) o;
+        return Objects.equal(getAccount(), socio.getAccount());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(super.hashCode(), getAccount());
+    }
+
+    @Override
+    public String toString() {
+        return "Socio{" +
+                super.toString() +
+                ", account=" + account +
+                '}';
     }
 }

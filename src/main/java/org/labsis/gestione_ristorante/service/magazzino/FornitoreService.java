@@ -14,9 +14,9 @@ public interface FornitoreService {
 
     Fornitore saveFornitore(Fornitore fornitore);
 
-    Fornitore getFornitoreById(Long id);
+    Fornitore getFornitoreById(String id);
 
     Fornitore updateFornitore(Fornitore fornitore);
 
-    void deleteFornitoreById(Long id);
+    void deleteFornitoreById(String id);
 }

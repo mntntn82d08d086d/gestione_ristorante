@@ -1,6 +1,6 @@
 package org.labsis.gestione_ristorante.entity.magazzino;
 
-import lombok.*;
+import com.google.common.base.Objects;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,9 +11,6 @@ import java.sql.Date;
  */
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Ordine implements Serializable {
 
     @Id
@@ -21,8 +18,7 @@ public class Ordine implements Serializable {
     @SequenceGenerator(
             name = "seq_ordine",
             sequenceName = "seq_ordine",
-            initialValue = 1,
-            allocationSize = 100
+            allocationSize = 1
     )
     @Column(name = "id", nullable = false)
     private Long id;
@@ -48,6 +44,17 @@ public class Ordine implements Serializable {
     @OneToMany
     private Set<R_OS> r_os;
 */
+
+    public Ordine() {
+    }
+
+    public Ordine(Long id, String codiceOrdine, Date dataRichiesta, Boolean ordineEvaso, String nota) {
+        this.id = id;
+        this.codiceOrdine = codiceOrdine;
+        this.dataRichiesta = dataRichiesta;
+        this.ordineEvaso = ordineEvaso;
+        this.nota = nota;
+    }
 
     public Ordine(String codiceOrdine, Date dataRichiesta, Boolean ordineEvaso, String nota) {
         this.codiceOrdine = codiceOrdine;
@@ -79,4 +86,67 @@ public class Ordine implements Serializable {
     }
 */
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCodiceOrdine() {
+        return codiceOrdine;
+    }
+
+    public void setCodiceOrdine(String codiceOrdine) {
+        this.codiceOrdine = codiceOrdine;
+    }
+
+    public Date getDataRichiesta() {
+        return dataRichiesta;
+    }
+
+    public void setDataRichiesta(Date dataRichiesta) {
+        this.dataRichiesta = dataRichiesta;
+    }
+
+    public Boolean getOrdineEvaso() {
+        return ordineEvaso;
+    }
+
+    public void setOrdineEvaso(Boolean ordineEvaso) {
+        this.ordineEvaso = ordineEvaso;
+    }
+
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ordine)) return false;
+        Ordine ordine = (Ordine) o;
+        return Objects.equal(getId(), ordine.getId()) && Objects.equal(getCodiceOrdine(), ordine.getCodiceOrdine()) && Objects.equal(getDataRichiesta(), ordine.getDataRichiesta()) && Objects.equal(getOrdineEvaso(), ordine.getOrdineEvaso()) && Objects.equal(getNota(), ordine.getNota());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId(), getCodiceOrdine(), getDataRichiesta(), getOrdineEvaso(), getNota());
+    }
+
+    @Override
+    public String toString() {
+        return "Ordine{" +
+                "id=" + id +
+                ", codiceOrdine='" + codiceOrdine + '\'' +
+                ", dataRichiesta=" + dataRichiesta +
+                ", ordineEvaso=" + ordineEvaso +
+                ", nota='" + nota + '\'' +
+                '}';
+    }
 }

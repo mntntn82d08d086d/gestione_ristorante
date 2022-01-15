@@ -1,46 +1,56 @@
 package org.labsis.gestione_ristorante.entity.magazzino;
 
-import lombok.*;
+import com.google.common.base.Objects;
+import org.labsis.gestione_ristorante.entity.common.Azienda;
 import org.labsis.gestione_ristorante.entity.common.AziendaAbstract;
+import org.labsis.gestione_ristorante.entity.common.Contatto;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * TODO: Documentazione
  */
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Fornitore extends AziendaAbstract implements Serializable {
+@Table(uniqueConstraints = @UniqueConstraint(name = "nome_azienda_unique", columnNames = "nome_azienda"))
+public class Fornitore extends AziendaAbstract implements Azienda {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fornitore")
-    @SequenceGenerator(
-            name = "seq_fornitore",
-            sequenceName = "seq_fornitore",
-            initialValue = 1,
-            allocationSize = 100
+    @OneToMany
+    @JoinTable(
+            name = "rubrica_fornitore",
+            joinColumns = @JoinColumn(name = "fornitore_piva", referencedColumnName = "piva",
+                    foreignKey = @ForeignKey(name = "f_piva_fk")),
+            inverseJoinColumns = @JoinColumn(name = "contatto_id",
+                    foreignKey = @ForeignKey(name = "f_contatto_id_fk")),
+            uniqueConstraints = @UniqueConstraint(name = "f_contatto_id_unique", columnNames = "contatto_id"),
+            indexes = @Index(name = "f_piva_idx", columnList = "fornitore_piva")
     )
-    @Column(name = "id", nullable = false)
-    private Long id;
+    private Set<Contatto> contatti;
+
+    public Fornitore() {
+        super();
+        contatti = new LinkedHashSet<>();
+    }
 
     public Fornitore(String piva, String nomeAzienda, String sedeLegale, String citta) {
         super(piva, nomeAzienda, sedeLegale, citta);
+        contatti = new LinkedHashSet<>();
     }
 
-/*
-    @Transient
+    public Fornitore(String piva, String nomeAzienda, String sedeLegale, String citta, Set<Contatto> contatti) {
+        super(piva, nomeAzienda, sedeLegale, citta);
+        this.contatti = contatti;
+    }
+
     @Override
-    public List<Contatto> getContatti() {
+    public Set<Contatto> getContatti() {
         return contatti;
     }
 
-    @Transient
     @Override
-    public void setContatti(List<Contatto> contatti) {
+    public void setContatti(Set<Contatto> contatti) {
         this.contatti = contatti;
     }
 
@@ -75,6 +85,26 @@ public class Fornitore extends AziendaAbstract implements Serializable {
             }
         }
     }
-*/
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Fornitore)) return false;
+        if (!super.equals(o)) return false;
+        Fornitore fornitore = (Fornitore) o;
+        return Objects.equal(getContatti(), fornitore.getContatti());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(super.hashCode(), getContatti());
+    }
+
+    @Override
+    public String toString() {
+        return "Fornitore{" +
+                super.toString() +
+                ", contatti=" + contatti +
+                '}';
+    }
 }

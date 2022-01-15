@@ -1,6 +1,6 @@
 package org.labsis.gestione_ristorante.entity.risorse_umane;
 
-import lombok.*;
+import com.google.common.base.Objects;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,17 +11,14 @@ import java.sql.Date;
  */
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class FerieDipendenti implements Serializable {
 
     @EmbeddedId
     private FerieDipendentiKey id;
 
-    @MapsId("dipendenteId")
+    @MapsId("dipendentePiva")
     @ManyToOne(optional = false)
-    @JoinColumn(name = "dipendente_id",nullable = false)
+    @JoinColumn(name = "dipendente_piva",nullable = false)
     private Dipendente dipendente;
 
     @Transient
@@ -34,4 +31,48 @@ public class FerieDipendenti implements Serializable {
         return id.getDataFine();
     }
 
+    public FerieDipendenti() {
+    }
+
+    public FerieDipendenti(FerieDipendentiKey id, Dipendente dipendente) {
+        this.id = id;
+        this.dipendente = dipendente;
+    }
+
+    public FerieDipendentiKey getId() {
+        return id;
+    }
+
+    public void setId(FerieDipendentiKey id) {
+        this.id = id;
+    }
+
+    public Dipendente getDipendente() {
+        return dipendente;
+    }
+
+    public void setDipendente(Dipendente dipendente) {
+        this.dipendente = dipendente;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FerieDipendenti)) return false;
+        FerieDipendenti that = (FerieDipendenti) o;
+        return Objects.equal(getId(), that.getId()) && Objects.equal(getDipendente(), that.getDipendente());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId(), getDipendente());
+    }
+
+    @Override
+    public String toString() {
+        return "FerieDipendenti{" +
+                "id=" + id +
+                ", dipendente=" + dipendente +
+                '}';
+    }
 }

@@ -2,8 +2,6 @@ package org.labsis.gestione_ristorante.controller.magazzino;
 
 import org.labsis.gestione_ristorante.entity.common.Contatto;
 import org.labsis.gestione_ristorante.entity.magazzino.Fornitore;
-import org.labsis.gestione_ristorante.entity.magazzino.Prodotto;
-import org.labsis.gestione_ristorante.entity.magazzino.R_FP;
 import org.labsis.gestione_ristorante.service.common.ContattoService;
 import org.labsis.gestione_ristorante.service.magazzino.FornitoreService;
 import org.labsis.gestione_ristorante.service.magazzino.R_FPService;
@@ -38,8 +36,9 @@ public class FornitoreController {
     public String getAllFornitori(Model model) {
         Map<Fornitore, Integer> map = new HashMap<>();
         List<Fornitore> fornitori = service.getAllFornitori();
+        List<Contatto> contatti;
         for(Fornitore f : fornitori) {
-            Integer countForniture = rFpService.countFornitureByFornitoreId(f.getId());
+            Integer countForniture = rFpService.countFornitureByFornitoreId(f.getPiva());
             map.put(f,countForniture);
         }
         model.addAttribute("fornitori", map);
@@ -72,14 +71,14 @@ public class FornitoreController {
 
     // TODO: implementare l'eventualità di modifica fornitura
     @GetMapping("/fornitori/edit/{id}")
-    public String editFornitore(@PathVariable("id") Long id, Model model) {
+    public String editFornitore(@PathVariable("id") String id, Model model) {
         Fornitore fornitore = service.getFornitoreById(id);
         model.addAttribute("fornitore", fornitore);
         return "magazzino/edit_fornitore";
     }
 
     @PostMapping("/fornitori/edit/{id}")
-    public String updateFornitore(@PathVariable Long id,
+    public String updateFornitore(@PathVariable String id,
                                   @ModelAttribute("fornitore") Fornitore fornitore,
                                   Model model) {
         // get fornitore from database by id
@@ -95,20 +94,32 @@ public class FornitoreController {
     }
 
     @GetMapping("/fornitori/edit/{id}/new_contatto")
-    public String editFornitoreContatti(@PathVariable("id") Long id, Model model) {
+    public String createFornitoreContatti(@PathVariable("id") String id, Model model) {
         Fornitore fornitore = service.getFornitoreById(id);
-        Contatto contatto = new Contatto();
-        String tipologia = Contatto.EnumTipologia.NS.toString();
-        String suffix = Contatto.EnumSuffix.NS.toString();
+        Contatto contattoObj = new Contatto();
+        Contatto.EnumTipologia tipologiaObj = Contatto.EnumTipologia.NS;
+        Contatto.EnumSuffix suffixObj = Contatto.EnumSuffix.NS;
         model.addAttribute("fornitore", fornitore);
-        model.addAttribute("contatto", contatto);
-        model.addAttribute("tipologia", tipologia);
-        model.addAttribute("suffix", suffix);
+        model.addAttribute("contattoObj", contattoObj);
+        model.addAttribute("tipologiaObj", tipologiaObj);
+        model.addAttribute("suffixObj", suffixObj);
         return "magazzino/fornitore_nuovo_contatto";
     }
 
+    // TODO: da implementare
+    @PostMapping("/fornitori/{id}/contatto")
+    public String saveFornitoreContatto(@PathVariable("id") String id,
+                                        @ModelAttribute("contattoObj") Contatto contatto,
+                                        Model model){
+        Fornitore fornitore = service.getFornitoreById(id);
+        fornitore.addContatto(contatto);
+        contattoService.saveContatto(contatto);
+        service.saveFornitore(fornitore);
+        return "redirect:/magazzino/fornitori";
+    }
+
     @PostMapping("/fornitori/{id}/update_contatto")
-    public String addContattoFornitore(@PathVariable Long id,
+    public String addContattoFornitore(@PathVariable String id,
                                   @ModelAttribute("fornitore") Fornitore fornitore,
                                   @ModelAttribute("contatto") Contatto contatto,
                                   Model model) {
@@ -123,14 +134,14 @@ public class FornitoreController {
     }
 
     @GetMapping("/fornitori/delete/{id}")
-    public String deleteFornitoreById(@PathVariable Long id) {
+    public String deleteFornitoreById(@PathVariable String id) {
         service.deleteFornitoreById(id);
         return "redirect:/magazzino/fornitori";
     }
 
     // TODO: da rivedere l'uso
     @GetMapping("/magazzino/fornitori/details/{id}")
-    public String fornitoreDetails(@PathVariable("id") Long id, Model model) {
+    public String fornitoreDetails(@PathVariable("id") String id, Model model) {
         Fornitore fornitore = service.getFornitoreById(id);
         model.addAttribute("fornitore", fornitore);
         return "magazzino/fornitore_details";

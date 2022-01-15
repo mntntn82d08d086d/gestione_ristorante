@@ -19,10 +19,10 @@ public interface R_FPRepository extends JpaRepository<R_FP, R_FPKey> {
     @Query("select r from R_FP r where r.id.prodottoId = ?1")
     Optional<R_FP> findR_FPByProdottoId(Long id);
 
-    @Query("select count(r.id.fornitoreId) as forniture from R_FP r where r.id.fornitoreId = ?1")
-    Integer countFornitureByFornitoreId(Long id);
+    @Query("select count(r.id.fornitorePiva) as forniture from R_FP r where r.id.fornitorePiva = ?1")
+    Integer countFornitureByFornitoreId(String id);
 
-    @Query("select r from R_FP r where r.id.fornitoreId = ?1")
-    List<R_FP> findR_FPByFornitoreId(Long id);
+    @Query("select r from R_FP r where r.id.fornitorePiva = ?1")
+    List<R_FP> findR_FPByFornitoreId(String id);
 
 }

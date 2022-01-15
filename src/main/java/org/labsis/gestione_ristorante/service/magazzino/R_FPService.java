@@ -15,7 +15,7 @@ public interface R_FPService {
 
     Optional<R_FP> getFornituraByProdottoId(Long id);
 
-    Integer countFornitureByFornitoreId(Long id);
+    Integer countFornitureByFornitoreId(String id);
 
     R_FP saveFornitura(R_FP fornitura);
 
@@ -23,5 +23,5 @@ public interface R_FPService {
 
     void deleteFornitura(Long id);
 
-    List<R_FP> getFornituraByFornitoreId(Long id);
+    List<R_FP> getFornituraByFornitoreId(String id);
 }

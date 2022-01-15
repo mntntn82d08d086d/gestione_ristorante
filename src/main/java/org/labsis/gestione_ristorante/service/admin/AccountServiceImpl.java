@@ -3,11 +3,12 @@ package org.labsis.gestione_ristorante.service.admin;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.labsis.gestione_ristorante.entity.admin.Account;
+import org.labsis.gestione_ristorante.entity.admin.AccountKey;
 import org.labsis.gestione_ristorante.entity.admin.OldRole;
 import org.labsis.gestione_ristorante.repository.admin.AccountRepository;
 import org.labsis.gestione_ristorante.repository.admin.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,8 +30,10 @@ public class AccountServiceImpl implements AccountService/*, UserDetailsService 
     @Autowired
     private final RoleRepository roleRepository;
 
+/*
     @Autowired
     private final PasswordEncoder passwordEncoder;
+*/
 
     @Override
     public List<Account> getAllAccount() {
@@ -39,7 +42,7 @@ public class AccountServiceImpl implements AccountService/*, UserDetailsService 
 
     @Override
     public Account saveAccount(Account account) {
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
+        //account.setPassword(passwordEncoder.encode(account.getPassword()));
         return repository.save(account);
     }
 
@@ -56,7 +59,7 @@ public class AccountServiceImpl implements AccountService/*, UserDetailsService 
 
     // TODO: implementare il metodo con Optional
     @Override
-    public Account getAccountById(Long id) {
+    public Account getAccountById(AccountKey id) {
         return repository.findById(id).get();
     }
 
@@ -67,7 +70,7 @@ public class AccountServiceImpl implements AccountService/*, UserDetailsService 
 
     // TODO: valutare l'uso del metodo
     @Override
-    public OldRole updateAccountRole(Long id, OldRole oldRole) {
+    public OldRole updateAccountRole(AccountKey id, OldRole oldRole) {
         return null;
     }
 

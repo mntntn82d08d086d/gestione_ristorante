@@ -33,7 +33,7 @@ public class FornitoreServiceImpl implements FornitoreService, Serializable {
     }
 
     @Override
-    public Fornitore getFornitoreById(Long id) {
+    public Fornitore getFornitoreById(String id) {
         return repository.findById(id).get();
     }
 
@@ -43,7 +43,7 @@ public class FornitoreServiceImpl implements FornitoreService, Serializable {
     }
 
     @Override
-    public void deleteFornitoreById(Long id) {
+    public void deleteFornitoreById(String id) {
         repository.deleteById(id);
     }
 }

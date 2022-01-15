@@ -33,12 +33,12 @@ public class R_FPServiceImpl implements R_FPService {
     }
 
     @Override
-    public List<R_FP> getFornituraByFornitoreId(Long id) {
+    public List<R_FP> getFornituraByFornitoreId(String id) {
         return repository.findR_FPByFornitoreId(id);
     }
 
     @Override
-    public Integer countFornitureByFornitoreId(Long id) {
+    public Integer countFornitureByFornitoreId(String id) {
         return repository.countFornitureByFornitoreId(id);
     }
 

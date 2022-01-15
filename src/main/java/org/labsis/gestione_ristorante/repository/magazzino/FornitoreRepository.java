@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface FornitoreRepository extends JpaRepository<Fornitore, Long> {
+public interface FornitoreRepository extends JpaRepository<Fornitore, String> {
 
 
 }

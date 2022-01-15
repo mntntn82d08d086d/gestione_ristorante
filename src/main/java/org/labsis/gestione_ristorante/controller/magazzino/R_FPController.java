@@ -55,7 +55,7 @@ public class R_FPController {
     }
 
     @GetMapping("/magazzino/forniture/fornitore/{id}")
-    public String getFornituraFornitoreById(@PathVariable("id") Long id, Model model) {
+    public String getFornituraFornitoreById(@PathVariable("id") String id, Model model) {
         List<R_FP> fornitureFornitore = service.getFornituraByFornitoreId(id);
         model.addAttribute("fornitore_id", id);
         model.addAttribute("forniture", fornitureFornitore);
@@ -67,7 +67,7 @@ public class R_FPController {
 
     // TODO: da implementare
     @GetMapping("/magazzino/forniture/fornitore/{id}/new")
-    public String createFornituraFornitore(@PathVariable("id") Long id, Model model) {
+    public String createFornituraFornitore(@PathVariable("id") String id, Model model) {
         Fornitore fornitore = fornitoreService.getFornitoreById(id);
 
         return "magazzino/create_fornitura_fornitore";

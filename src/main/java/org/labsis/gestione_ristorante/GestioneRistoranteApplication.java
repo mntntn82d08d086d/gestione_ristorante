@@ -1,6 +1,6 @@
 package org.labsis.gestione_ristorante;
 
-import de.codecentric.boot.admin.server.config.EnableAdminServer;
+//import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.labsis.gestione_ristorante.entity.admin.Role;
 import org.labsis.gestione_ristorante.entity.admin.User;
 import org.labsis.gestione_ristorante.service.admin.UserService;
@@ -11,8 +11,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+/*
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+*/
 
 import java.util.ArrayList;
 
@@ -21,7 +23,7 @@ import java.util.ArrayList;
  */
 
 @SpringBootApplication
-@EnableAdminServer
+//@EnableAdminServer
 public class GestioneRistoranteApplication {
 
     private static final Logger log = LoggerFactory.getLogger(GestioneRistoranteApplication.class);
@@ -30,6 +32,7 @@ public class GestioneRistoranteApplication {
         SpringApplication.run(GestioneRistoranteApplication.class, args);
     }
 
+/*
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -38,6 +41,7 @@ public class GestioneRistoranteApplication {
     @Bean
     CommandLineRunner run(UserService userService) {
         return args -> {
+*/
 /*
           userService.saveRole(new Role(null, "ROLE_USER"));
           userService.saveRole(new Role(null, "ROLE_MANAGER"));
@@ -56,10 +60,10 @@ public class GestioneRistoranteApplication {
           userService.addRoleToUser("silver", "ROLE_SUPER_ADMIN");
           userService.addRoleToUser("silver", "ROLE_ADMIN");
           userService.addRoleToUser("silver", "ROLE_USER");
-*/
+
         };
     }
-
+*/
 /*
     @Autowired
     private FornitoreRepository repository;
