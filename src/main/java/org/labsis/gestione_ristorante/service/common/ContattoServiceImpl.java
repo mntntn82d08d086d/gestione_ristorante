@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * TODO: Documentazione
  */
@@ -20,6 +22,11 @@ public class ContattoServiceImpl implements ContattoService {
     private final ContattoRepository repository;
 
     @Override
+    public List<Contatto> getAllContatti() {
+        return repository.findAll();
+    }
+
+    @Override
     public Contatto getContattoById(Long id) {
         return repository.findById(id).get();
     }
@@ -27,5 +34,10 @@ public class ContattoServiceImpl implements ContattoService {
     @Override
     public Contatto saveContatto(Contatto contatto) {
         return repository.save(contatto);
+    }
+
+    @Override
+    public void deleteContattoById(Long id) {
+        repository.deleteById(id);
     }
 }
