@@ -25,4 +25,9 @@ public class SocioServiceImpl implements SocioService {
     public List<Socio> getAllSocio() {
         return repository.findAll();
     }
+
+    @Override
+    public Socio saveSocio(Socio socio) {
+        return repository.save(socio);
+    }
 }

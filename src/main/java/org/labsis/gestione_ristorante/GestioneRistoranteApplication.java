@@ -1,8 +1,8 @@
 package org.labsis.gestione_ristorante;
 
 //import de.codecentric.boot.admin.server.config.EnableAdminServer;
-import org.labsis.gestione_ristorante.entity.admin.Role;
-import org.labsis.gestione_ristorante.entity.admin.User;
+import org.labsis.gestione_ristorante.entity.admin.*;
+import org.labsis.gestione_ristorante.service.admin.SocioService;
 import org.labsis.gestione_ristorante.service.admin.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,11 +11,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 /*
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 */
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -32,17 +35,15 @@ public class GestioneRistoranteApplication {
         SpringApplication.run(GestioneRistoranteApplication.class, args);
     }
 
-/*
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+/*
     @Bean
     CommandLineRunner run(UserService userService) {
         return args -> {
-*/
-/*
           userService.saveRole(new Role(null, "ROLE_USER"));
           userService.saveRole(new Role(null, "ROLE_MANAGER"));
           userService.saveRole(new Role(null, "ROLE_ADMIN"));
@@ -64,16 +65,14 @@ public class GestioneRistoranteApplication {
         };
     }
 */
-/*
-    @Autowired
-    private FornitoreRepository repository;
 
-    @Autowired
-    private ContattoRepository contattoRepository;
-
-    @Override
-    public void run(String... args) throws Exception {
-
+    @Bean
+    CommandLineRunner run(SocioService service) {
+        return args -> {
+            service.saveSocio(new Socio(
+                    "mntntn82d08d086d", "Antonio", "Montera", new Date(1982, 4, 8), "Via Angelo Onnis 22", "Villa Guardia (Como)",
+                    new Account("antoniomontera8", "antoniomontera8@gmail.com", getPasswordEncoder().encode("admin"))
+            ));
+        };
     }
-*/
 }

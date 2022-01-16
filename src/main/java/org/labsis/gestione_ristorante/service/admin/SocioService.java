@@ -12,4 +12,6 @@ public interface SocioService {
 
     List<Socio> getAllSocio();
 
+    Socio saveSocio(Socio socio);
+
 }

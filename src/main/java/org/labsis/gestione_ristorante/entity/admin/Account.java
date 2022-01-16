@@ -30,6 +30,11 @@ public class Account implements Serializable {
         this.password = password;
     }
 
+    public Account(String username, String email, String password) {
+        id = new AccountKey(username, email);
+        this.password = password;
+    }
+
     public AccountKey getId() {
         return id;
     }
