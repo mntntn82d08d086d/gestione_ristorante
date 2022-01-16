@@ -17,7 +17,7 @@ import static javax.persistence.FetchType.*;
  */
 
 @Entity
-public class Socio extends UtenteAbstract implements Utente {
+public class Socio extends UtenteAbstract {
 
     @OneToOne(optional = false, orphanRemoval = true)
     private Account account;

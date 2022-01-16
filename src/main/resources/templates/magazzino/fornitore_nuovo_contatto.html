@@ -1,9 +1,47 @@
 <!DOCTYPE html>
 <!-- TODO: Documentazione -->
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:insert="magazzino-fragments.html :: headerfiles"></head>
+<head>
+    <title>Gestione Ristorante</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.css}" />
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
 <body>
-<th:block th:insert="magazzino-fragments.html :: nav"></th:block>
+<div class="row">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">Gestione Ristorante/Magazzino</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">               <!-- TODO: da modificare -->
+                        <a class="nav-link active" aria-current="page" href="">Home (Da modificare)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/magazzino/fornitori}">Fornitori</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/magazzino/prodotti}">Prodotti</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/magazzino/ordini}">Ordini</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/magazzino/forniture}">Forniture</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+</div>
 <div class="container-fuild">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
@@ -14,30 +52,36 @@
                 <h6 th:text="'sede legale: ' + ${fornitore.sedeLegale}"></h6>
                 <h6 th:text="'citta\': ' + ${fornitore.citta}"></h6>
                 <h4>Contatto</h4>
-                <form th:action="@{/fornitori/{id}/contatto (id=${fornitore.getId()})}" th:object="${contatto}" method="POST">
+                <form th:action="@{/magazzino/fornitori/{id}/contatto (id=${fornitore.getId()})}" th:object="${contattoObj}" method="POST">
+                    <div class="form-group">
+                        <input type="hidden" th:field="*{id}" class="form-control" />
+                    </div>
+
                     <div class="form-group">
                         <label> tipologia </label>
                         <select th:field="*{tipologia}" class="form-select"
                                 aria-label="Default select example">
-                            <option th:value="${contatto}">&nbsp;</option>
-                            <option th:value="${contatto.tipologia.TELEFONO}" th:text="${contatto.tipologia.TELEFONO}"></option>
-                            <option th:value="${contatto.tipologia.EMAIL}" th:text="${contatto.tipologia.EMAIL}"></option>
-                            <option th:value="${contatto.tipologia.FAX}" th:text="${contatto.tipologia.FAX}"></option>
+                            <option th:value="${''}" th:text="${''}"></option>
+                            <option th:value="${tipologiaObj.TELEFONO.toString()}" th:text="${tipologiaObj.TELEFONO.toString()}"></option>
+                            <option th:value="${tipologiaObj.EMAIL.toString()}" th:text="${tipologiaObj.EMAIL.toString()}"></option>
+                            <option th:value="${tipologiaObj.FAX.toString()}" th:text="${tipologiaObj.FAX.toString()}"></option>
                         </select>
                     </div>
                     <br>
+
                     <div class="form-group">
                         <label> suffisso </label>
                         <select th:field="*{suffix}" class="form-select"
                                 aria-label="Default select example">
-                            <option th:value="${suffix.NS}" th:text="${suffix.NS}"></option>
-                            <option th:value="${suffix.PRINCIPALE}" th:text="${suffix.PRINCIPALE}"></option>
-                            <option th:value="${suffix.SECONDARIO}" th:text="${suffix.SECONDARIO}"></option>
-                            <option th:value="${suffix.LAVORO}" th:text="${suffix.LAVORO}"></option>
-                            <option th:value="${suffix.PERSONALE}" th:text="${suffix.PERSONALE}"></option>
+                            <option th:value="${''}" th:text="${''}"></option>
+                            <option th:value="${suffixObj.PRINCIPALE.toString()}" th:text="${suffixObj.PRINCIPALE.toString()}"></option>
+                            <option th:value="${suffixObj.SECONDARIO.toString()}" th:text="${suffixObj.SECONDARIO.toString()}"></option>
+                            <option th:value="${suffixObj.LAVORO.toString()}" th:text="${suffixObj.LAVORO.toString()}"></option>
+                            <option th:value="${suffixObj.PERSONALE.toString()}" th:text="${suffixObj.PERSONALE.toString()}"></option>
                         </select>
                     </div>
                     <br>
+
                     <div class="form-group">
                         <label for="contatto"> contatto </label>
                         <input
@@ -45,7 +89,6 @@
                                 id="contatto"
                                 th:field="*{contatto}"
                                 class="form-control"
-                                placeholder="Inserisci contatto fornitore"
                         />
                     </div>
                     <br>

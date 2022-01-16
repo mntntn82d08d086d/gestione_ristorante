@@ -19,7 +19,7 @@ import static javax.persistence.FetchType.LAZY;
  */
 
 @Entity
-public class Cliente extends UtenteAbstract implements Utente {
+public class Cliente extends UtenteAbstract {
 
     @OneToMany
     @JoinTable(

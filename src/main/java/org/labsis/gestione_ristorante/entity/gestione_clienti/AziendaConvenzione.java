@@ -19,7 +19,7 @@ import java.util.Set;
         @UniqueConstraint(name = "prefix_tessera_unique", columnNames = "prefix_tessera"),
         @UniqueConstraint(name = "convenzione_unique", columnNames = "convenzione_id")}
 )
-public class AziendaConvenzione extends AziendaAbstract implements Azienda {
+public class AziendaConvenzione extends AziendaAbstract {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -42,10 +42,6 @@ public class AziendaConvenzione extends AziendaAbstract implements Azienda {
 
     public AziendaConvenzione() {
         super();
-/*
-        contatti = new LinkedHashSet<>();
-        convenzione = new Convenzione();
-*/
     }
 
     public AziendaConvenzione(String piva, String nomeAzienda, String sedeLegale, String citta, String prefixTessera,

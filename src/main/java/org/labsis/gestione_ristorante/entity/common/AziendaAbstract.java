@@ -13,7 +13,7 @@ import java.util.Set;
  */
 
 @MappedSuperclass
-public abstract class AziendaAbstract implements Serializable {
+public abstract class AziendaAbstract implements Azienda {
 
     @Id
     @Column(name = "piva", length = 21, nullable = false)

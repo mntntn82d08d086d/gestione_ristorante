@@ -15,9 +15,9 @@ import java.util.Set;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(name = "nome_azienda_unique", columnNames = "nome_azienda"))
-public class Fornitore extends AziendaAbstract implements Azienda {
+public class Fornitore extends AziendaAbstract {
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "rubrica_fornitore",
             joinColumns = @JoinColumn(name = "fornitore_piva", referencedColumnName = "piva",
@@ -27,7 +27,7 @@ public class Fornitore extends AziendaAbstract implements Azienda {
             uniqueConstraints = @UniqueConstraint(name = "f_contatto_id_unique", columnNames = "contatto_id"),
             indexes = @Index(name = "f_piva_idx", columnList = "fornitore_piva")
     )
-    private Set<Contatto> contatti;
+    private Set<Contatto> contatti = new LinkedHashSet<>();
 
     public Fornitore() {
         super();

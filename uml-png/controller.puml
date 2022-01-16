@@ -1,0 +1,70 @@
+@startuml
+class org.labsis.gestione_ristorante.controller.risorse_umane.DipendenteController {
+- DipendenteService service
++ String getAllDipendenti(Model)
++ String createDipendente(Model)
++ String saveDipendente(Dipendente)
+}
+class org.labsis.gestione_ristorante.controller.risorse_umane.FerieDipendentiController {
+- FerieDipendentiService service
+}
+class org.labsis.gestione_ristorante.controller.admin.SocioController {
+- SocioService service
+}
+class org.labsis.gestione_ristorante.controller.risorse_umane.PresenzeDipendentiController {
+- PresenzeDipendentiService service
+}
+class org.labsis.gestione_ristorante.controller.magazzino.ProdottoController {
+- ProdottoService service
++ String getAllProdotti(Model)
++ String createProdotto(Model)
++ String saveProdotto(Prodotto)
++ String editProdotto(Long,Model)
++ String updateFornitore(Long,Prodotto,Model)
++ String deleteFornitori(Long)
+}
+class org.labsis.gestione_ristorante.controller.risorse_umane.PermessiDipendenteController {
+- PermessiDipendenteService service
+}
+class org.labsis.gestione_ristorante.controller.gestione_pagamenti.R_OSController {
+- R_OSService service
+}
+class org.labsis.gestione_ristorante.controller.risorse_umane.AziendaConvenzioneController {
+- AziendaConvenzioneService service
+}
+class org.labsis.gestione_ristorante.controller.magazzino.FornitoreController {
+- FornitoreService service
+- ContattoService contattoService
+- R_FPService rFpService
++ String getAllFornitori(Model)
++ String createFornitore(Model)
++ String saveFornitore(Fornitore)
++ String editFornitore(String,Model)
++ String updateFornitore(String,Fornitore,Model)
++ String createFornitoreContatti(String,Model)
++ String saveFornitoreContatto(String,Contatto,Model)
++ String addContattoFornitore(String,Fornitore,Contatto,Model)
++ String deleteFornitoreById(String)
++ String fornitoreDetails(String,Model)
+}
+class org.labsis.gestione_ristorante.controller.admin.AccountController {
+}
+class org.labsis.gestione_ristorante.controller.magazzino.R_FPController {
+- R_FPServiceImpl service
+- ProdottoService prodottoService
+- FornitoreService fornitoreService
++ String getAllForniture(Model)
++ String getFornituraProdottoById(Long,Model)
++ String getFornituraFornitoreById(String,Model)
++ String createFornituraFornitore(String,Model)
+}
+class org.labsis.gestione_ristorante.controller.magazzino.OdineController {
+- OrdineService service
++ String getAllOrdini(Model)
++ String createOrdine(Model)
++ String saveOrdine(Ordine)
++ String editOrdine(Long,Model)
++ String updateOrdine(Long,Ordine,Model)
++ String deleteOrdine(Long)
+}
+@enduml

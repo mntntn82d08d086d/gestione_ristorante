@@ -15,7 +15,7 @@ import java.sql.Date;
  */
 
 @MappedSuperclass
-public abstract class UtenteAbstract implements Serializable {
+public abstract class UtenteAbstract implements Utente {
 
     @Id
     @Column(name = "codice_fiscale", nullable = false, length = 16)

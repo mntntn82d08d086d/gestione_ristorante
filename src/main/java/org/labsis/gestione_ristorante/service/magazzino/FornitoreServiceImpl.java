@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class FornitoreServiceImpl implements FornitoreService, Serializable {
+public class FornitoreServiceImpl implements FornitoreService {
 
     @Autowired
     private final FornitoreRepository repository;

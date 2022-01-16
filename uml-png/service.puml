@@ -1,0 +1,171 @@
+@startuml
+class org.labsis.gestione_ristorante.service.gestione_clienti.ConvenzioneServiceImpl {
+- ConvenzioneRepository repository
++ Convenzione getConvenzioneByCodiceConvenzione(String)
++ List<Convenzione> getConvenzioneByDataStipula(Date)
++ Convenzione saveConvenzione(Convenzione)
+}
+interface org.labsis.gestione_ristorante.service.magazzino.R_FPService {
+~ List<R_FP> getAllForniture()
+~ Optional<R_FP> getFornituraByProdottoId(Long)
+~ Integer countFornitureByFornitoreId(String)
+~ R_FP saveFornitura(R_FP)
+~ R_FP updateFornitura(R_FP)
+~ void deleteFornitura(Long)
+~ List<R_FP> getFornituraByFornitoreId(String)
+}
+interface org.labsis.gestione_ristorante.service.risorse_umane.PermessiDipendenteService {
+}
+class org.labsis.gestione_ristorante.service.risorse_umane.PresenzeDipendentiServiceImpl {
+- PresenzeDipendentiRepository repository
+}
+interface org.labsis.gestione_ristorante.service.magazzino.OrdineService {
+~ List<Ordine> getAllOrdine()
+~ Ordine saveOrdine(Ordine)
+~ Ordine getOrdineById(Long)
+~ void deleteOrdineById(Long)
+}
+class org.labsis.gestione_ristorante.service.magazzino.ProdottoServiceImpl {
+- ProdottoRepository repository
++ List<Prodotto> getAllProdotto()
++ Prodotto saveProdotto(Prodotto)
++ Prodotto getProdottoById(Long)
++ Prodotto updateProdotto(Prodotto)
++ void deleteProdottoById(Long)
+}
+interface org.labsis.gestione_ristorante.service.gestione_pagamenti.R_OSService {
+}
+class org.labsis.gestione_ristorante.service.risorse_umane.FerieDipendentiServiceImpl {
+- FerieDipendentiRepository repository
+}
+class org.labsis.gestione_ristorante.service.admin.SocioServiceImpl {
+- SocioRepository repository
++ List<Socio> getAllSocio()
+}
+interface org.labsis.gestione_ristorante.service.risorse_umane.PresenzeDipendentiService {
+}
+class org.labsis.gestione_ristorante.service.risorse_umane.PermessiDipendenteServiceImpl {
+- PermessiDipendenteRepository repository
+}
+class org.labsis.gestione_ristorante.service.common.ContattoServiceImpl {
+- ContattoRepository repository
++ List<Contatto> getAllContatti()
++ Contatto getContattoById(Long)
++ Contatto saveContatto(Contatto)
++ void deleteContattoById(Long)
+}
+interface org.labsis.gestione_ristorante.service.magazzino.FornitoreService {
+~ List<Fornitore> getAllFornitori()
+~ Fornitore saveFornitore(Fornitore)
+~ Fornitore getFornitoreById(String)
+~ Fornitore updateFornitore(Fornitore)
+~ void deleteFornitoreById(String)
+}
+interface org.labsis.gestione_ristorante.service.gestione_clienti.AziendaConvenzioneService {
+~ AziendaConvenzione getAziendaConvenzioneByNomeAzienda(String)
+~ AziendaConvenzione saveAziendaConvenzione(AziendaConvenzione)
+}
+interface org.labsis.gestione_ristorante.service.gestione_clienti.ConvenzioneService {
+~ Convenzione getConvenzioneByCodiceConvenzione(String)
+~ List<Convenzione> getConvenzioneByDataStipula(Date)
+~ Convenzione saveConvenzione(Convenzione)
+}
+class org.labsis.gestione_ristorante.service.risorse_umane.DipendenteServiceImpl {
+- DipendenteRepository repository
++ List<Dipendente> getAllDipendenti()
++ Dipendente saveDipendente(Dipendente)
++ Dipendente getDipendenteById(Long)
++ Dipendente updateDipendente(Dipendente)
++ void deleteDipendenteById(Long)
+}
+class org.labsis.gestione_ristorante.service.magazzino.R_FPServiceImpl {
+- R_FPRepository repository
++ List<R_FP> getAllForniture()
++ Optional<R_FP> getFornituraByProdottoId(Long)
++ List<R_FP> getFornituraByFornitoreId(String)
++ Integer countFornitureByFornitoreId(String)
++ R_FP saveFornitura(R_FP)
++ R_FP updateFornitura(R_FP)
++ void deleteFornitura(Long)
+}
+interface org.labsis.gestione_ristorante.service.risorse_umane.FerieDipendentiService {
+}
+class org.labsis.gestione_ristorante.service.gestione_clienti.AziendaConvenzioneServiceImpl {
+- AziendaConvenzioneRepository repository
++ AziendaConvenzione getAziendaConvenzioneByNomeAzienda(String)
++ AziendaConvenzione saveAziendaConvenzione(AziendaConvenzione)
+}
+class org.labsis.gestione_ristorante.service.admin.AccountServiceImpl {
+- AccountRepository repository
+- RoleRepository roleRepository
++ List<Account> getAllAccount()
++ Account saveAccount(Account)
++ Account getAccountById(AccountKey)
++ Account updateAccount(Account)
++ OldRole updateAccountRole(AccountKey,OldRole)
+}
+interface org.labsis.gestione_ristorante.service.risorse_umane.DipendenteService {
+~ List<Dipendente> getAllDipendenti()
+~ Dipendente saveDipendente(Dipendente)
+~ Dipendente getDipendenteById(Long)
+~ Dipendente updateDipendente(Dipendente)
+~ void deleteDipendenteById(Long)
+}
+class org.labsis.gestione_ristorante.service.gestione_pagamenti.R_OSServiceImpl {
+- R_OSRepository repository
+}
+interface org.labsis.gestione_ristorante.service.common.ContattoService {
+~ List<Contatto> getAllContatti()
+~ Contatto getContattoById(Long)
+~ Contatto saveContatto(Contatto)
+~ void deleteContattoById(Long)
+}
+class org.labsis.gestione_ristorante.service.magazzino.OrdineServiceImpl {
+- OrdineRepository repository
++ List<Ordine> getAllOrdine()
++ Ordine saveOrdine(Ordine)
++ Ordine getOrdineById(Long)
++ void deleteOrdineById(Long)
+}
+interface org.labsis.gestione_ristorante.service.magazzino.ProdottoService {
+~ List<Prodotto> getAllProdotto()
+~ Prodotto saveProdotto(Prodotto)
+~ Prodotto getProdottoById(Long)
+~ Prodotto updateProdotto(Prodotto)
+~ void deleteProdottoById(Long)
+}
+interface org.labsis.gestione_ristorante.service.admin.AccountService {
+~ List<Account> getAllAccount()
+~ Account saveAccount(Account)
+~ Account getAccountById(AccountKey)
+~ Account updateAccount(Account)
+~ OldRole updateAccountRole(AccountKey,OldRole)
+}
+class org.labsis.gestione_ristorante.service.magazzino.FornitoreServiceImpl {
+- FornitoreRepository repository
++ List<Fornitore> getAllFornitori()
++ Fornitore saveFornitore(Fornitore)
++ Fornitore getFornitoreById(String)
++ Fornitore updateFornitore(Fornitore)
++ void deleteFornitoreById(String)
+}
+interface org.labsis.gestione_ristorante.service.admin.SocioService {
+~ List<Socio> getAllSocio()
+}
+
+
+org.labsis.gestione_ristorante.service.gestione_clienti.ConvenzioneService <|.. org.labsis.gestione_ristorante.service.gestione_clienti.ConvenzioneServiceImpl
+org.labsis.gestione_ristorante.service.risorse_umane.PresenzeDipendentiService <|.. org.labsis.gestione_ristorante.service.risorse_umane.PresenzeDipendentiServiceImpl
+org.labsis.gestione_ristorante.service.magazzino.ProdottoService <|.. org.labsis.gestione_ristorante.service.magazzino.ProdottoServiceImpl
+org.labsis.gestione_ristorante.service.risorse_umane.FerieDipendentiService <|.. org.labsis.gestione_ristorante.service.risorse_umane.FerieDipendentiServiceImpl
+org.labsis.gestione_ristorante.service.admin.SocioService <|.. org.labsis.gestione_ristorante.service.admin.SocioServiceImpl
+org.labsis.gestione_ristorante.service.risorse_umane.PermessiDipendenteService <|.. org.labsis.gestione_ristorante.service.risorse_umane.PermessiDipendenteServiceImpl
+org.labsis.gestione_ristorante.service.common.ContattoService <|.. org.labsis.gestione_ristorante.service.common.ContattoServiceImpl
+org.labsis.gestione_ristorante.service.risorse_umane.DipendenteService <|.. org.labsis.gestione_ristorante.service.risorse_umane.DipendenteServiceImpl
+org.labsis.gestione_ristorante.service.magazzino.R_FPService <|.. org.labsis.gestione_ristorante.service.magazzino.R_FPServiceImpl
+org.labsis.gestione_ristorante.service.gestione_clienti.AziendaConvenzioneService <|.. org.labsis.gestione_ristorante.service.gestione_clienti.AziendaConvenzioneServiceImpl
+org.labsis.gestione_ristorante.service.admin.AccountService <|.. org.labsis.gestione_ristorante.service.admin.AccountServiceImpl
+org.labsis.gestione_ristorante.service.gestione_pagamenti.R_OSService <|.. org.labsis.gestione_ristorante.service.gestione_pagamenti.R_OSServiceImpl
+org.labsis.gestione_ristorante.service.magazzino.OrdineService <|.. org.labsis.gestione_ristorante.service.magazzino.OrdineServiceImpl
+org.labsis.gestione_ristorante.service.magazzino.FornitoreService <|.. org.labsis.gestione_ristorante.service.magazzino.FornitoreServiceImpl
+@enduml

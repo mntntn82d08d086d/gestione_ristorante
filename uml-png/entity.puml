@@ -1,0 +1,429 @@
+@startuml
+class org.labsis.gestione_ristorante.entity.gestione_clienti.Convenzione {
+- Long id
+- String codiceConvenzione
+- Double sconto
+- Date dataStipula
++ Long getId()
++ void setId(Long)
++ String getCodiceConvenzione()
++ void setCodiceConvenzione(String)
++ Double getSconto()
++ void setSconto(Double)
++ Date getDataStipula()
++ void setDataStipula(Date)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.magazzino.R_FPKey {
+- String fornitorePiva
+- Long prodottoId
++ String getFornitorePiva()
++ void setFornitorePiva(String)
++ Long getProdottoId()
++ void setProdottoId(Long)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.magazzino.Prodotto {
+- Long id
+- String nome
+- String tipologia
+- String marca
++ Long getId()
++ void setId(Long)
++ String getNome()
++ void setNome(String)
++ String getTipologia()
++ void setTipologia(String)
++ String getMarca()
++ void setMarca(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.gestione_clienti.Cliente {
+- Set<Contatto> contatti
+- Account account
++ Account getAccount()
++ void setAccount(Account)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+interface org.labsis.gestione_ristorante.entity.common.Azienda {
+}
+class org.labsis.gestione_ristorante.entity.risorse_umane.PrezenzeDipendenteKey {
+- Date dataPresenza
+- String dipendentePiva
++ Date getDataPresenza()
++ void setDataPresenza(Date)
++ String getDipendentePiva()
++ void setDipendentePiva(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.risorse_umane.PermessiDipendente {
+- PermessiDipendentiKey id
+- Dipendente dipendente
+- String motivazione
+- Boolean retribuito
++ PermessiDipendentiKey getId()
++ void setId(PermessiDipendentiKey)
++ Dipendente getDipendente()
++ void setDipendente(Dipendente)
++ String getMotivazione()
++ void setMotivazione(String)
++ Boolean getRetribuito()
++ void setRetribuito(Boolean)
++ Date getDataPermesso()
++ void setDataPermesso(java.sql.Date)
++ String getDipendentePiva()
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.magazzino.Fornitore {
+- Set<Contatto> contatti
++ Set<Contatto> getContatti()
++ void setContatti(Set<Contatto>)
++ void addContatto(Contatto)
++ void removeContattoByTipologia(String)
++ void removeContattoByTipologiaAndSuffix(String,String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.common.Contatto {
+- Long id
+- String tipologia
+- String suffix
+- String contatto
++ Long getId()
++ void setId(Long)
++ String getTipologia()
++ void setTipologia(String)
++ String getSuffix()
++ void setSuffix(String)
++ String getContatto()
++ void setContatto(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+enum org.labsis.gestione_ristorante.entity.common.EnumSuffix {
++  NS
++  PRINCIPALE
++  SECONDARIO
++  LAVORO
++  PERSONALE
+- String suffix
++ String getSuffix()
++ void setSuffix(String)
++ String toString()
+}
+enum org.labsis.gestione_ristorante.entity.common.EnumTipologia {
++  NS
++  EMAIL
++  TELEFONO
++  FAX
+- String tipologia
++ String getTipologia()
++ void setTipologia(String)
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.risorse_umane.PermessiDipendentiKey {
+- Date dataPermesso
+- String dipendentePiva
++ Date getDataPermesso()
++ void setDataPermesso(Date)
++ String getDipendentePiva()
++ void setDipendentePiva(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.magazzino.R_POKey {
+# Long prodottoId
+# Long ordineId
++ Long getProdottoId()
++ void setProdottoId(Long)
++ Long getOrdineId()
++ void setOrdineId(Long)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.gestione_pagamenti.R_OSkey {
+- Long ordineId
+- String socioPiva
++ Long getOrdineId()
++ void setOrdineId(Long)
++ String getSocioPiva()
++ void setSocioPiva(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.risorse_umane.FerieDipendentiKey {
+- Date dataInizio
+- Date dataFine
+- String dipendentePiva
++ Date getDataInizio()
++ void setDataInizio(Date)
++ Date getDataFine()
++ void setDataFine(Date)
++ String getDipendenteId()
++ void setDipendenteId(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+abstract class org.labsis.gestione_ristorante.entity.common.AziendaAbstract {
+- String piva
+- String nomeAzienda
+- String sedeLegale
+- String citta
++ {abstract}Set<Contatto> getContatti()
++ {abstract}void setContatti(Set<Contatto>)
++ {abstract}void addContatto(Contatto)
++ {abstract}void removeContattoByTipologia(String)
++ {abstract}void removeContattoByTipologiaAndSuffix(String,String)
++ String getPiva()
++ void setPiva(String)
++ String getNomeAzienda()
++ void setNomeAzienda(String)
++ String getSedeLegale()
++ void setSedeLegale(String)
++ String getCitta()
++ void setCitta(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.admin.Socio {
+- Account account
++ Account getAccount()
++ void setAccount(Account)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.risorse_umane.FerieDipendenti {
+- FerieDipendentiKey id
+- Dipendente dipendente
++ Date getDataInizio()
++ Date getDataFine()
++ FerieDipendentiKey getId()
++ void setId(FerieDipendentiKey)
++ Dipendente getDipendente()
++ void setDipendente(Dipendente)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.magazzino.R_PO {
+- R_POKey id
+- Prodotto prodotto
+- Ordine ordine
+- Double quantita
++ Long getProdottoId()
++ Long getOrdineId()
++ R_POKey getId()
++ void setId(R_POKey)
++ Prodotto getProdotto()
++ void setProdotto(Prodotto)
++ Ordine getOrdine()
++ void setOrdine(Ordine)
++ Double getQuantita()
++ void setQuantita(Double)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.risorse_umane.Dipendente {
+- Set<Contatto> contatti
+- Integer ferieDaContratto
+- Integer permessiDaContratto
+- String mansione
+- Account account
++ Integer getFerieDaContratto()
++ void setFerieDaContratto(Integer)
++ Integer getPermessiDaContratto()
++ void setPermessiDaContratto(Integer)
++ String getMansione()
++ void setMansione(String)
++ Account getAccount()
++ void setAccount(Account)
++ boolean equals(Object)
++ int hashCode()
+}
+enum org.labsis.gestione_ristorante.entity.risorse_umane.Mansione {
++  NS
++  MAGAZZINIERE
++  CASSIERE
++  CAMERIERE
++  RIDER
+- String mansione
++ String getMansione()
++ void setMansione(String)
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.risorse_umane.PresenzeDipendenti {
+- PrezenzeDipendenteKey id
+- Dipendente dipendente
+- Time oraEntrata
+- Time oraUscita
++ Date getDatePresenza()
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+interface org.labsis.gestione_ristorante.entity.common.Utente {
+}
+class org.labsis.gestione_ristorante.entity.gestione_pagamenti.R_OS {
+- R_OSkey id
+- Ordine ordine
+- Socio socio
+- Date dataEvasione
++ R_OSkey getId()
++ void setId(R_OSkey)
++ Ordine getOrdine()
++ void setOrdine(Ordine)
++ Socio getSocio()
++ void setSocio(Socio)
++ Date getDataEvasione()
++ void setDataEvasione(Date)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.admin.Account {
+- AccountKey id
+- String password
++ AccountKey getId()
++ void setId(AccountKey)
++ String getPassword()
++ void setPassword(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.magazzino.Ordine {
+- Long id
+- String codiceOrdine
+- Date dataRichiesta
+- Boolean ordineEvaso
+- String nota
++ Long getId()
++ void setId(Long)
++ String getCodiceOrdine()
++ void setCodiceOrdine(String)
++ Date getDataRichiesta()
++ void setDataRichiesta(Date)
++ Boolean getOrdineEvaso()
++ void setOrdineEvaso(Boolean)
++ String getNota()
++ void setNota(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.magazzino.R_FP {
+- R_FPKey id
+- Fornitore fornitore
+- Prodotto prodotto
+- Double prezzoUnitario
+- Integer tempoConsegna
++ String getFornitoreId()
++ Long getProdottoId()
++ R_FPKey getId()
++ void setId(R_FPKey)
++ Fornitore getFornitore()
++ void setFornitore(Fornitore)
++ Prodotto getProdotto()
++ void setProdotto(Prodotto)
++ Double getPrezzoUnitario()
++ void setPrezzoUnitario(Double)
++ Integer getTempoConsegna()
++ void setTempoConsegna(Integer)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+abstract class org.labsis.gestione_ristorante.entity.common.UtenteAbstract {
+- String codiceFiscale
+- String nome
+- String cognome
+- Date dataDiNascita
+- String indirizzo
+- String citta
++ {abstract}Account getAccount()
++ {abstract}void setAccount(Account)
++ String getCodiceFiscale()
++ void setCodiceFiscale(String)
++ String getNome()
++ void setNome(String)
++ String getCognome()
++ void setCognome(String)
++ Date getDataDiNascita()
++ void setDataDiNascita(Date)
++ String getIndirizzo()
++ void setIndirizzo(String)
++ String getCitta()
++ void setCitta(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class org.labsis.gestione_ristorante.entity.gestione_clienti.AziendaConvenzione {
+- Set<Contatto> contatti
+- String prefixTessera
+- Convenzione convenzione
++ String getPrefixTessera()
++ void setPrefixTessera(String)
++ Convenzione getConvenzione()
++ void setConvenzione(Convenzione)
++ Set<Contatto> getContatti()
++ void setContatti(Set<Contatto>)
++ void addContatto(Contatto)
++ void removeContattoByTipologia(String)
++ void removeContattoByTipologiaAndSuffix(String,String)
+# String generatePrefix(String,String,String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+
+
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.gestione_clienti.Convenzione
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.magazzino.R_FPKey
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.magazzino.Prodotto
+org.labsis.gestione_ristorante.entity.common.UtenteAbstract <|-- org.labsis.gestione_ristorante.entity.gestione_clienti.Cliente
+java.io.Serializable <|-- org.labsis.gestione_ristorante.entity.common.Azienda
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.risorse_umane.PrezenzeDipendenteKey
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.risorse_umane.PermessiDipendente
+org.labsis.gestione_ristorante.entity.common.AziendaAbstract <|-- org.labsis.gestione_ristorante.entity.magazzino.Fornitore
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.common.Contatto
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.risorse_umane.PermessiDipendentiKey
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.magazzino.R_POKey
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.gestione_pagamenti.R_OSkey
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.risorse_umane.FerieDipendentiKey
+org.labsis.gestione_ristorante.entity.common.Azienda <|.. org.labsis.gestione_ristorante.entity.common.AziendaAbstract
+org.labsis.gestione_ristorante.entity.common.UtenteAbstract <|-- org.labsis.gestione_ristorante.entity.admin.Socio
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.risorse_umane.FerieDipendenti
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.magazzino.R_PO
+org.labsis.gestione_ristorante.entity.common.UtenteAbstract <|-- org.labsis.gestione_ristorante.entity.risorse_umane.Dipendente
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.risorse_umane.PresenzeDipendenti
+java.io.Serializable <|-- org.labsis.gestione_ristorante.entity.common.Utente
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.gestione_pagamenti.R_OS
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.admin.Account
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.magazzino.Ordine
+java.io.Serializable <|.. org.labsis.gestione_ristorante.entity.magazzino.R_FP
+org.labsis.gestione_ristorante.entity.common.Utente <|.. org.labsis.gestione_ristorante.entity.common.UtenteAbstract
+org.labsis.gestione_ristorante.entity.common.Azienda <|.. org.labsis.gestione_ristorante.entity.gestione_clienti.AziendaConvenzione
+org.labsis.gestione_ristorante.entity.common.AziendaAbstract <|-- org.labsis.gestione_ristorante.entity.gestione_clienti.AziendaConvenzione
+@enduml
