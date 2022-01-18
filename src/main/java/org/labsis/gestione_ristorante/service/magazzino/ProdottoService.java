@@ -1,23 +1,25 @@
 package org.labsis.gestione_ristorante.service.magazzino;
 
 import org.labsis.gestione_ristorante.entity.magazzino.Prodotto;
+import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * TODO: Documentazione
  */
 
+@Component
 public interface ProdottoService {
 
     List<Prodotto> getAllProdotto();
 
-    Prodotto saveProdotto(Prodotto prodotto);
+    Optional<Prodotto> getProdottoById(Long id);
 
-    Prodotto getProdottoById(Long id);
+    Optional<Prodotto> saveProdotto(Prodotto prodotto);
 
-    Prodotto updateProdotto(Prodotto prodotto);
+    Optional<Prodotto> updateProdotto(Prodotto prodotto, Long id);
 
-    void deleteProdottoById(Long id);
+    Optional<Prodotto> deleteProdottoById(Long id);
 }

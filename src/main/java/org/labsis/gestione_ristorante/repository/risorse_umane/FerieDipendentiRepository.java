@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
  * TODO: Documentazione
  */
 
-@Repository
-public interface FerieDipendentiRepository extends JpaRepository<FerieDipendenti, FerieDipendentiKey> {
+@Repository("ferieDipendentiRepository")
+public interface FerieDipendentiRepository extends JpaRepository<FerieDipendenti, FerieDipendentiKey>, CustomFerieDipendentiRepository {
 
-
+    // TODO: da implementare
 }

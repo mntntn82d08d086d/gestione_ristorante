@@ -1,32 +1,31 @@
 package org.labsis.gestione_ristorante.service.gestione_clienti;
 
-import lombok.RequiredArgsConstructor;
 import org.labsis.gestione_ristorante.entity.gestione_clienti.Convenzione;
 import org.labsis.gestione_ristorante.repository.gestione_cliente.ConvenzioneRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.util.List;
 
-@Service
-@Transactional
-@RequiredArgsConstructor
+@Service("convenzioneService")
+@Transactional(readOnly = true)
 public class ConvenzioneServiceImpl implements ConvenzioneService {
 
-    @Autowired
-    private final ConvenzioneRepository repository;
+    private final ConvenzioneRepository convenzioneRepository;
 
+    public ConvenzioneServiceImpl(ConvenzioneRepository convenzioneRepository) {
+        this.convenzioneRepository = convenzioneRepository;
+    }
 
     @Override
     public Convenzione getConvenzioneByCodiceConvenzione(String codiceConvenzione) {
-        return repository.findConvenzioneByCodiceConvenzione(codiceConvenzione);
+        return convenzioneRepository.findConvenzioneByCodiceConvenzione(codiceConvenzione);
     }
 
     @Override
     public List<Convenzione> getConvenzioneByDataStipula(Date dataStipula) {
-        return repository.findConvenzioneByDataStipula(dataStipula);
+        return convenzioneRepository.findConvenzioneByDataStipula(dataStipula);
     }
 
 /*
@@ -36,8 +35,9 @@ public class ConvenzioneServiceImpl implements ConvenzioneService {
     }
 */
 
+    // TODO: da implementare
     @Override
     public Convenzione saveConvenzione(Convenzione convenzione) {
-        return repository.save(convenzione);
+        return convenzioneRepository.save(convenzione);
     }
 }

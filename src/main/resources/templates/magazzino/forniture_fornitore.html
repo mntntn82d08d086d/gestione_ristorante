@@ -40,24 +40,19 @@
     </div>
 </nav>
 <br>
-<div class="container-fluid" th:if="${forniture.isEmpty()}">
-    <div class="row">
+<div class="container-fluid">
+    <!-- TODO: eventualità da implementare -->
+    <div class="row" th:if="${forniture.isEmpty()}">
         <h1 th:text="'Forniture non presenti'"></h1>
-        <!-- TODO: eventualità da implementare -->
     </div>
-    <th:block th:insert="magazzino-fragments.html :: aggiunge_fornitura"></th:block>
-</div>
-
-<div class="container-fluid" th:unless="${forniture.isEmpty()}">
-    <div class="row">
+    <div class="row" th:unless="${forniture.isEmpty()}">
         <h1 th:text="'Fornitura Fornitore: ' + ${forniture.get(0).getFornitore().getNomeAzienda()}"></h1>
     </div>
-    <div class="row" th:fragment="aggiunge_fornitura_fornitore">
+    <div class="row">
         <div class="col-lg-3">
             <a th:href="@{'/magazzino/forniture/fornitore/' + ${id} + '/new'}" class="btn btn-primary btn-sm mb-3">Aggiungi fornitura</a>
         </div>
     </div>
 </div>
-
 </body>
 </html>

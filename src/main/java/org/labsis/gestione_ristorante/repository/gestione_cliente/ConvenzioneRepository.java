@@ -11,8 +11,8 @@ import java.util.List;
  * TODO: Documentazione
  */
 
-@Repository
-public interface ConvenzioneRepository extends JpaRepository<Convenzione, Long> {
+@Repository("convenzioneRepository")
+public interface ConvenzioneRepository extends JpaRepository<Convenzione, Long>, CustomConvenzioneRepository {
 
     Convenzione findConvenzioneByCodiceConvenzione(String codiceConvenzione);
 

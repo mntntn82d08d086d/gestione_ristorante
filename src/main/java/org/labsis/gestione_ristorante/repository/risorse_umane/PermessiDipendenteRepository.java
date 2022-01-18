@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
  * TODO: Documentazione
  */
 
-@Repository
-public interface PermessiDipendenteRepository extends JpaRepository<PermessiDipendente, PermessiDipendentiKey> {
+@Repository("permessiDipendenteRepository")
+public interface PermessiDipendenteRepository extends JpaRepository<PermessiDipendente, PermessiDipendentiKey>, CustomPermessiDipendentiRepository {
 
+    // TODO: da implementare
 
 }

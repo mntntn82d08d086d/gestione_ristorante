@@ -9,8 +9,6 @@ import org.labsis.gestione_ristorante.service.gestione_clienti.AziendaConvenzion
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Date;
-
 import static org.labsis.gestione_ristorante.entity.common.Contatto.EnumSuffix;
 import static org.labsis.gestione_ristorante.entity.common.Contatto.EnumTipologia;
 
@@ -57,7 +55,7 @@ class AziendaConvenzioneTest {
         contattoService.saveContatto(c2);
 */
         acs.saveAziendaConvenzione(ac);
-        ac = acs.getAziendaConvenzioneByNomeAzienda("Nome Azienda 1");
+        ac = acs.getAziendaConvenzioneByNomeAzienda("Nome Azienda 1").get();
     }
 
     @Test
@@ -70,7 +68,7 @@ class AziendaConvenzioneTest {
         ac.addContatto(c3);
         acs.saveAziendaConvenzione(ac);
         if(ac == null)
-            ac = acs.getAziendaConvenzioneByNomeAzienda("Nome Azienda 1");
+            ac = acs.getAziendaConvenzioneByNomeAzienda("Nome Azienda 1").get();
         System.out.println(ac);
     }
 

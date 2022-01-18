@@ -113,10 +113,6 @@ public class Contatto implements Serializable {
             this.suffix = suffix;
         }
 
-        @Override
-        public String toString() {
-            return suffix;
-        }
     }
 
     public enum EnumTipologia {
@@ -135,9 +131,5 @@ public class Contatto implements Serializable {
             this.tipologia = tipologia;
         }
 
-        @Override
-        public String toString() {
-            return tipologia;
-        }
     }
 }

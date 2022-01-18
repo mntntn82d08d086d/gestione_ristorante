@@ -112,17 +112,16 @@
             <td>
                 <!-- TODO: da regolare il sizing -->
                 <div class="row">
-                        <span>
-                        <a th:href="@{/magazzino/fornitori/edit/{id} (id=${entry.key.getPiva()})}"
-                           class="btn btn-primary sm">
-                            modifica </a>
-                            </span>
-                    <span>&nbsp;</span>
-                    <span>
-                        <a th:href="@{/magazzino/fornitori/delete/{id} (id=${entry.key.getPiva()})}"
-                           class="btn btn-danger sm">
-                            elimina </a>
-                    </span>
+                        <div class="col">
+                            <a th:href="@{/magazzino/fornitori/edit/{id} (id=${entry.key.getPiva()})}" class="btn btn-primary sm"> modifica </a>
+                        </div>
+                    <div class="col">
+                        <form th:action="@{/magazzino/fornitori/delete/{id} (id=${entry.key.getPiva()})}" method="post">
+                            <input type="hidden" name="_method" value="delete"/>
+                            <input type="submit" value="elimina" class="btn btn-danger sm"/>
+                        </form>
+                        <!-- <a th:href="@{/magazzino/fornitori/delete/{id} (id=${entry.key.getPiva()})}" class="btn btn-danger sm"> elimina </a> -->
+                    </div>
                 </div>
             </td>
         </tr>

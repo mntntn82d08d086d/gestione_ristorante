@@ -1,22 +1,25 @@
 package org.labsis.gestione_ristorante.service.magazzino;
 
 import org.labsis.gestione_ristorante.entity.magazzino.Fornitore;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * TODO: Documentazione
  */
 
+@Component
 public interface FornitoreService {
 
     List<Fornitore> getAllFornitori();
 
-    Fornitore saveFornitore(Fornitore fornitore);
+    Optional<Fornitore> getFornitoreByPiva(String piva);
 
-    Fornitore getFornitoreById(String id);
+    Optional<Fornitore> saveFornitore(Fornitore fornitore);
 
-    Fornitore updateFornitore(Fornitore fornitore);
+    Optional<Fornitore> updateFornitore(Fornitore fornitore, String piva);
 
-    void deleteFornitoreById(String id);
+    Optional<Fornitore> deleteFornitoreByPiva(String piva);
 }

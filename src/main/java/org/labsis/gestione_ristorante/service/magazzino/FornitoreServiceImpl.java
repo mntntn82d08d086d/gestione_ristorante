@@ -1,49 +1,53 @@
 package org.labsis.gestione_ristorante.service.magazzino;
 
-import lombok.RequiredArgsConstructor;
 import org.labsis.gestione_ristorante.entity.magazzino.Fornitore;
 import org.labsis.gestione_ristorante.repository.magazzino.FornitoreRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * TODO: Documentazione
  */
 
-@Service
-@Transactional
-@RequiredArgsConstructor
+@Service("fornitoreService")
+@Transactional(readOnly = true)
 public class FornitoreServiceImpl implements FornitoreService {
 
-    @Autowired
-    private final FornitoreRepository repository;
+    private final FornitoreRepository fornitoreRepository;
+
+    public FornitoreServiceImpl(FornitoreRepository fornitoreRepository) {
+        this.fornitoreRepository = fornitoreRepository;
+    }
 
     @Override
     public List<Fornitore> getAllFornitori() {
-        return repository.findAll();
+        return fornitoreRepository.findAll();
     }
 
     @Override
-    public Fornitore saveFornitore(Fornitore fornitore) {
-        return repository.save(fornitore);
+    public Optional<Fornitore> getFornitoreByPiva(String piva) {
+        return fornitoreRepository.findFornitoreByPiva(piva);
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public Fornitore getFornitoreById(String id) {
-        return repository.findById(id).get();
+    public Optional<Fornitore> saveFornitore(Fornitore fornitore) {
+        return fornitoreRepository.saveFornitore(fornitore);
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public Fornitore updateFornitore(Fornitore fornitore) {
-        return repository.save(fornitore);
+    public Optional<Fornitore> updateFornitore(Fornitore fornitore, String piva) {
+        return fornitoreRepository.updateFornitore(fornitore, piva);
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public void deleteFornitoreById(String id) {
-        repository.deleteById(id);
+    public Optional<Fornitore> deleteFornitoreByPiva(String piva) {
+        return fornitoreRepository.deleteFornitoreByPiva(piva);
     }
 }

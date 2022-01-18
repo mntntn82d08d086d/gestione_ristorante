@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
  * TODO: Documentazione
  */
 
-@Repository
-public interface ClienteRepository extends JpaRepository<Cliente, String> {
+@Repository("clienteRepository")
+public interface ClienteRepository extends JpaRepository<Cliente, String>, CustomClienteRepository {
 
+    // TODO: da implementare
 
 }

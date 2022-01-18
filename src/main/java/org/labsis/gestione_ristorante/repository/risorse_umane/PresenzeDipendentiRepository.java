@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
  * TODO: Documentazione
  */
 
-@Repository
-public interface PresenzeDipendentiRepository extends JpaRepository<PresenzeDipendenti, PrezenzeDipendenteKey> {
+@Repository("presenzeDipendentiRepository")
+public interface PresenzeDipendentiRepository extends JpaRepository<PresenzeDipendenti, PrezenzeDipendenteKey>, CustomPresenzeDipendentiRepository {
 
+    // TODO: da implementare
 
 }

@@ -3,16 +3,11 @@ package org.labsis.gestione_ristorante.entity.risorse_umane;
 import com.google.common.base.Objects;
 import org.labsis.gestione_ristorante.entity.admin.Account;
 import org.labsis.gestione_ristorante.entity.common.Contatto;
-import org.labsis.gestione_ristorante.entity.common.Utente;
 import org.labsis.gestione_ristorante.entity.common.UtenteAbstract;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
 import java.util.Set;
-
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.FetchType.LAZY;
 
 /**
  * TODO: Documentazione
@@ -108,10 +103,10 @@ public class Dipendente extends UtenteAbstract {
         return Objects.hashCode(super.hashCode(), getFerieDaContratto(), getPermessiDaContratto(), getMansione(), getAccount());
     }
 
-    public enum Mansione {
+    public enum EnumMansione {
         NS("Non Specificato"), MAGAZZINIERE("Magazziniere"), CASSIERE("Cassiere"), CAMERIERE("Cameriere"), RIDER("Rider");
 
-        Mansione(String mansione) {
+        EnumMansione(String mansione) {
             this.mansione = mansione;
         }
         private String mansione;
@@ -124,9 +119,5 @@ public class Dipendente extends UtenteAbstract {
             this.mansione = mansione;
         }
 
-        @Override
-        public String toString() {
-            return mansione;
-        }
     }
 }

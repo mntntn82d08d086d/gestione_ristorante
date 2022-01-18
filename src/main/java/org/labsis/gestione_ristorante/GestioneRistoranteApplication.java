@@ -1,25 +1,21 @@
 package org.labsis.gestione_ristorante;
 
 //import de.codecentric.boot.admin.server.config.EnableAdminServer;
-import org.labsis.gestione_ristorante.entity.admin.*;
+
+import org.labsis.gestione_ristorante.entity.admin.Account;
+import org.labsis.gestione_ristorante.entity.admin.Socio;
+import org.labsis.gestione_ristorante.service.admin.AccountService;
 import org.labsis.gestione_ristorante.service.admin.SocioService;
-import org.labsis.gestione_ristorante.service.admin.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-/*
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-*/
 
 import java.sql.Date;
-import java.util.ArrayList;
 
 /**
  * TODO: Documentazione
@@ -67,12 +63,20 @@ public class GestioneRistoranteApplication {
 */
 
     @Bean
-    CommandLineRunner run(SocioService service) {
+    CommandLineRunner run(SocioService socioService, AccountService accountService) {
         return args -> {
-            service.saveSocio(new Socio(
-                    "mntntn82d08d086d", "Antonio", "Montera", new Date(1982, 4, 8), "Via Angelo Onnis 22", "Villa Guardia (Como)",
-                    new Account("antoniomontera8", "antoniomontera8@gmail.com", getPasswordEncoder().encode("admin"))
-            ));
+            Account ac = new Account("am8", "antoniomon@gmail.com",
+                    getPasswordEncoder().encode("admin"));
+            Socio admin = new Socio();
+            admin.setCodiceFiscale("mntntn82");
+            admin.setNome("Antonio");
+            admin.setCognome("Montera");
+            admin.setDataDiNascita(new Date(1982, 4, 8));
+            admin.setIndirizzo("Via Martiri 22");
+            admin.setCitta("Como");
+            admin.setAccount(ac);
+            accountService.saveAccount(ac);
+            socioService.saveSocio(admin);
         };
     }
 }

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
  * TODO: Documentazione
  */
 
-@Repository
-public interface R_OSRepository extends JpaRepository<R_OS, R_OSkey> {
+@Repository("rosRepository")
+public interface R_OSRepository extends JpaRepository<R_OS, R_OSkey>, CustomR_OSRepository {
 
-
+    // TODO: da implementare
 }

@@ -1,8 +1,6 @@
 package org.labsis.gestione_ristorante.service.risorse_umane;
 
-import lombok.RequiredArgsConstructor;
 import org.labsis.gestione_ristorante.repository.risorse_umane.PermessiDipendenteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,11 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
  * TODO: Documentazione
  */
 
-@Service
+@Service("permessiDipendenteService")
 @Transactional
-@RequiredArgsConstructor
 public class PermessiDipendenteServiceImpl implements PermessiDipendenteService {
 
-    @Autowired
-    private final PermessiDipendenteRepository repository;
+    private final PermessiDipendenteRepository permessiDipendenteRepository;
+
+    public PermessiDipendenteServiceImpl(PermessiDipendenteRepository permessiDipendenteRepository) {
+        this.permessiDipendenteRepository = permessiDipendenteRepository;
+    }
+
+    // TODO: da implementare
 }

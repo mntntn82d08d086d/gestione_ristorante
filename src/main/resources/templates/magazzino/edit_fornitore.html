@@ -40,14 +40,12 @@
     </div>
 </nav>
 <br>
-
 <div class="container-fuild">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
             <h1 class="text-center"> Aggiorna fornitore</h1>
             <div class="card-body">
-                <form th:action="@{/fornitori/edit/{id} (id=${fornitore.getPiva()})}" th:object="${fornitore}"
-                      method="POST">
+                <form th:action="@{/magazzino/fornitori/edit/{id} (id=${fornitore.getPiva()})}" th:object="${fornitore}" method="post">
                     <div class="form-group">
                         <label for="piva"> partita iva</label>
                         <input
@@ -93,7 +91,9 @@
                     </div>
                     <br>
                     <div class="footer-body">
-                        <button type="submit" class="btn btn-primary"> Modifica</button>
+                        <input type="hidden" name="_method" value="put"/>
+                        <input type="submit" value="modifica" class="btn btn-primary sm"/>
+                        <!-- <button type="submit" class="btn btn-primary"> Modifica</button> -->
                     </div>
                 </form>
             </div>

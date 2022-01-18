@@ -7,16 +7,42 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.labsis.gestione_ristorante.entity.common.Contatto.EnumSuffix.*;
-import static org.labsis.gestione_ristorante.entity.common.Contatto.EnumTipologia.*;
-
 @SpringBootTest
 class ContattoServiceImplTest {
 
     @Autowired
-    private ContattoService service;
+    private ContattoService contattoService;
 
+    private void iterateContatti() {
+        List<Contatto> lc = contattoService.getAllContatti();
+        for(Contatto c : lc) {
+            System.out.println(c);
+        }
+    }
+
+    // TODO: Testing Contatto
+    @Test
+    void getAllContatti() {
+    }
+
+    @Test
+    void getContattoById() {
+    }
+
+    @Test
+    void saveContatto() {
+    }
+
+    @Test
+    void updateContatto() {
+    }
+
+    @Test
+    void deleteContattoById() {
+    }
+}
+
+/*
     @Test
     void getAllContatti() {
         Contatto c1 = new Contatto();
@@ -42,34 +68,28 @@ class ContattoServiceImplTest {
         c1 = service.getContattoById(c_ins.getId());
         System.out.println(c1);
         iterateContatti();
-        service.deleteContattoById(c_ins.getId());
+        //service.deleteContattoById(c_ins.getId());
     }
 
     @Test
     void saveContatto() {
-        Contatto c1 = new Contatto();
-        c1.setTipologia(TELEFONO.getTipologia());
-        c1.setSuffix(LAVORO.getSuffix());
-        c1.setContatto("123-456123");
-        service.saveContatto(c1);
-        iterateContatti();
+            Contatto c1 = new Contatto();
+            c1.setTipologia(TELEFONO.getTipologia());
+            c1.setSuffix(LAVORO.getSuffix());
+            c1.setContatto("123-456123");
+            service.saveContatto(c1);
+            iterateContatti();
     }
 
     @Test
     void deleteContattoById() {
-        Contatto c1 = new Contatto();
-        c1.setTipologia(TELEFONO.getTipologia());
-        c1.setSuffix(LAVORO.getSuffix());
-        c1.setContatto("123-456123");
-        Contatto c_ins = service.saveContatto(c1);
-        iterateContatti();
-        service.deleteContattoById(c_ins.getId());
+            Contatto c1 = new Contatto();
+            c1.setTipologia(TELEFONO.getTipologia());
+            c1.setSuffix(LAVORO.getSuffix());
+            c1.setContatto("123-456123");
+            Contatto c_ins = service.saveContatto(c1);
+            iterateContatti();
+            service.deleteContattoById(c_ins.getId());
     }
 
-    private void iterateContatti() {
-        List<Contatto> lc = service.getAllContatti();
-        for(Contatto c : lc) {
-            System.out.println(c);
-        }
-    }
-}
+ */

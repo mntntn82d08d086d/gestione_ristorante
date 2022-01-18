@@ -1,48 +1,54 @@
 package org.labsis.gestione_ristorante.service.magazzino;
 
-import lombok.RequiredArgsConstructor;
 import org.labsis.gestione_ristorante.entity.magazzino.Prodotto;
 import org.labsis.gestione_ristorante.repository.magazzino.ProdottoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * TODO: Documentazione
  */
 
-@Service
-@Transactional
-@RequiredArgsConstructor
+@Service("prodottoService")
+@Transactional(readOnly = true)
 public class ProdottoServiceImpl implements ProdottoService {
 
-    @Autowired
-    private final ProdottoRepository repository;
+    private final ProdottoRepository prodottoRepository;
+
+    public ProdottoServiceImpl(ProdottoRepository prodottoRepository) {
+        this.prodottoRepository = prodottoRepository;
+    }
 
     @Override
     public List<Prodotto> getAllProdotto() {
-        return repository.findAll();
+        return prodottoRepository.findAll();
     }
 
     @Override
-    public Prodotto saveProdotto(Prodotto prodotto) {
-        return repository.save(prodotto);
+    public Optional<Prodotto> getProdottoById(Long id) {
+        return prodottoRepository.findProdottoById(id);
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public Prodotto getProdottoById(Long id) {
-        return repository.findById(id).get();
+    public Optional<Prodotto> saveProdotto(Prodotto prodotto) {
+        return prodottoRepository.saveProdotto(prodotto);
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public Prodotto updateProdotto(Prodotto existingProdotto) {
-        return repository.save(existingProdotto);
+    public Optional<Prodotto> updateProdotto(Prodotto prodotto, Long id) {
+        return prodottoRepository.updateProdotto(prodotto, id);
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public void deleteProdottoById(Long id) {
-        repository.deleteById(id);
+    public Optional<Prodotto> deleteProdottoById(Long id) {
+        prodottoRepository.deleteById(id);
+        return Optional.empty();
     }
 }

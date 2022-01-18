@@ -1,48 +1,53 @@
 package org.labsis.gestione_ristorante.service.risorse_umane;
 
-import lombok.RequiredArgsConstructor;
 import org.labsis.gestione_ristorante.entity.risorse_umane.Dipendente;
 import org.labsis.gestione_ristorante.repository.risorse_umane.DipendenteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * TODO: Documentazione
  */
 
-@Service
-@Transactional
-@RequiredArgsConstructor
+@Service("dipendenteService")
+@Transactional(readOnly = true)
 public class DipendenteServiceImpl implements DipendenteService {
 
-    @Autowired
-    private final DipendenteRepository repository;
+    private final DipendenteRepository dipendenteRepository;
+
+    public DipendenteServiceImpl(DipendenteRepository dipendenteRepository) {
+        this.dipendenteRepository = dipendenteRepository;
+    }
 
     @Override
     public List<Dipendente> getAllDipendenti() {
-        return repository.findAll();
+        return dipendenteRepository.findAll();
     }
 
     @Override
-    public Dipendente saveDipendente(Dipendente dipendente) {
-        return repository.save(dipendente);
+    public Optional<Dipendente> getDipendenteByCodiceFiscale(String codiceFiscale) {
+        return dipendenteRepository.findDipendenteByCodiceFiscale(codiceFiscale);
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public Dipendente getDipendenteById(Long id) {
-        return repository.getById(id);
+    public Optional<Dipendente> saveDipendente(Dipendente dipendente) {
+        return dipendenteRepository.saveDipendente(dipendente);
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public Dipendente updateDipendente(Dipendente dipendente) {
-        return repository.save(dipendente);
+    public Optional<Dipendente> updateDipendente(Dipendente dipendente, String codiceFiscale) {
+        return dipendenteRepository.updateDipendente(dipendente, codiceFiscale);
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public void deleteDipendenteById(Long id) {
-        repository.deleteById(id);
+    public Optional<Dipendente> deleteDipendenteByCodiceFiscale(String codiceFiscale) {
+        return dipendenteRepository.deleteDipendenteByCodiceFiscale(codiceFiscale);
     }
 }
