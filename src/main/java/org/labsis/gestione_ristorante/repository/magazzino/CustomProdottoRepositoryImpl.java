@@ -17,9 +17,13 @@ public class CustomProdottoRepositoryImpl implements CustomProdottoRepository {
 
     @Override
     public Optional<Prodotto> saveProdotto(Prodotto prodotto) {
-        // FIXME: testare l'eventualità che fornitore sia già presente nel database
+        // FIXME: testare l'eventualità che prodotto sia già presente nel database
         Optional<Prodotto> ret = Optional.empty();
-        Prodotto p = entityManager.find(Prodotto.class, prodotto.getId());
+        // TODO: da eliminare la logica
+        Prodotto p = null;
+        if(prodotto.getId() != null) {
+            p = entityManager.find(Prodotto.class, prodotto.getId());
+        }
         if(p == null) {
             entityManager.persist(prodotto);
             ret = Optional.of(prodotto);
