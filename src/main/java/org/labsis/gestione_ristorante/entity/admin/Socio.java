@@ -1,16 +1,12 @@
 package org.labsis.gestione_ristorante.entity.admin;
 
 import com.google.common.base.Objects;
-import lombok.*;
-import org.labsis.gestione_ristorante.entity.common.Utente;
+import org.labsis.gestione_ristorante.entity.common.Contatto;
 import org.labsis.gestione_ristorante.entity.common.UtenteAbstract;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Date;
-
-import static javax.persistence.CascadeType.*;
-import static javax.persistence.FetchType.*;
+import java.util.Set;
 
 /**
  * TODO: Documentazione
@@ -18,6 +14,18 @@ import static javax.persistence.FetchType.*;
 
 @Entity
 public class Socio extends UtenteAbstract {
+
+    @OneToMany
+    @JoinTable(
+            name = "rubrica_socio",
+            joinColumns = @JoinColumn(name = "socio_codice_fiscale", referencedColumnName = "codice_fiscale",
+                    foreignKey = @ForeignKey(name = "s_cod_fis_fk")),
+            inverseJoinColumns = @JoinColumn(name = "contatto_id",
+                    foreignKey = @ForeignKey(name = "s_contatto_id_fk")),
+            uniqueConstraints = @UniqueConstraint(name = "s_contatto_id_unique", columnNames = "contatto_id"),
+            indexes = @Index(name = "s_cod_fis_idx", columnList = "socio_codice_fiscale")
+    )
+    private Set<Contatto> contatti;
 
     @OneToOne(optional = false, orphanRemoval = true)
     private Account account;
@@ -30,6 +38,16 @@ public class Socio extends UtenteAbstract {
     public Socio(String codiceFiscale, String nome, String cognome, Date dataDiNascita, String indirizzo, String citta, Account account) {
         super(codiceFiscale, nome, cognome, dataDiNascita, indirizzo, citta);
         this.account = account;
+    }
+
+    @Override
+    public Set<Contatto> getContatti() {
+        return contatti;
+    }
+
+    @Override
+    public void setContatti(Set<Contatto> contatti) {
+        this.contatti = contatti;
     }
 
     @Override
@@ -48,18 +66,19 @@ public class Socio extends UtenteAbstract {
         if (!(o instanceof Socio)) return false;
         if (!super.equals(o)) return false;
         Socio socio = (Socio) o;
-        return Objects.equal(getAccount(), socio.getAccount());
+        return Objects.equal(getContatti(), socio.getContatti()) && Objects.equal(getAccount(), socio.getAccount());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(super.hashCode(), getAccount());
+        return Objects.hashCode(super.hashCode(), getContatti(), getAccount());
     }
 
     @Override
     public String toString() {
         return "Socio{" +
                 super.toString() +
+                ", contatti=" + contatti +
                 ", account=" + account +
                 '}';
     }

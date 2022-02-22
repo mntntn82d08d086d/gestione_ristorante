@@ -14,6 +14,10 @@ public interface AziendaConvenzioneService {
 
     Optional<AziendaConvenzione> getAziendaConvenzioneByNomeAzienda(String nomeAzienda);
 
-    AziendaConvenzione saveAziendaConvenzione(AziendaConvenzione aziendaConvenzione);
+    Optional<AziendaConvenzione> saveAziendaConvenzione(AziendaConvenzione aziendaConvenzione);
+
+    Optional<AziendaConvenzione> updateAziendaConvenzione(AziendaConvenzione aziendaConvenzione, String piva);
+
+    Optional<AziendaConvenzione> deleteAziendaConvenzione(String piva);
 
 }

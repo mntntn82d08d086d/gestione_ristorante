@@ -15,5 +15,7 @@ public interface FornitoreRepository extends JpaRepository<Fornitore, String>, C
 
     Optional<Fornitore> findFornitoreByPiva(String piva);
 
+    Optional<Fornitore> findFornitoreByNomeAzienda(String nomeAzienda);
+
 }
 

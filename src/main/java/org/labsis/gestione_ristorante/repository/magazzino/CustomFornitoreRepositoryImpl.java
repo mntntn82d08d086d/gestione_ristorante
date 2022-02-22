@@ -17,7 +17,6 @@ public class CustomFornitoreRepositoryImpl implements CustomFornitoreRepository 
 
     @Override
     public Optional<Fornitore> saveFornitore(Fornitore fornitore) {
-        // FIXME: testata l'eventualità che fornitore sia già presente nel database
         Optional<Fornitore> ret = Optional.empty();
         Fornitore f = entityManager.find(Fornitore.class, fornitore.getPiva());
         if(f == null) {
@@ -33,7 +32,6 @@ public class CustomFornitoreRepositoryImpl implements CustomFornitoreRepository 
         Fornitore existingFornitore = entityManager.find(Fornitore.class, piva);
         if(existingFornitore != null) {
             entityManager.remove(existingFornitore);
-            entityManager.flush();
             existingFornitore.setPiva(fornitore.getPiva());
             existingFornitore.setNomeAzienda(fornitore.getNomeAzienda());
             existingFornitore.setSedeLegale(fornitore.getSedeLegale());

@@ -1,14 +1,13 @@
 package org.labsis.gestione_ristorante.entity.common;
 
 import com.google.common.base.Objects;
-import lombok.*;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.labsis.gestione_ristorante.entity.admin.Account;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.sql.Date;
+import java.util.Set;
 
 /**
  * TODO: Documentazione
@@ -35,6 +34,10 @@ public abstract class UtenteAbstract implements Utente {
 
     @Column(name = "citta")
     private String citta;
+
+    public abstract Set<Contatto> getContatti();
+
+    public abstract void setContatti(Set<Contatto> contatti);
 
     public abstract Account getAccount();
 

@@ -46,6 +46,7 @@
             <h1 class="text-center"> Crea nuovo ordine</h1>
             <div class="card-body">
                 <form th:action="@{/magazzino/ordini/new}" th:object="${ordine}" method="POST">
+                    <input type="hidden" th:field="*{id}" />
                     <div th:fragment="input_ordine">
                         <div class="form-group">
                             <label for="codiceOrdine"> Codice ordine </label>
@@ -93,7 +94,7 @@
                         </div>
                         <br>
                         <div class="footer-body">
-                            <button type="submit" class="btn btn-primary"> Aggiorna</button>
+                            <button type="submit" class="btn btn-primary"> Crea</button>
                         </div>
                     </div>
                 </form>

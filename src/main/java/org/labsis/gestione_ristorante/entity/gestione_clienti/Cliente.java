@@ -3,16 +3,12 @@ package org.labsis.gestione_ristorante.entity.gestione_clienti;
 import com.google.common.base.Objects;
 import org.labsis.gestione_ristorante.entity.admin.Account;
 import org.labsis.gestione_ristorante.entity.common.Contatto;
-import org.labsis.gestione_ristorante.entity.common.Utente;
 import org.labsis.gestione_ristorante.entity.common.UtenteAbstract;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.FetchType.LAZY;
 
 /**
  * TODO: Documentazione
@@ -49,6 +45,14 @@ public class Cliente extends UtenteAbstract {
         this.contatti = contatti;
     }
 
+    public Set<Contatto> getContatti() {
+        return contatti;
+    }
+
+    public void setContatti(Set<Contatto> contatti) {
+        this.contatti = contatti;
+    }
+
     @Override
     public Account getAccount() {
         return account;
@@ -65,18 +69,19 @@ public class Cliente extends UtenteAbstract {
         if (!(o instanceof Cliente)) return false;
         if (!super.equals(o)) return false;
         Cliente cliente = (Cliente) o;
-        return Objects.equal(getAccount(), cliente.getAccount());
+        return Objects.equal(getContatti(), cliente.getContatti()) && Objects.equal(getAccount(), cliente.getAccount());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(super.hashCode(), getAccount());
+        return Objects.hashCode(super.hashCode(), getContatti(), getAccount());
     }
 
     @Override
     public String toString() {
         return "Cliente{" +
-                ", " + super.toString() +
+                super.toString() +
+                ", contatti=" + contatti +
                 ", account=" + account +
                 '}';
     }

@@ -2,7 +2,6 @@ package org.labsis.gestione_ristorante.controller.risorse_umane;
 
 import org.labsis.gestione_ristorante.entity.risorse_umane.Dipendente;
 import org.labsis.gestione_ristorante.service.risorse_umane.DipendenteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +17,15 @@ import java.util.List;
 @Controller
 public class DipendenteController {
 
-    @Autowired
-    private DipendenteService service;
+    private final DipendenteService dipendenteService;
+
+    public DipendenteController(DipendenteService dipendenteService) {
+        this.dipendenteService = dipendenteService;
+    }
 
     @GetMapping("/risorse_umane/dipendenti")
     public String getAllDipendenti(Model model) {
-        List<Dipendente> dipendenti = service.getAllDipendenti();
+        List<Dipendente> dipendenti = dipendenteService.getAllDipendenti();
         model.addAttribute("dipendenti", dipendenti);
         return "risorse_umane/dipendenti";
     }
@@ -37,7 +39,7 @@ public class DipendenteController {
 
     @PostMapping("/risorse_umane/dipendenti/new")
     public String saveDipendente(@ModelAttribute("dipendente") Dipendente dipendente) {
-        service.saveDipendente(dipendente);
+        dipendenteService.saveDipendente(dipendente);
         return "redirect:/risorse_umane/dipendenti";
     }
 }

@@ -16,15 +16,15 @@ public class R_OSkey implements Serializable {
     @Column(name = "ordine_id", nullable = false)
     private Long ordineId;
 
-    @Column(name = "socio_id", nullable = false)
-    private String socioPiva;
+    @Column(name = "socio_codice_fiscale", nullable = false)
+    private String socioCodicefiscale;
 
     public R_OSkey() {
     }
 
-    public R_OSkey(Long ordineId, String socioPiva) {
+    public R_OSkey(Long ordineId, String socioCodicefiscale) {
         this.ordineId = ordineId;
-        this.socioPiva = socioPiva;
+        this.socioCodicefiscale = socioCodicefiscale;
     }
 
     public Long getOrdineId() {
@@ -36,11 +36,11 @@ public class R_OSkey implements Serializable {
     }
 
     public String getSocioPiva() {
-        return socioPiva;
+        return socioCodicefiscale;
     }
 
-    public void setSocioPiva(String socioId) {
-        this.socioPiva = socioId;
+    public void setSocioPiva(String socioCodicefiscale) {
+        this.socioCodicefiscale = socioCodicefiscale;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class R_OSkey implements Serializable {
     public String toString() {
         return "R_OSkey{" +
                 "ordineId=" + ordineId +
-                ", socioId=" + socioPiva +
+                ", socioCodicefiscale=" + socioCodicefiscale +
                 '}';
     }
 }

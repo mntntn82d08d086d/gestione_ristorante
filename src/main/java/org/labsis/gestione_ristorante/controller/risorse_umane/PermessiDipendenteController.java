@@ -1,7 +1,6 @@
 package org.labsis.gestione_ristorante.controller.risorse_umane;
 
 import org.labsis.gestione_ristorante.service.risorse_umane.PermessiDipendenteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -11,6 +10,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class PermessiDipendenteController {
 
-    @Autowired
-    private PermessiDipendenteService service;
+    private final PermessiDipendenteService permessiDipendenteService;
+
+    public PermessiDipendenteController(PermessiDipendenteService permessiDipendenteService) {
+        this.permessiDipendenteService = permessiDipendenteService;
+    }
 }

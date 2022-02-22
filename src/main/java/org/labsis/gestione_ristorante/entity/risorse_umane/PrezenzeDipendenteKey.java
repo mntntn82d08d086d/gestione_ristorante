@@ -17,15 +17,15 @@ public class PrezenzeDipendenteKey implements Serializable {
     @Column(name = "data_presenza", nullable = false)
     private Date dataPresenza;
 
-    @Column(name = "dipendente_piva", nullable = false)
-    private String dipendentePiva;
+    @Column(name = "dipendente_codice_fiscale", nullable = false)
+    private String dipendenteCodiceFiscale;
 
     public PrezenzeDipendenteKey() {
     }
 
-    public PrezenzeDipendenteKey(Date dataPresenza, String dipendentePiva) {
+    public PrezenzeDipendenteKey(Date dataPresenza, String dipendenteCodiceFiscale) {
         this.dataPresenza = dataPresenza;
-        this.dipendentePiva = dipendentePiva;
+        this.dipendenteCodiceFiscale = dipendenteCodiceFiscale;
     }
 
     public Date getDataPresenza() {
@@ -36,12 +36,12 @@ public class PrezenzeDipendenteKey implements Serializable {
         this.dataPresenza = dataPresenza;
     }
 
-    public String getDipendentePiva() {
-        return dipendentePiva;
+    public String getDipendenteCodiceFiscale() {
+        return dipendenteCodiceFiscale;
     }
 
-    public void setDipendentePiva(String dipendentePiva) {
-        this.dipendentePiva = dipendentePiva;
+    public void setDipendenteCodiceFiscale(String dipendentePiva) {
+        this.dipendenteCodiceFiscale = dipendentePiva;
     }
 
     @Override
@@ -50,19 +50,19 @@ public class PrezenzeDipendenteKey implements Serializable {
         if (!(o instanceof PrezenzeDipendenteKey)) return false;
         PrezenzeDipendenteKey that = (PrezenzeDipendenteKey) o;
         return Objects.equal(getDataPresenza(), that.getDataPresenza()) &&
-                Objects.equal(getDipendentePiva(), that.getDipendentePiva());
+                Objects.equal(getDipendenteCodiceFiscale(), that.getDipendenteCodiceFiscale());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getDataPresenza(), getDipendentePiva());
+        return Objects.hashCode(getDataPresenza(), getDipendenteCodiceFiscale());
     }
 
     @Override
     public String toString() {
         return "PrezenzeDipendenteKey{" +
                 "dataPresenza=" + dataPresenza +
-                ", dipendente piva=" + dipendentePiva +
+                ", dipendente piva=" + dipendenteCodiceFiscale +
                 '}';
     }
 }

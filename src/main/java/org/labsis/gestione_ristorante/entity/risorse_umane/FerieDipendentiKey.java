@@ -20,16 +20,16 @@ public class FerieDipendentiKey implements Serializable {
     @Column(name = "data_fine", nullable = false)
     private Date dataFine;
 
-    @Column(name = "dipendente_piva", nullable = false)
-    private String dipendentePiva;
+    @Column(name = "dipendente_codice_fiscale", nullable = false)
+    private String dipendenteCodiceFiscale;
 
     public FerieDipendentiKey() {
     }
 
-    public FerieDipendentiKey(Date dataInizio, Date dataFine, String dipendentePiva) {
+    public FerieDipendentiKey(Date dataInizio, Date dataFine, String dipendenteCodiceFiscale) {
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
-        this.dipendentePiva = dipendentePiva;
+        this.dipendenteCodiceFiscale = dipendenteCodiceFiscale;
     }
 
     public Date getDataInizio() {
@@ -48,12 +48,12 @@ public class FerieDipendentiKey implements Serializable {
         this.dataFine = dataFine;
     }
 
-    public String getDipendenteId() {
-        return dipendentePiva;
+    public String getDipendenteCodiceFiscale() {
+        return dipendenteCodiceFiscale;
     }
 
-    public void setDipendenteId(String dipendentePiva) {
-        this.dipendentePiva = dipendentePiva;
+    public void setDipendenteCodiceFiscale(String dipendenteCodiceFiscale) {
+        this.dipendenteCodiceFiscale = dipendenteCodiceFiscale;
     }
 
     @Override
@@ -61,12 +61,13 @@ public class FerieDipendentiKey implements Serializable {
         if (this == o) return true;
         if (!(o instanceof FerieDipendentiKey)) return false;
         FerieDipendentiKey that = (FerieDipendentiKey) o;
-        return Objects.equal(getDataInizio(), that.getDataInizio()) && Objects.equal(getDataFine(), that.getDataFine()) && Objects.equal(getDipendenteId(), that.getDipendenteId());
+        return Objects.equal(getDataInizio(), that.getDataInizio()) && Objects.equal(getDataFine(), that.getDataFine()) &&
+                Objects.equal(getDipendenteCodiceFiscale(), that.getDipendenteCodiceFiscale());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getDataInizio(), getDataFine(), getDipendenteId());
+        return Objects.hashCode(getDataInizio(), getDataFine(), getDipendenteCodiceFiscale());
     }
 
     @Override
@@ -74,7 +75,7 @@ public class FerieDipendentiKey implements Serializable {
         return "FerieDipendentiKey{" +
                 "dataInizio=" + dataInizio +
                 ", dataFine=" + dataFine +
-                ", dipendente piva=" + dipendentePiva +
+                ", dipendente piva=" + dipendenteCodiceFiscale +
                 '}';
     }
 }

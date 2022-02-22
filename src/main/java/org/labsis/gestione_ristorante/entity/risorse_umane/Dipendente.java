@@ -80,6 +80,16 @@ public class Dipendente extends UtenteAbstract {
     }
 
     @Override
+    public Set<Contatto> getContatti() {
+        return contatti;
+    }
+
+    @Override
+    public void setContatti(Set<Contatto> contatti) {
+        this.contatti = contatti;
+    }
+
+    @Override
     public Account getAccount() {
         return account;
     }
@@ -95,12 +105,24 @@ public class Dipendente extends UtenteAbstract {
         if (!(o instanceof Dipendente)) return false;
         if (!super.equals(o)) return false;
         Dipendente that = (Dipendente) o;
-        return Objects.equal(getFerieDaContratto(), that.getFerieDaContratto()) && Objects.equal(getPermessiDaContratto(), that.getPermessiDaContratto()) && Objects.equal(getMansione(), that.getMansione()) && Objects.equal(getAccount(), that.getAccount());
+        return Objects.equal(getContatti(), that.getContatti()) && Objects.equal(getFerieDaContratto(), that.getFerieDaContratto()) && Objects.equal(getPermessiDaContratto(), that.getPermessiDaContratto()) && Objects.equal(getMansione(), that.getMansione()) && Objects.equal(getAccount(), that.getAccount());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(super.hashCode(), getFerieDaContratto(), getPermessiDaContratto(), getMansione(), getAccount());
+        return Objects.hashCode(super.hashCode(), getContatti(), getFerieDaContratto(), getPermessiDaContratto(), getMansione(), getAccount());
+    }
+
+    @Override
+    public String toString() {
+        return "Dipendente{" +
+                super.toString() +
+                ", contatti=" + contatti +
+                ", ferieDaContratto=" + ferieDaContratto +
+                ", permessiDaContratto=" + permessiDaContratto +
+                ", mansione='" + mansione + '\'' +
+                ", account=" + account +
+                '}';
     }
 
     public enum EnumMansione {

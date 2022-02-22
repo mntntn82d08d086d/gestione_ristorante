@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * TODO: Documentazione
@@ -14,7 +15,7 @@ import java.util.List;
 @Repository("convenzioneRepository")
 public interface ConvenzioneRepository extends JpaRepository<Convenzione, Long>, CustomConvenzioneRepository {
 
-    Convenzione findConvenzioneByCodiceConvenzione(String codiceConvenzione);
+    Optional<Convenzione> findConvenzioneByCodiceConvenzione(String codiceConvenzione);
 
     List<Convenzione> findConvenzioneByDataStipula(Date dataStipula);
 

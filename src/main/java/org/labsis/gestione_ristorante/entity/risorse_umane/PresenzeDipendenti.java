@@ -18,9 +18,9 @@ public class PresenzeDipendenti implements Serializable {
     @EmbeddedId
     private PrezenzeDipendenteKey id;
 
-    @MapsId("dipendentePiva")
+    @MapsId("dipendenteCodiceFiscale")
     @ManyToOne(optional = false)
-    @JoinColumn(name = "dipendente_piva", nullable = false)
+    @JoinColumn(name = "dipendente_codice_fiscale", nullable = false)
     private Dipendente dipendente;
 
     @Column(name = "ora_entrata", nullable = false)
@@ -42,6 +42,11 @@ public class PresenzeDipendenti implements Serializable {
     @Transient
     public Date getDatePresenza() {
         return id.getDataPresenza();
+    }
+
+    @Transient
+    public String getDipendenteCodiceFiscale() {
+        return id.getDipendenteCodiceFiscale();
     }
 
     @Override

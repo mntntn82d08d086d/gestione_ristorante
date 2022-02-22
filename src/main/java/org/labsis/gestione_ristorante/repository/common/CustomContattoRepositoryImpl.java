@@ -1,23 +1,31 @@
 package org.labsis.gestione_ristorante.repository.common;
 
-import lombok.RequiredArgsConstructor;
 import org.labsis.gestione_ristorante.entity.common.Contatto;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import java.util.Optional;
 
-@RequiredArgsConstructor
+@Component
 public class CustomContattoRepositoryImpl implements CustomContattoRepository {
 
-    @Autowired
     private final EntityManager entityManager;
+
+    public CustomContattoRepositoryImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     @Override
     public Optional<Contatto> saveContatto(Contatto contatto) {
         Optional<Contatto> ret = Optional.empty();
-        Contatto c = entityManager.find(Contatto.class, contatto.getId());
-        if(c == null) {
+        try {
+            TypedQuery<Contatto> query = entityManager.createQuery("SELECT c FROM Contatto c WHERE c.contatto = ?1", Contatto.class);
+            Contatto existingContatto = query.setParameter(1, contatto.getContatto()).getSingleResult();
+            if(existingContatto != null)
+                ret = Optional.of(existingContatto);
+        } catch (NoResultException e) {
             entityManager.persist(contatto);
             ret = Optional.of(contatto);
         }
@@ -28,7 +36,7 @@ public class CustomContattoRepositoryImpl implements CustomContattoRepository {
     public Optional<Contatto> updateContatto(Contatto contatto, Long id) {
         Optional<Contatto> ret = Optional.empty();
         Contatto existingContatto = entityManager.find(Contatto.class, id);
-        if(existingContatto != null) {
+        if (existingContatto != null) {
             entityManager.remove(existingContatto);
             entityManager.flush();
             existingContatto.setId(contatto.getId());
@@ -45,7 +53,7 @@ public class CustomContattoRepositoryImpl implements CustomContattoRepository {
     public Optional<Contatto> deleteContattoById(Long id) {
         Optional<Contatto> ret = Optional.empty();
         Contatto c = entityManager.find(Contatto.class, id);
-        if(c != null) {
+        if (c != null) {
             entityManager.remove(c);
             ret = Optional.of(c);
         }

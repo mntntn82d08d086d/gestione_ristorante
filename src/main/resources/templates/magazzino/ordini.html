@@ -109,7 +109,12 @@
             </td>
             <td>
                 <a th:href="@{/magazzino/ordini/edit/{id} (id=${ordine.id})}" class="btn btn-primary">Modifica</a>
-                <a th:href="@{/magazzino/ordini/delete/{id} (id=${ordine.id})}" class="btn btn-danger">Elimina</a>
+                <form th:action="@{/magazzino/ordini/delete/{id} (id=${ordine.id})}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <input type="submit" value="elimina" class="btn btn-danger sm"/>
+                </form>
+                <!-- <a th:href="@{/magazzino/ordini/delete/{id} (id=${ordine.id})}" class="btn btn-danger">Elimina</a> -->
+
             </td>
         </tr>
         </tbody>

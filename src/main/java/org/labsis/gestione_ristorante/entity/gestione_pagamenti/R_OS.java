@@ -23,9 +23,9 @@ public class R_OS implements Serializable {
     @JoinColumn(name = "ordine_id", nullable = false)
     private Ordine ordine;
 
-    @MapsId("socioPiva")
+    @MapsId("socioCodicefiscale")
     @ManyToOne(optional = false)
-    @JoinColumn(name = "socio_piva", nullable = false)
+    @JoinColumn(name = "socio_codice_fiscale", nullable = false)
     private Socio socio;
 
     @Column(name = "data_evasione", nullable = false)

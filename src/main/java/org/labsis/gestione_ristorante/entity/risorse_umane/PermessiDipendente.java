@@ -16,9 +16,9 @@ public class PermessiDipendente implements Serializable {
     @EmbeddedId
     private PermessiDipendentiKey id;
 
-    @MapsId("dipendentePiva")
+    @MapsId("dipendenteCodiceFiscale")
     @ManyToOne(optional = false)
-    @JoinColumn(name = "dipendente_piva", nullable = false)
+    @JoinColumn(name = "dipendente_codice_fiscale", nullable = false)
     private Dipendente dipendente;
 
     @Column(name = "motivazione", nullable = false)
@@ -75,13 +75,8 @@ public class PermessiDipendente implements Serializable {
     }
 
     @Transient
-    public void setDataPermesso(java.sql.Date dataPermesso) {
-        id.setDataPermesso(dataPermesso);
-    }
-
-    @Transient
     public String getDipendentePiva() {
-        return id.getDipendentePiva();
+        return id.getDipendenteCodiceFiscale();
     }
 
     @Override

@@ -2,7 +2,6 @@ package org.labsis.gestione_ristorante.controller.magazzino;
 
 import org.labsis.gestione_ristorante.entity.magazzino.Ordine;
 import org.labsis.gestione_ristorante.service.magazzino.OrdineService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,52 +16,57 @@ import java.util.List;
 @RequestMapping("/magazzino")
 public class OdineController {
 
-    @Autowired
-    private OrdineService service;
+    private static final String LISTA_ORDINI = "magazzino/ordini";
+    private static final String CREATE_ORDINE = "magazzino/create_ordine";
+    private static final String EDIT_ORDINE = "magazzino/edit_ordine";
+    private static final String REDIRECT_LISTA_ORDINI = "redirect:/magazzino/ordini";
+
+    private final OrdineService ordineService;
+
+    public OdineController(OrdineService ordineService) {
+        this.ordineService = ordineService;
+    }
 
     @GetMapping("/ordini")
     public String getAllOrdini(Model model) {
-        List<Ordine> ordini = service.getAllOrdine();
+        List<Ordine> ordini = ordineService.getAllOrdine();
         model.addAttribute("ordini", ordini);
-        return "magazzino/ordini";
+        return LISTA_ORDINI;
     }
 
     @GetMapping("/ordini/new")
     public String createOrdine(Model model) {
         Ordine ordine = new Ordine();
         model.addAttribute("ordine", ordine);
-        return "magazzino/create_ordine";
+        return CREATE_ORDINE;
     }
 
+    /**
+     * @param ordine
+     * @param model
+     * @return
+     */
     @PostMapping("/ordini/new")
-    public String saveOrdine(@ModelAttribute("ordine") Ordine ordine) {
-        service.saveOrdine(ordine);
-        return "redirect:/magazzino/ordini";
+    public String saveOrdine(@ModelAttribute("ordine") Ordine ordine, Model model) {
+        ordineService.saveOrdine(ordine);
+        return REDIRECT_LISTA_ORDINI;
     }
 
     @GetMapping("/ordini/edit/{id}")
     public String editOrdine(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("ordine", service.getOrdineById(id));
-        return "magazzino/edit_ordine";
+        model.addAttribute("ordine", ordineService.getOrdineById(id).get());
+        return EDIT_ORDINE;
     }
 
-    @PostMapping("/ordini/edit/{id}")
-    public String updateOrdine(@PathVariable("id") Long id,
-                               @ModelAttribute("ordine") Ordine ordine,
-                               Model model){
-        Ordine existingOrdine = service.getOrdineById(id);
-        existingOrdine.setCodiceOrdine(ordine.getCodiceOrdine());
-        existingOrdine.setDataRichiesta(ordine.getDataRichiesta());
-        existingOrdine.setOrdineEvaso(ordine.getOrdineEvaso());
-        existingOrdine.setNota(ordine.getNota());
-
-        service.saveOrdine(existingOrdine);
-        return "redirect:/magazzino/ordini";
+    @PutMapping("/ordini/edit/{id}")
+    public String updateOrdine(@PathVariable("id") Long id, @ModelAttribute("ordine") Ordine ordine, Model model) {
+        ordineService.updateOrdine(ordine, id);
+        return REDIRECT_LISTA_ORDINI;
     }
 
-    @GetMapping("/ordini/delete/{id}")
+    @DeleteMapping("/ordini/delete/{id}")
     public String deleteOrdine(@PathVariable Long id) {
-        service.deleteOrdineById(id);
-        return "redirect:/magazzino/ordini";
+        ordineService.deleteOrdineById(id);
+        return REDIRECT_LISTA_ORDINI;
     }
 }

@@ -1,14 +1,11 @@
 package org.labsis.gestione_ristorante.service.admin;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.labsis.gestione_ristorante.entity.admin.Account;
 import org.labsis.gestione_ristorante.entity.admin.AccountKey;
 import org.labsis.gestione_ristorante.entity.admin.OldRole;
 import org.labsis.gestione_ristorante.repository.admin.AccountRepository;
 import org.labsis.gestione_ristorante.repository.admin.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,17 +17,19 @@ import java.util.List;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 @Slf4j
 public class AccountServiceImpl implements AccountService/*, UserDetailsService */{
 
-    @Autowired
     private final AccountRepository repository;
 
-    @Autowired
     private final RoleRepository roleRepository;
 
-/*
+    public AccountServiceImpl(AccountRepository repository, RoleRepository roleRepository) {
+        this.repository = repository;
+        this.roleRepository = roleRepository;
+    }
+
+    /*
     @Autowired
     private final PasswordEncoder passwordEncoder;
 */

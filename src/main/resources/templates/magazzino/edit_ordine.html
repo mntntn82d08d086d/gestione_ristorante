@@ -45,7 +45,8 @@
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
             <h1 class="text-center"> Aggiorna ordine</h1>
             <div class="card-body">
-                <form th:action="@{/magazzino/ordini/edit/{id} (id=${ordine.id})}" th:object="${ordine}" method="POST">
+                <form th:action="@{/magazzino/ordini/edit/{id} (id=${ordine.getId()})}" th:object="${ordine}" method="post">
+                    <input type="hidden" th:field="*{id}" th:value="${id}"/>
                     <div th:fragment="input_ordine">
                         <div class="form-group">
                             <label for="codiceOrdine"> Codice ordine </label>
@@ -93,6 +94,7 @@
                         </div>
                         <br>
                         <div class="footer-body">
+                            <input type="hidden" name="_method" value="put"/>
                             <button type="submit" class="btn btn-primary"> Aggiorna</button>
                         </div>
                     </div>

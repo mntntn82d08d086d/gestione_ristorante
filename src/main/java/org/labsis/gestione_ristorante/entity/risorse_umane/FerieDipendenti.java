@@ -16,20 +16,10 @@ public class FerieDipendenti implements Serializable {
     @EmbeddedId
     private FerieDipendentiKey id;
 
-    @MapsId("dipendentePiva")
+    @MapsId("dipendenteCodiceFiscale")
     @ManyToOne(optional = false)
-    @JoinColumn(name = "dipendente_piva",nullable = false)
+    @JoinColumn(name = "dipendente_codice_fiscale",nullable = false)
     private Dipendente dipendente;
-
-    @Transient
-    public Date getDataInizio() {
-        return id.getDataInizio();
-    }
-
-    @Transient
-    public Date getDataFine() {
-        return id.getDataFine();
-    }
 
     public FerieDipendenti() {
     }
@@ -53,6 +43,21 @@ public class FerieDipendenti implements Serializable {
 
     public void setDipendente(Dipendente dipendente) {
         this.dipendente = dipendente;
+    }
+
+    @Transient
+    public Date getDataInizio() {
+        return id.getDataInizio();
+    }
+
+    @Transient
+    public Date getDataFine() {
+        return id.getDataFine();
+    }
+
+    @Transient
+    public String getDipendenteCodiceFiscale() {
+        return id.getDipendenteCodiceFiscale();
     }
 
     @Override

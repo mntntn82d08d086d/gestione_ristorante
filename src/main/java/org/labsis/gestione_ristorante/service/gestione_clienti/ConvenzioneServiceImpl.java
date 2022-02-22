@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service("convenzioneService")
 @Transactional(readOnly = true)
@@ -19,7 +20,7 @@ public class ConvenzioneServiceImpl implements ConvenzioneService {
     }
 
     @Override
-    public Convenzione getConvenzioneByCodiceConvenzione(String codiceConvenzione) {
+    public Optional<Convenzione> getConvenzioneByCodiceConvenzione(String codiceConvenzione) {
         return convenzioneRepository.findConvenzioneByCodiceConvenzione(codiceConvenzione);
     }
 
@@ -28,6 +29,7 @@ public class ConvenzioneServiceImpl implements ConvenzioneService {
         return convenzioneRepository.findConvenzioneByDataStipula(dataStipula);
     }
 
+    // TODO: da implementare
 /*
     @Override
     public List<Convenzione> getConvenzioneByDataStipula_Month(Integer mese) {
@@ -35,9 +37,18 @@ public class ConvenzioneServiceImpl implements ConvenzioneService {
     }
 */
 
-    // TODO: da implementare
     @Override
-    public Convenzione saveConvenzione(Convenzione convenzione) {
-        return convenzioneRepository.save(convenzione);
+    public Optional<Convenzione> saveConvenzione(Convenzione convenzione) {
+        return convenzioneRepository.saveConvenzione(convenzione);
+    }
+
+    @Override
+    public Optional<Convenzione> updateConvenzione(Convenzione convenzione, Long id) {
+        return convenzioneRepository.updateConvenzione(convenzione, id);
+    }
+
+    @Override
+    public Optional<Convenzione> deleteConvenzioneById(Long id) {
+        return convenzioneRepository.deleteConvenzioneById(id);
     }
 }

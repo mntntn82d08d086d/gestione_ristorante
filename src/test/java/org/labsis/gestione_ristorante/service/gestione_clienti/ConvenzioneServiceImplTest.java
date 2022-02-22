@@ -8,8 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Date;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Optional;
 @SpringBootTest
 class ConvenzioneServiceImplTest {
 
@@ -29,8 +28,8 @@ class ConvenzioneServiceImplTest {
 
     @Test
     void getConvenzioneByCodice() {
-        Convenzione convenzione = service.getConvenzioneByCodiceConvenzione("1AS");
-        System.out.println(convenzione);
+        Optional<Convenzione> convenzione = service.getConvenzioneByCodiceConvenzione("1AS");
+        System.out.println(convenzione.get());
     }
 
     @Test

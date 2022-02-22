@@ -10,7 +10,8 @@ import java.sql.Date;
  * TODO: Documentazione
  */
 
-@Entity
+@Entity(name = "Ordine")
+@Table(uniqueConstraints = @UniqueConstraint(name = "codice_ordine_unique", columnNames = "codice_ordine"))
 public class Ordine implements Serializable {
 
     @Id
@@ -30,22 +31,14 @@ public class Ordine implements Serializable {
     private Date dataRichiesta;
 
     @Column(name = "ordine_evaso")
-    private Boolean ordineEvaso = false;
+    private Boolean ordineEvaso;
 
     @Lob
     @Column(name = "nota")
     private String nota;
 
-/*
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "ordine")
-    @ToString.Exclude
-    private Set<R_PO> r_po = new java.util.LinkedHashSet<>();
-
-    @OneToMany
-    private Set<R_OS> r_os;
-*/
-
     public Ordine() {
+        ordineEvaso = false;
     }
 
     public Ordine(Long id, String codiceOrdine, Date dataRichiesta, Boolean ordineEvaso, String nota) {
@@ -73,18 +66,6 @@ public class Ordine implements Serializable {
         this.codiceOrdine = codiceOrdine;
         this.dataRichiesta = dataRichiesta;
     }
-
-/*
-    @Transient
-    public void addRpo(R_PO r) {
-        r_po.add(r);
-    }
-
-    @Transient
-    public void removeRpo(R_PO r) {
-        r_po.remove(r);
-    }
-*/
 
     public Long getId() {
         return id;

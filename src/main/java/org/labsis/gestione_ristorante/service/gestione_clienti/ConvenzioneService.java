@@ -5,15 +5,21 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public interface ConvenzioneService {
 
-    Convenzione getConvenzioneByCodiceConvenzione(String codiceConvenzione);
+    Optional<Convenzione> getConvenzioneByCodiceConvenzione(String codiceConvenzione);
 
     List<Convenzione> getConvenzioneByDataStipula(Date dataStipula);
 
     //List<Convenzione> getConvenzioneByDataStipula_Month(Integer mese);
 
-    Convenzione saveConvenzione(Convenzione convenzione);
+    Optional<Convenzione> saveConvenzione(Convenzione convenzione);
+
+    Optional<Convenzione> updateConvenzione(Convenzione convenzione, Long id);
+
+    Optional<Convenzione> deleteConvenzioneById(Long id);
+
 }

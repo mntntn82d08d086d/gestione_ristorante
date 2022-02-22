@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.PersistenceException;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,6 @@ import java.util.Optional;
  */
 
 @Service("fornitoreService")
-@Transactional(readOnly = true)
 public class FornitoreServiceImpl implements FornitoreService {
 
     private final FornitoreRepository fornitoreRepository;
@@ -23,29 +23,31 @@ public class FornitoreServiceImpl implements FornitoreService {
         this.fornitoreRepository = fornitoreRepository;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Fornitore> getAllFornitori() {
         return fornitoreRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Fornitore> getFornitoreByPiva(String piva) {
         return fornitoreRepository.findFornitoreByPiva(piva);
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = {PersistenceException.class})
     @Override
     public Optional<Fornitore> saveFornitore(Fornitore fornitore) {
         return fornitoreRepository.saveFornitore(fornitore);
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = {PersistenceException.class})
     @Override
     public Optional<Fornitore> updateFornitore(Fornitore fornitore, String piva) {
         return fornitoreRepository.updateFornitore(fornitore, piva);
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = {PersistenceException.class})
     @Override
     public Optional<Fornitore> deleteFornitoreByPiva(String piva) {
         return fornitoreRepository.deleteFornitoreByPiva(piva);

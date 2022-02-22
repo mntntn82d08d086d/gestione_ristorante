@@ -52,7 +52,7 @@
                 <h6 th:text="'sede legale: ' + ${fornitore.sedeLegale}"></h6>
                 <h6 th:text="'citta\': ' + ${fornitore.citta}"></h6>
                 <h4>Contatto</h4>
-                <form th:action="@{/magazzino/fornitori/{id}/contatto (id=${fornitore.getId()})}" th:object="${contattoObj}" method="POST">
+                <form th:action="@{/magazzino/fornitori/{id}/contatto (id=${fornitore.getPiva()})}" th:object="${contattoObj}" method="POST">
                     <div class="form-group">
                         <input type="hidden" th:field="*{id}" class="form-control" />
                     </div>
@@ -74,10 +74,10 @@
                         <select th:field="*{suffix}" class="form-select"
                                 aria-label="Default select example">
                             <option th:value="${''}" th:text="${''}"></option>
-                            <option th:value="${suffixObj.PRINCIPALE.toString()}" th:text="${suffixObj.PRINCIPALE.toString()}"></option>
-                            <option th:value="${suffixObj.SECONDARIO.toString()}" th:text="${suffixObj.SECONDARIO.toString()}"></option>
-                            <option th:value="${suffixObj.LAVORO.toString()}" th:text="${suffixObj.LAVORO.toString()}"></option>
-                            <option th:value="${suffixObj.PERSONALE.toString()}" th:text="${suffixObj.PERSONALE.toString()}"></option>
+                            <option th:value="${suffixObj.PRINCIPALE.name()}" th:text="${suffixObj.PRINCIPALE.name()}"></option>
+                            <option th:value="${suffixObj.SECONDARIO.name()}" th:text="${suffixObj.SECONDARIO.name()}"></option>
+                            <option th:value="${suffixObj.LAVORO.name()}" th:text="${suffixObj.LAVORO.name()}"></option>
+                            <option th:value="${suffixObj.PERSONALE.name()}" th:text="${suffixObj.PERSONALE.name()}"></option>
                         </select>
                     </div>
                     <br>

@@ -79,7 +79,8 @@ public class Convenzione implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Convenzione)) return false;
         Convenzione that = (Convenzione) o;
-        return Objects.equal(getId(), that.getId()) && Objects.equal(getCodiceConvenzione(), that.getCodiceConvenzione()) && Objects.equal(getSconto(), that.getSconto()) && Objects.equal(getDataStipula(), that.getDataStipula());
+        return Objects.equal(getId(), that.getId()) && Objects.equal(getCodiceConvenzione(), that.getCodiceConvenzione()) &&
+                Objects.equal(getSconto(), that.getSconto()) && Objects.equal(getDataStipula(), that.getDataStipula());
     }
 
     @Override

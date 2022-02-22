@@ -1,7 +1,6 @@
 package org.labsis.gestione_ristorante.controller.risorse_umane;
 
 import org.labsis.gestione_ristorante.service.risorse_umane.FerieDipendentiService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -11,7 +10,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class FerieDipendentiController {
 
-    @Autowired
-    private FerieDipendentiService service;
+    private final FerieDipendentiService ferieDipendentiService;
 
+    public FerieDipendentiController(FerieDipendentiService ferieDipendentiService) {
+        this.ferieDipendentiService = ferieDipendentiService;
+    }
 }

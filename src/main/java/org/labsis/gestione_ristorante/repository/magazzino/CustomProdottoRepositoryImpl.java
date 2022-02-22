@@ -33,7 +33,6 @@ public class CustomProdottoRepositoryImpl implements CustomProdottoRepository {
         Prodotto existingProdotto = entityManager.find(Prodotto.class, id);
         if(existingProdotto != null) {
             entityManager.remove(existingProdotto);
-            entityManager.flush();
             existingProdotto.setId(prodotto.getId());
             existingProdotto.setNome(prodotto.getNome());
             existingProdotto.setTipologia(prodotto.getTipologia());

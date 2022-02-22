@@ -17,15 +17,15 @@ public class PermessiDipendentiKey implements Serializable {
     @Column(name = "data_permesso", nullable = false)
     private Date dataPermesso;
 
-    @Column(name = "dipendente_piva", nullable = false)
-    private String dipendentePiva;
+    @Column(name = "dipendente_codice_fiscale", nullable = false)
+    private String dipendenteCodiceFiscale;
 
     public PermessiDipendentiKey() {
     }
 
-    public PermessiDipendentiKey(Date dataPermesso, String dipendentePiva) {
+    public PermessiDipendentiKey(Date dataPermesso, String dipendenteCodiceFiscale) {
         this.dataPermesso = dataPermesso;
-        this.dipendentePiva = dipendentePiva;
+        this.dipendenteCodiceFiscale = dipendenteCodiceFiscale;
     }
 
     public Date getDataPermesso() {
@@ -36,12 +36,12 @@ public class PermessiDipendentiKey implements Serializable {
         this.dataPermesso = dataPermesso;
     }
 
-    public String getDipendentePiva() {
-        return dipendentePiva;
+    public String getDipendenteCodiceFiscale() {
+        return dipendenteCodiceFiscale;
     }
 
-    public void setDipendentePiva(String dipendentePiva) {
-        this.dipendentePiva = dipendentePiva;
+    public void setDipendenteCodiceFiscale(String dipendentePiva) {
+        this.dipendenteCodiceFiscale = dipendentePiva;
     }
 
     @Override
@@ -50,19 +50,19 @@ public class PermessiDipendentiKey implements Serializable {
         if (!(o instanceof PermessiDipendentiKey)) return false;
         PermessiDipendentiKey that = (PermessiDipendentiKey) o;
         return Objects.equal(getDataPermesso(), that.getDataPermesso()) &&
-                Objects.equal(getDipendentePiva(), that.getDipendentePiva());
+                Objects.equal(getDipendenteCodiceFiscale(), that.getDipendenteCodiceFiscale());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getDataPermesso(), getDipendentePiva());
+        return Objects.hashCode(getDataPermesso(), getDipendenteCodiceFiscale());
     }
 
     @Override
     public String toString() {
         return "PermessiDipendentiKey{" +
                 "dataPermesso=" + dataPermesso +
-                ", dipendente piva=" + dipendentePiva +
+                ", dipendente piva=" + dipendenteCodiceFiscale +
                 '}';
     }
 }

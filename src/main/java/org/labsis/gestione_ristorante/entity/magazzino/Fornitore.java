@@ -1,7 +1,6 @@
 package org.labsis.gestione_ristorante.entity.magazzino;
 
 import com.google.common.base.Objects;
-import org.labsis.gestione_ristorante.entity.common.Azienda;
 import org.labsis.gestione_ristorante.entity.common.AziendaAbstract;
 import org.labsis.gestione_ristorante.entity.common.Contatto;
 
@@ -10,7 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * TODO: Documentazione
+ * Entità fornitore che rappresenta un generico fornitore nel database.
  */
 
 @Entity
@@ -27,7 +26,7 @@ public class Fornitore extends AziendaAbstract {
             uniqueConstraints = @UniqueConstraint(name = "f_contatto_id_unique", columnNames = "contatto_id"),
             indexes = @Index(name = "f_piva_idx", columnList = "fornitore_piva")
     )
-    private Set<Contatto> contatti = new LinkedHashSet<>();
+    private Set<Contatto> contatti;
 
     public Fornitore() {
         super();
@@ -56,8 +55,16 @@ public class Fornitore extends AziendaAbstract {
 
     @Transient
     @Override
-    public void addContatto(Contatto contatto) {
+    public boolean addContatto(Contatto contatto) {
+        for (Contatto c : contatti) {
+            // TODO: da rivedere la logica
+            boolean cannotInsert = Objects.equal(c.getTipologia(), contatto.getTipologia()) &&
+                    Objects.equal(c.getSuffix(), contatto.getSuffix()) && Objects.equal(c.getContatto(), contatto.getContatto());
+            if (cannotInsert)
+                return false;
+        }
         contatti.add(contatto);
+        return true;
     }
 
     @Transient

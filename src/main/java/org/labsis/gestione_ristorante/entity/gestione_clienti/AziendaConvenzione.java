@@ -1,7 +1,6 @@
 package org.labsis.gestione_ristorante.entity.gestione_clienti;
 
 import com.google.common.base.Objects;
-import org.labsis.gestione_ristorante.entity.common.Azienda;
 import org.labsis.gestione_ristorante.entity.common.AziendaAbstract;
 import org.labsis.gestione_ristorante.entity.common.Contatto;
 
@@ -13,7 +12,7 @@ import java.util.Set;
  * TODO: Documentazione
  */
 
-@Entity
+@Entity(name = "AziendaConvenzione")
 @Table(uniqueConstraints = {
         @UniqueConstraint(name = "nome_azienda_unique", columnNames = "nome_azienda"),
         @UniqueConstraint(name = "prefix_tessera_unique", columnNames = "prefix_tessera"),
@@ -87,12 +86,18 @@ public class AziendaConvenzione extends AziendaAbstract {
 
     @Transient
     @Override
-    public void addContatto(Contatto contatto) {
-        if(contatti == null)
-            contatti = new LinkedHashSet<>();
+    public boolean addContatto(Contatto contatto) {
+        for (Contatto c : contatti) {
+            boolean cannotInsert = Objects.equal(c.getTipologia(), contatto.getTipologia()) &&
+                    Objects.equal(c.getSuffix(), contatto.getSuffix()) && Objects.equal(c.getContatto(), contatto.getContatto());
+            if(cannotInsert)
+                return false;
+        }
         contatti.add(contatto);
+        return true;
     }
 
+    @Transient
     @Override
     public void removeContattoByTipologia(String tipologia) {
         if(!contatti.isEmpty()) {
@@ -105,6 +110,7 @@ public class AziendaConvenzione extends AziendaAbstract {
         }
     }
 
+    @Transient
     @Override
     public void removeContattoByTipologiaAndSuffix(String tipologia, String suffix) {
         if(!contatti.isEmpty()) {
@@ -117,6 +123,7 @@ public class AziendaConvenzione extends AziendaAbstract {
         }
     }
 
+    @Transient
     protected String generatePrefix(String piva, String nomeAzienda, String citta) {
         String ret = "";
         if(nomeAzienda == null || nomeAzienda.isEmpty()) return ret;

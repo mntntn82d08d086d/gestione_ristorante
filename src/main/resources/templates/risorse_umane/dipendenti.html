@@ -47,7 +47,7 @@
                         </div>
                         <div class="col">
                             <p>
-                                <a th:href="@{/risorse_umane/dipendenti/edit/{id}/update_contatto (id=${dipendente.getId()})}"
+                                <a th:href="@{/risorse_umane/dipendenti/edit/{id}/update_contatto (id=${dipendente.getCodiceFiscale()()})}"
                                    class="btn btn-primary btn-sm"> aggiorna </a>
                             </p>
                         </div>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="row">
                         <p>
-                            <a th:href="@{/risorse_umane/dipendenti/edit/{id}/new_contatto (id=${dipendente.getId()})}"
+                            <a th:href="@{/risorse_umane/dipendenti/edit/{id}/new_contatto (id=${dipendente.getCodiceFiscale()})}"
                                class="btn btn-primary btn-sm"> aggiungi </a>
                         </p>
                     </div>
@@ -65,13 +65,13 @@
                 <!-- TODO: da regolare il sizing -->
                 <div class="row">
                     <div class="col">
-                        <a th:href="@{/risorse_umane/dipendenti/edit/{id} (id=${dipendente.getId()})}"
+                        <a th:href="@{/risorse_umane/dipendenti/edit/{id} (id=${dipendente.getCodiceFiscale()})}"
                            class="btn btn-primary sm">
                             modifica </a>
                     </div>
                     <br>
                     <div class="col">
-                        <a th:href="@{/risorse_umane/dipendenti/delete/{id} (id=${dipendente.getId()})}"
+                        <a th:href="@{/risorse_umane/dipendenti/delete/{id} (id=${dipendente.getCodiceFiscale()})}"
                            class="btn btn-danger sm">
                             elimina </a>
                     </div>

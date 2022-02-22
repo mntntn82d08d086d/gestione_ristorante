@@ -1,15 +1,15 @@
 package org.labsis.gestione_ristorante.entity.common;
 
 import com.google.common.base.Objects;
-import lombok.*;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 import java.util.Set;
 
 /**
- * TODO: Documentazione
+ * Classe comune per le entità Fornitore e AziendaConvenzione
  */
 
 @MappedSuperclass
@@ -43,7 +43,7 @@ public abstract class AziendaAbstract implements Azienda {
     public abstract void setContatti(Set<Contatto> contatti);
 
     @Transient
-    public abstract void addContatto(Contatto contatto);
+    public abstract boolean addContatto(Contatto contatto);
 
     @Transient
     public abstract void removeContattoByTipologia(String tipologia);
@@ -51,10 +51,18 @@ public abstract class AziendaAbstract implements Azienda {
     @Transient
     public abstract void removeContattoByTipologiaAndSuffix(String tipologia, String suffix);
 
+    /**
+     * Metodo che ritorna la partita iva dell'Azienda.
+     * @return partita iva
+     */
     public String getPiva() {
         return piva;
     }
 
+    /**
+     * Metodo per settare la partita iva dell'Azienda
+     * @param piva
+     */
     public void setPiva(String piva) {
         this.piva = piva;
     }

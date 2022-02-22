@@ -1,7 +1,6 @@
 package org.labsis.gestione_ristorante.entity.magazzino;
 
 import com.google.common.base.Objects;
-import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
