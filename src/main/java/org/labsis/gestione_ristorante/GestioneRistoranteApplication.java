@@ -12,8 +12,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+/*
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+*/
 
 import java.sql.Date;
 
@@ -31,10 +33,12 @@ public class GestioneRistoranteApplication {
         SpringApplication.run(GestioneRistoranteApplication.class, args);
     }
 
+/*
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+*/
 
 /*
     @Bean
@@ -66,12 +70,12 @@ public class GestioneRistoranteApplication {
     CommandLineRunner run(SocioService socioService, AccountService accountService) {
         return args -> {
             Account ac = new Account("am8", "antoniomon@gmail.com",
-                    getPasswordEncoder().encode("admin"));
+                    "admin");
             Socio admin = new Socio();
             admin.setCodiceFiscale("mntntn82");
             admin.setNome("Antonio");
             admin.setCognome("Montera");
-            admin.setDataDiNascita(new Date(1982, 4, 8));
+            admin.setDataDiNascita(new java.sql.Date(1982, 4, 8));
             admin.setIndirizzo("Via Martiri 22");
             admin.setCitta("Como");
             admin.setAccount(ac);

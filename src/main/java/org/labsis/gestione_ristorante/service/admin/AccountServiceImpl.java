@@ -68,7 +68,7 @@ public class AccountServiceImpl implements AccountService/*, UserDetailsService 
     }
 
     // TODO: valutare l'uso del metodo
-    @Override
+    //@Override
     public OldRole updateAccountRole(AccountKey id, OldRole oldRole) {
         return null;
     }

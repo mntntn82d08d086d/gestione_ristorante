@@ -1,6 +1,7 @@
 package org.labsis.gestione_ristorante.controller.magazzino;
 
 import org.labsis.gestione_ristorante.entity.magazzino.Ordine;
+import org.labsis.gestione_ristorante.entity.magazzino.Prodotto;
 import org.labsis.gestione_ristorante.service.magazzino.OrdineService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,5 +69,12 @@ public class OdineController {
     public String deleteOrdine(@PathVariable Long id) {
         ordineService.deleteOrdineById(id);
         return REDIRECT_LISTA_ORDINI;
+    }
+
+    @GetMapping("/ordini/{id}/dettagli_ordine")
+    public String getAllProdottiInOrdine(@PathVariable Long id, Model model) {
+        List<Prodotto> prodottiInOrdine = ordineService.getAllProdottiInOrdine(id);
+        model.addAttribute("prodottiInOrdine", prodottiInOrdine);
+        return "magazzino/ordine_details";
     }
 }

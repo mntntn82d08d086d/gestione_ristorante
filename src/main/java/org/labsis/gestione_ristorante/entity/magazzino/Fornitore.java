@@ -13,7 +13,10 @@ import java.util.Set;
  */
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(name = "nome_azienda_unique", columnNames = "nome_azienda"))
+@Table(
+        uniqueConstraints =
+        @UniqueConstraint(name = "nome_azienda_unique", columnNames = "nome_azienda"
+))
 public class Fornitore extends AziendaAbstract {
 
     @OneToMany(fetch = FetchType.EAGER)

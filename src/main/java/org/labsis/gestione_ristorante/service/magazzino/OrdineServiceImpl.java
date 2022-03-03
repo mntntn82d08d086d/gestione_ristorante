@@ -1,6 +1,7 @@
 package org.labsis.gestione_ristorante.service.magazzino;
 
 import org.labsis.gestione_ristorante.entity.magazzino.Ordine;
+import org.labsis.gestione_ristorante.entity.magazzino.Prodotto;
 import org.labsis.gestione_ristorante.repository.magazzino.OrdineRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -25,6 +26,11 @@ public class OrdineServiceImpl implements OrdineService {
 
     public List<Ordine> getAllOrdine() {
         return ordineRepository.findAll();
+    }
+
+    @Override
+    public List<Prodotto> getAllProdottiInOrdine(long id) {
+        return ordineRepository.findAllProdottiInOrdine(id);
     }
 
     @Override
