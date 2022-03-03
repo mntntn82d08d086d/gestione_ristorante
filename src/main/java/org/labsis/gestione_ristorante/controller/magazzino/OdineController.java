@@ -3,6 +3,7 @@ package org.labsis.gestione_ristorante.controller.magazzino;
 import org.labsis.gestione_ristorante.entity.magazzino.Ordine;
 import org.labsis.gestione_ristorante.entity.magazzino.Prodotto;
 import org.labsis.gestione_ristorante.service.magazzino.OrdineService;
+import org.labsis.gestione_ristorante.service.magazzino.ProdottoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +24,11 @@ public class OdineController {
     private static final String REDIRECT_LISTA_ORDINI = "redirect:/magazzino/ordini";
 
     private final OrdineService ordineService;
+    private final ProdottoService prodottoService;
 
-    public OdineController(OrdineService ordineService) {
+    public OdineController(OrdineService ordineService, ProdottoService prodottoService) {
         this.ordineService = ordineService;
+        this.prodottoService = prodottoService;
     }
 
     @GetMapping("/ordini")
@@ -37,8 +40,11 @@ public class OdineController {
 
     @GetMapping("/ordini/new")
     public String createOrdine(Model model) {
+        // TODO: da rivedere
         Ordine ordine = new Ordine();
+        List<Prodotto> prodotti = prodottoService.getAllProdotto();
         model.addAttribute("ordine", ordine);
+        model.addAttribute("ciccio", prodotti);
         return CREATE_ORDINE;
     }
 
