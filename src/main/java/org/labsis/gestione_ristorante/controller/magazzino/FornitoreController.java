@@ -34,10 +34,13 @@ public class FornitoreController {
 
     private final R_FPService rfpService;
 
+    private static Integer flag;
+
     public FornitoreController(FornitoreService fornitoreService, ContattoService contattoService, R_FPService rfpService) {
         this.fornitoreService = fornitoreService;
         this.contattoService = contattoService;
         this.rfpService = rfpService;
+        flag = 0;
     }
 
     // TODO: da implementare la presentazione delle forniture
@@ -50,6 +53,7 @@ public class FornitoreController {
             map.put(f,countForniture);
         }
         model.addAttribute("fornitori", map);
+        model.addAttribute("obj", flag);
         return LISTA_FORNITORI;
     }
 
@@ -70,8 +74,12 @@ public class FornitoreController {
     }
 
     @PostMapping("/fornitori/new")
-    public String saveFornitore(@ModelAttribute("fornitore") Fornitore fornitore/*, @ModelAttribute("prodotto") Prodotto prodotto, @ModelAttribute("fornitura") R_FP fornitura*/) {
-        fornitoreService.saveFornitore(fornitore);
+    public String saveFornitore(@ModelAttribute("fornitore") Fornitore fornitore, Model model/*, @ModelAttribute("prodotto") Prodotto prodotto, @ModelAttribute("fornitura") R_FP fornitura*/) {
+        Optional<Fornitore> obj = fornitoreService.saveFornitore(fornitore);
+        flag = 0; //caso vuoto
+        if (obj.isEmpty())
+            flag = 1;
+        model.addAttribute("obj", flag);
         return REDIRECT_LISTA_FORNITORI;
     }
 

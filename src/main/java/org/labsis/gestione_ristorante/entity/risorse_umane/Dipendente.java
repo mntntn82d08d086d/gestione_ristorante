@@ -7,6 +7,7 @@ import org.labsis.gestione_ristorante.entity.common.UtenteAbstract;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Set;
 @Entity
 public class Dipendente extends UtenteAbstract {
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "rubrica_dipendente",
             joinColumns = @JoinColumn(name = "dipendente_codice_fiscale", referencedColumnName = "codice_fiscale",
@@ -42,7 +43,8 @@ public class Dipendente extends UtenteAbstract {
 
     public Dipendente() {
         super();
-         account = new Account();
+        account = new Account();
+        contatti = new LinkedHashSet<>();
     }
 
     public Dipendente(String codiceFiscale, String nome, String cognome, Date dataDiNascita, String indirizzo,
