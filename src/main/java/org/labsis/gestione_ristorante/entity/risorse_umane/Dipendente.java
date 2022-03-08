@@ -38,7 +38,11 @@ public class Dipendente extends UtenteAbstract {
     @Column(name = "mansione", length = 20, nullable = false)
     private String mansione;
 
-    @OneToOne(optional = false, orphanRemoval = true)
+    @OneToOne(orphanRemoval = true)
+    @JoinColumns({
+            @JoinColumn(name = "username", referencedColumnName = "username"),
+            @JoinColumn(name = "email", referencedColumnName = "email")
+    })
     private Account account;
 
     public Dipendente() {
@@ -128,7 +132,9 @@ public class Dipendente extends UtenteAbstract {
     }
 
     public enum EnumMansione {
-        NS("Non Specificato"), MAGAZZINIERE("Magazziniere"), CASSIERE("Cassiere"), CAMERIERE("Cameriere"), RIDER("Rider");
+        NS("Non Specificato"), MAGAZZINIERE("Magazziniere"), CASSIERE("Cassiere"),
+        CAMERIERE("Cameriere"), RIDER("Rider"), BRAND_AMBASSADOR("Brand Ambassador"),
+        CUOCO("Cuoco"), PINSAIOLO("Pinsaiolo");
 
         EnumMansione(String mansione) {
             this.mansione = mansione;

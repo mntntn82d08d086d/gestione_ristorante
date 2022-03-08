@@ -2,10 +2,7 @@ package org.labsis.gestione_ristorante.entity.admin;
 
 import com.google.common.base.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -22,8 +19,7 @@ public class Account implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    public Account() {
-    }
+    public Account() {}
 
     public Account(AccountKey id, String password) {
         this.id = id;
@@ -49,6 +45,16 @@ public class Account implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Transient
+    public void setEmail(String email) {
+        id.setEmail(email);
+    }
+
+    @Transient
+    public void setUsername(String username) {
+        id.setUsername(username);
     }
 
     @Override
