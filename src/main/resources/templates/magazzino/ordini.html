@@ -108,10 +108,12 @@
                    class="btn btn-primary btn-sm mb-3"> visualizza </a>
             </td>
             <td>
-                <a th:href="@{/magazzino/ordini/edit/{id} (id=${ordine.id})}" class="btn btn-primary">Modifica</a>
+                <a th:href="@{/magazzino/ordini/edit/{id} (id=${ordine.id})}" class="btn btn-primary btn-sm">Modifica</a>
                 <form th:action="@{/magazzino/ordini/delete/{id} (id=${ordine.id})}" method="post">
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <input type="hidden" name="_method" value="delete"/>
-                    <input type="submit" value="elimina" class="btn btn-danger sm"/>
+                    <input type="submit" value="elimina" class="btn btn-danger btn-sm"></button>
+                    </div>
                 </form>
                 <!-- <a th:href="@{/magazzino/ordini/delete/{id} (id=${ordine.id})}" class="btn btn-danger">Elimina</a> -->
 

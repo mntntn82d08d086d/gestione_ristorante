@@ -51,8 +51,7 @@
             <th> Cognome </th>
             <th> Codice Fiscale </th>
             <th> Data di Nascita </th>
-            <th> Indirizzo </th>
-            <th> Città </th>
+            <th> Indirizzo, Città </th>
             <th> Contatto </th>
             <th>&emsp;</th>
         </tr>
@@ -67,6 +66,7 @@
             <td>
                 <!-- TODO: da regolare il sizing -->
                 <div class="container">
+                    <div th:unless="${dipendente.contatti.size() > 0}">
                     <div class="row start" th:each="contatto, cont: ${dipendente.getContatti()}">
                         <div class="col">
                             <span th:text="${contatto.tipologia}"></span>
@@ -81,7 +81,7 @@
                                    class="btn btn-primary btn-sm"> aggiorna </a>
                             </p>
                         </div>
-
+                    </div>
                     </div>
                     <div class="row">
                         <p>
