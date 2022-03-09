@@ -18,13 +18,17 @@ public class ProdottoController {
 
     private final ProdottoService prodottoService;
 
+    private static Integer flag;
+
     public ProdottoController(ProdottoService prodottoService) {
         this.prodottoService = prodottoService;
+        flag = 0;
     }
 
     @GetMapping("/prodotti")
     public String getAllProdotti(Model model) {
         model.addAttribute("prodotti", prodottoService.getAllProdotto());
+        model.addAttribute("obj", flag);
         return "magazzino/prodotti";
     }
 
@@ -36,8 +40,12 @@ public class ProdottoController {
     }
 
     @PostMapping("/prodotti/new")
-    public String saveProdotto(@ModelAttribute("prodotto") Prodotto prodotto) {
-        prodottoService.saveProdotto(prodotto);
+    public String saveProdotto(@ModelAttribute("prodotto") Prodotto prodotto, Model model) {
+        Optional<Prodotto> obj = prodottoService.saveProdotto(prodotto);
+        flag = 0; //caso vuoto
+        if (obj.isEmpty())
+            flag = 1;
+        model.addAttribute("obj", flag);
         return "redirect:/magazzino/prodotti";
     }
 
