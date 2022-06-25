@@ -32,18 +32,16 @@
                 <li class="nav-item">
                     <a class="nav-link " th:href="@{/magazzino/ordini}">Ordini</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/magazzino/forniture}">Forniture</a>
-                </li>
             </ul>
         </div>
     </div>
 </nav>
 <div th:if="${obj == 1}">
     <!-- TODO: messaggio di inserimento fornitore -->
-    <h3>
-        Fornitore già presente.
-    </h3>
+    <div class="alert alert-danger text-center" role="alert">
+        <h4> Fornitore già presente. </h4>
+    </div>
+
 </div>
 <br>
 <div class="container-fluid">
@@ -119,13 +117,14 @@
                 <!-- TODO: da regolare il sizing -->
                 <div class="row">
                     <div class="col">
-                        <a th:href="@{/magazzino/fornitori/edit/{id} (id=${entry.key.getPiva()})}"
-                           class="btn btn-primary sm"> modifica </a>
+                    <a th:href="@{/magazzino/fornitori/edit/{id} (id=${entry.key.getPiva()})}"
+                       class="btn btn-primary btn-sm"> modifica </a>
                     </div>
+
                     <div class="col">
                         <form th:action="@{/magazzino/fornitori/delete/{id} (id=${entry.key.getPiva()})}" method="post">
                             <input type="hidden" name="_method" value="delete"/>
-                            <input type="submit" value="elimina" class="btn btn-danger sm"/>
+                            <input type="submit" value="elimina" class="btn btn-danger btn-sm"/>
                         </form>
                         <!-- <a th:href="@{/magazzino/fornitori/delete/{id} (id=${entry.key.getPiva()})}" class="btn btn-danger sm"> elimina </a> -->
                     </div>

@@ -74,7 +74,8 @@ public class FornitoreController {
     }
 
     @PostMapping("/fornitori/new")
-    public String saveFornitore(@ModelAttribute("fornitore") Fornitore fornitore, Model model/*, @ModelAttribute("prodotto") Prodotto prodotto, @ModelAttribute("fornitura") R_FP fornitura*/) {
+    public String saveFornitore(@ModelAttribute("fornitore") Fornitore fornitore, Model model
+            /*, @ModelAttribute("prodotto") Prodotto prodotto, @ModelAttribute("fornitura") R_FP fornitura*/) {
         Optional<Fornitore> obj = fornitoreService.saveFornitore(fornitore);
         flag = 0; //caso vuoto
         if (obj.isEmpty())
@@ -82,7 +83,6 @@ public class FornitoreController {
         model.addAttribute("obj", flag);
         return REDIRECT_LISTA_FORNITORI;
     }
-
     // TODO: implementare l'eventualità di modifica fornitura
     @GetMapping("/fornitori/edit/{id}")
     public String editFornitore(@PathVariable("id") String id, Model model) {

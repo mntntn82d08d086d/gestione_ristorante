@@ -48,8 +48,18 @@ public class Account implements Serializable {
     }
 
     @Transient
+    public String getEmail() {
+        return id.getEmail();
+    }
+
+    @Transient
     public void setEmail(String email) {
         id.setEmail(email);
+    }
+
+    @Transient
+    public String getUsername() {
+        return id.getUsername();
     }
 
     @Transient

@@ -35,6 +35,14 @@
 </nav>
 <br>
 
+<div th:if="${obj == 1}">
+    <!-- TODO: messaggio di inserimento fornitore -->
+    <div class="alert alert-danger text-center" role="alert">
+        <h4> Dipendente già presente. </h4>
+    </div>
+
+</div>
+
 <div class="container-fluid">
     <div class="row">
         <h1> Lista Dipendenti </h1>
@@ -91,21 +99,20 @@
                     </div>
                 </div>
             </td>
+
             <td>
-                <!-- TODO: da regolare il sizing -->
-                <div class="row">
-                    <div class="col">
-                        <a th:href="@{/risorse_umane/dipendenti/edit/{id} (id=${dipendente.getCodiceFiscale()})}"
-                           class="btn btn-primary sm">
-                            modifica </a>
-                    </div>
-                    <br>
-                    <div class="col">
-                        <a th:href="@{/risorse_umane/dipendenti/delete/{id} (id=${dipendente.getCodiceFiscale()})}"
-                           class="btn btn-danger sm">
-                            elimina </a>
-                    </div>
+            <div class="row">
+                <div class="col">
+                    <a th:href="@{/risorse_umane/dipendenti/edit/{id} (id=${dipendente.getCodiceFiscale()})}"
+                       class="btn btn-primary btn-sm"></a> Modifica </a>
                 </div>
+                <div class="col">
+                    <form th:action="@{/risorse_umane/dipendenti/delete/{id} (id=${dipendente.getCodiceFiscale()})}" method="post">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <input type="submit" value="elimina" class="btn btn-danger btn-sm"/>
+                    </form>
+                </div>
+            </div>
             </td>
         </tr>
         </tbody>

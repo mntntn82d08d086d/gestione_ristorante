@@ -32,9 +32,7 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/magazzino/ordini}">Ordini</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/magazzino/forniture}">Forniture</a>
-                </li>
+
             </ul>
         </div>
     </div>
@@ -65,20 +63,20 @@
             <td th:text="${prodotto.getTipologia()}"></td>
             <td th:text="${prodotto.getMarca()}"></td>
             <td>
-                <a th:href="@{/magazzino/forniture/prodotto/{id} (id=${prodotto.id})}" class="btn btn-primary">
-                    visualizza </a>
+                <div class="col">
+                    <a th:href="@{/magazzino/forniture/prodotto/{id} (id=${prodotto.id})}" class="btn btn-primary btn-sm">
+                            visualizza </a>
+                </div>
             </td>
             <td>
                 <!-- TODO: da regolare il sizing -->
                 <div class="row">
                     <div class="col">
-                        <a th:href="@{/magazzino/prodotti/edit/{id} (id=${prodotto.id})}" class="btn btn-primary sm">
-                            modifica </a>
+                        <a th:href="@{/magazzino/prodotti/edit/{id} (id=${prodotto.id})}" class="btn btn-primary sm"> modifica </a>
                     </div>
                     <br>
                     <div class="col">
-                        <a th:href="@{/magazzino/prodotti/delete/{id} (id=${prodotto.id})}" class="btn btn-danger sm">
-                            elimina </a>
+                        <a th:href="@{/magazzino/prodotti/delete/{id} (id=${prodotto.id})}" class="btn btn-danger sm"> elimina </a>
                     </div>
                 </div>
             </td>

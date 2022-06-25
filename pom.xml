@@ -124,6 +124,7 @@
                     <version>3.0.0</version>
                 </dependency>
         -->
+<!--
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-server-ui</artifactId>
@@ -139,6 +140,7 @@
             <artifactId>spring-boot-admin-client</artifactId>
             <version>2.5.5</version>
         </dependency>
+-->
 
         <dependency>
             <groupId>org.webjars</groupId>

@@ -1,5 +1,6 @@
 package org.labsis.gestione_ristorante.controller.magazzino;
 
+import org.labsis.gestione_ristorante.entity.magazzino.Fornitore;
 import org.labsis.gestione_ristorante.entity.magazzino.Prodotto;
 import org.labsis.gestione_ristorante.service.magazzino.ProdottoService;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,21 @@ public class ProdottoController {
         return "magazzino/prodotti";
     }
 
+    @PostMapping("/prodotti/edit/{id}")
+    public String updateFornitore(@PathVariable Long id,
+                                  @ModelAttribute("prodotti") Prodotto prodotto,
+                                  Model model) {
+        Optional<Prodotto> opt = prodottoService.getProdottoById(id);
+        if (opt.isPresent()) {
+            Prodotto existingProdotto = opt.get();
+            existingProdotto.setNome(prodotto.getNome());
+            existingProdotto.setTipologia(prodotto.getTipologia());
+            existingProdotto.setMarca(prodotto.getMarca());
+            prodottoService.updateProdotto(existingProdotto, id);
+        }
+        return "redirect:/magazzino/prodotti";
+    }
+
     @GetMapping("/prodotti/new")
     public String createProdotto(Model model) {
         Prodotto prodotto = new Prodotto();
@@ -49,31 +65,34 @@ public class ProdottoController {
         return "redirect:/magazzino/prodotti";
     }
 
-    @GetMapping("/prodotti/edit/{id}")
+    /*@GetMapping("/prodotti/edit/{id}")
     public String editProdotto(@PathVariable("id") Long id, Model model) {
         // TODO: da rivedere
         Prodotto prodotto = prodottoService.getProdottoById(id).get();
         model.addAttribute("prodotto", prodotto);
         return "magazzino/edit_prodotto";
     }
-
-    @PostMapping("/prodotti/edit/{id}")
-    public String updateFornitore(@PathVariable Long id,
-                                  @ModelAttribute("prodotti") Prodotto prodotto,
-                                  Model model) {
+*/
+    // TODO: implementare l'eventualità di modifica fornitura
+    @GetMapping("/prodotti/edit/{id}")
+    public String editProdotti(@PathVariable("id") Long id, Model model) {
         Optional<Prodotto> opt = prodottoService.getProdottoById(id);
+        Prodotto prodotto = null;
         if(opt.isPresent()) {
-            Prodotto existingProdotto = opt.get();
-            existingProdotto.setNome(prodotto.getNome());
-            existingProdotto.setTipologia(prodotto.getTipologia());
-            existingProdotto.setMarca(prodotto.getMarca());
-            prodottoService.updateProdotto(existingProdotto, id);
+            prodotto = opt.get();
         }
+        model.addAttribute("prodotto", prodotto);
+        return "magazzino/edit_prodotto";
+    }
+
+    @PutMapping("/prodotti/edit/{id}")
+    public String updateProdotto(@PathVariable("id") Long id, @ModelAttribute("prodotto") Prodotto prodotto, Model model) {
+        prodottoService.updateProdotto(prodotto, id);
         return "redirect:/magazzino/prodotti";
     }
 
     @GetMapping("/prodotti/delete/{id}")
-    public String deleteFornitori(@PathVariable Long id) {
+    public String deleteProdottoById(@PathVariable Long id) {
         prodottoService.deleteProdottoById(id);
         return "redirect:/magazzino/prodotti";
     }

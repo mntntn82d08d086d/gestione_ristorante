@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.PersistenceException;
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,12 @@ public class FornitoreServiceImpl implements FornitoreService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = {PersistenceException.class})
     @Override
     public Optional<Fornitore> saveFornitore(Fornitore fornitore) {
-        return fornitoreRepository.saveFornitore(fornitore);
+        Optional<Fornitore> ret = Optional.empty();
+        ret = fornitoreRepository.findFornitoreByNomeAzienda(fornitore.getNomeAzienda());
+        if(ret.isEmpty()) {
+            ret = fornitoreRepository.saveFornitore(fornitore);
+        }
+        return ret;
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = {PersistenceException.class})

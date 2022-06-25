@@ -64,6 +64,8 @@ public class AccountServiceImpl implements AccountService/*, UserDetailsService 
 
     @Override
     public Account updateAccount(Account account) {
+        repository.delete(account);
+        repository.flush();
         return repository.save(account);
     }
 

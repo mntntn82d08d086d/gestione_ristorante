@@ -18,8 +18,8 @@ public class CustomFornitoreRepositoryImpl implements CustomFornitoreRepository 
     @Override
     public Optional<Fornitore> saveFornitore(Fornitore fornitore) {
         Optional<Fornitore> ret = Optional.empty();
-        Fornitore f = entityManager.find(Fornitore.class, fornitore.getPiva());
-        if(f == null) {
+        Fornitore f1 = entityManager.find(Fornitore.class, fornitore.getPiva());
+        if(f1 == null) {
             entityManager.persist(fornitore);
             ret = Optional.of(fornitore);
         }
