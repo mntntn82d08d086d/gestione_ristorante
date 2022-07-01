@@ -36,6 +36,7 @@ public class R_FPController {
         this.fornitoreService = fornitoreService;
     }
 
+    // TODO: da eliminare
     @GetMapping("/forniture")
     public String getAllForniture(Model model) {
         List<R_FP> forniture = rfpService.getAllForniture();
