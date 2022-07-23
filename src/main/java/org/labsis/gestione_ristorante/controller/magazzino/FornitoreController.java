@@ -76,8 +76,8 @@ public class FornitoreController {
     @PostMapping("/fornitori/new")
     public String saveFornitore(@ModelAttribute("fornitore") Fornitore fornitore, Model model
             /*, @ModelAttribute("prodotto") Prodotto prodotto, @ModelAttribute("fornitura") R_FP fornitura*/) {
-        Optional<Fornitore> obj = fornitoreService.saveFornitore(fornitore);
         flag = 0; //caso vuoto
+        Optional<Fornitore> obj = fornitoreService.saveFornitore(fornitore);
         if (obj.isEmpty())
             flag = 1;
         model.addAttribute("obj", flag);

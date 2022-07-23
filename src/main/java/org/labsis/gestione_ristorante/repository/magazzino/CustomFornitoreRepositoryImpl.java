@@ -1,14 +1,19 @@
 package org.labsis.gestione_ristorante.repository.magazzino;
 
+import org.labsis.gestione_ristorante.GestioneRistoranteApplication;
 import org.labsis.gestione_ristorante.entity.magazzino.Fornitore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
+import java.sql.SQLException;
 import java.util.Optional;
 
 @Component
 public class CustomFornitoreRepositoryImpl implements CustomFornitoreRepository {
 
+    private static final Logger log = LoggerFactory.getLogger(CustomFornitoreRepositoryImpl.class);
     private final EntityManager entityManager;
 
     public CustomFornitoreRepositoryImpl(EntityManager entityManager) {
@@ -20,8 +25,13 @@ public class CustomFornitoreRepositoryImpl implements CustomFornitoreRepository 
         Optional<Fornitore> ret = Optional.empty();
         Fornitore f1 = entityManager.find(Fornitore.class, fornitore.getPiva());
         if(f1 == null) {
-            entityManager.persist(fornitore);
-            ret = Optional.of(fornitore);
+            try{
+                entityManager.persist(fornitore);
+                entityManager.flush();
+                ret = Optional.of(fornitore);
+            } catch (Exception e) {
+                log.info("message: " + e.getMessage() +"\n" + e.toString());
+            }
         }
         return ret;
     }

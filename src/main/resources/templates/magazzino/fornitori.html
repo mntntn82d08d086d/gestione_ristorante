@@ -41,8 +41,15 @@
     <div class="alert alert-danger text-center" role="alert">
         <h4> Fornitore già presente. </h4>
     </div>
-
 </div>
+
+<div th:if="${obj == 2}">
+    <!-- TODO: messaggio di inserimento fornitore -->
+    <div class="alert alert-danger text-center" role="alert">
+        <h4> PIva non conferme. </h4>
+    </div>
+</div>
+
 <br>
 <div class="container-fluid">
     <div class="row">

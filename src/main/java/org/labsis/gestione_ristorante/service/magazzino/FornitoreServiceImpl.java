@@ -3,6 +3,7 @@ package org.labsis.gestione_ristorante.service.magazzino;
 import org.labsis.gestione_ristorante.entity.magazzino.Fornitore;
 import org.labsis.gestione_ristorante.repository.magazzino.FornitoreRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,13 +37,15 @@ public class FornitoreServiceImpl implements FornitoreService {
         return fornitoreRepository.findFornitoreByPiva(piva);
     }
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = {PersistenceException.class})
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = {UnexpectedRollbackException.class, PersistenceException.class})
     @Override
     public Optional<Fornitore> saveFornitore(Fornitore fornitore) {
-        Optional<Fornitore> ret = Optional.empty();
+        Optional<Fornitore> ret;
         ret = fornitoreRepository.findFornitoreByNomeAzienda(fornitore.getNomeAzienda());
         if(ret.isEmpty()) {
             ret = fornitoreRepository.saveFornitore(fornitore);
+        } else {
+            ret = Optional.empty();
         }
         return ret;
     }
