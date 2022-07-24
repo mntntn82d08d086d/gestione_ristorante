@@ -2,17 +2,17 @@ package org.labsis.gestione_ristorante.controller.magazzino;
 
 import org.labsis.gestione_ristorante.entity.common.Contatto;
 import org.labsis.gestione_ristorante.entity.magazzino.Fornitore;
+import org.labsis.gestione_ristorante.entity.magazzino.R_FP;
 import org.labsis.gestione_ristorante.service.common.ContattoService;
 import org.labsis.gestione_ristorante.service.magazzino.FornitoreService;
+import org.labsis.gestione_ristorante.service.magazzino.ProdottoService;
 import org.labsis.gestione_ristorante.service.magazzino.R_FPService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * TODO: Documentazione
@@ -32,13 +32,17 @@ public class FornitoreController {
 
     private final ContattoService contattoService;
 
+    private final ProdottoService prodottoService;
+
     private final R_FPService rfpService;
 
     private static Integer flag;
 
-    public FornitoreController(FornitoreService fornitoreService, ContattoService contattoService, R_FPService rfpService) {
+    @Autowired
+    public FornitoreController(FornitoreService fornitoreService, ContattoService contattoService, ProdottoService prodottoService, R_FPService rfpService) {
         this.fornitoreService = fornitoreService;
         this.contattoService = contattoService;
+        this.prodottoService = prodottoService;
         this.rfpService = rfpService;
         flag = 0;
     }
@@ -136,35 +140,60 @@ public class FornitoreController {
         return REDIRECT_LISTA_FORNITORI;
     }
 
+    @GetMapping("/fornitori/edit/{id}/update_contatto/{contatto_id}")
+    public String editContattoFornitore(@PathVariable("id") String id, @PathVariable("contatto_id") Long contatto_id, Model model) {
+        Optional<Fornitore> optF = fornitoreService.getFornitoreByPiva(id);
+        Fornitore existingFornitore = optF.get();
+        Optional<Contatto> optC = contattoService.getContattoById(contatto_id);
+        Contatto contatto = optC.get();
+        // TODO: da rivedere
+        Contatto.EnumTipologia tipologiaObj = Contatto.EnumTipologia.NS;
+        Contatto.EnumSuffix suffixObj = Contatto.EnumSuffix.NS;
+        model.addAttribute("tipologiaObj", tipologiaObj);
+        model.addAttribute("suffixObj", suffixObj);
+        model.addAttribute("fornitore", existingFornitore);
+        model.addAttribute("contattoObj", contatto);
+        return "magazzino/edit_fornitore_contatto";
+    }
+
     // TODO: da rivedere
-    @PostMapping("/fornitori/{id}/update_contatto")
-    public String addContattoFornitore(@PathVariable String id, @ModelAttribute("fornitore") Fornitore fornitore, @ModelAttribute("contatto") Contatto contatto, Model model) {
+    @PostMapping("/fornitori/edit/{id}/update_contatto/{contatto_id}")
+    public String updateContattoFornitore(@PathVariable("id") String id, @ModelAttribute("fornitore") Fornitore fornitore,
+                                          @PathVariable("contatto_id") Long contatto_id, @ModelAttribute("contatto") Contatto contatto, Model model) {
         Optional<Fornitore> opt = fornitoreService.getFornitoreByPiva(id);
         Fornitore existingFornitore = null;
         if(opt.isPresent()){
             existingFornitore = opt.get();
         }
-        contattoService.saveContatto(contatto);
-        fornitoreService.updateFornitore(existingFornitore, id);
+        // TODO: da rivedere
+        Set<Contatto> temp = existingFornitore.getContatti();
+        for(Contatto c : temp) {
+            if(c.getId().equals(contatto.getId())) {
+                temp.remove(c);
+            }
+        }
+        temp.add(contatto);
+        existingFornitore.setContatti(temp);
+        contattoService.updateContatto(contatto, contatto_id);
+        //contattoService.saveContatto(contatto);
+        //fornitoreService.updateFornitore(existingFornitore, id);
         return REDIRECT_LISTA_FORNITORI;
     }
 
     @DeleteMapping("/fornitori/delete/{id}")
-    public String deleteFornitoreById(@PathVariable("id") String id) {
+    public String deleteFornitoreById(@PathVariable("id") String id, Model model) {
+        Optional<List<R_FP>> optionalFornitureFornitore = rfpService.deleteFornitureByFornitorePiva(id);
+        List<R_FP> fornitureFornitore = optionalFornitureFornitore.get();
+        List<Long> listProdottiId = new ArrayList<>();
+        for(R_FP fornitura : fornitureFornitore) {
+            listProdottiId.add(fornitura.getProdottoId());
+        }
+        // TODO: Da inserire il metodo deleteAllProdottoById(List longId)
+        for(Long idProdotto : listProdottiId) {
+            prodottoService.deleteProdottoById(idProdotto);
+        }
         Optional<Fornitore> opt = fornitoreService.deleteFornitoreByPiva(id);
         // TODO: da implementare messaggio di cancellazione fornitore
         return REDIRECT_LISTA_FORNITORI;
-    }
-
-    // TODO: da rivedere l'uso
-    @GetMapping("/magazzino/fornitori/details/{id}")
-    public String fornitoreDetails(@PathVariable("id") String id, Model model) {
-        Optional<Fornitore> opt = fornitoreService.getFornitoreByPiva(id);
-        Fornitore fornitore = null;
-        if(opt.isPresent()){
-            fornitore = opt.get();
-        }
-        model.addAttribute("fornitore", fornitore);
-        return "magazzino/fornitore_details";
     }
 }

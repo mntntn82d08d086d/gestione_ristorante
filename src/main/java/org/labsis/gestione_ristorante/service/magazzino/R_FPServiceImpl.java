@@ -64,4 +64,13 @@ public class R_FPServiceImpl implements R_FPService {
         // TODO: da implementare
         return Optional.empty();
     }
+
+    @Override
+    public Optional<List<R_FP>> deleteFornitureByFornitorePiva(String piva) {
+        List<R_FP> listaForniture = rfpRepository.findR_FPByFornitorePiva(piva);
+        rfpRepository.deleteAll(listaForniture);
+        rfpRepository.flush();
+        return Optional.of(listaForniture);
+    }
+
 }

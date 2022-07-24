@@ -92,7 +92,7 @@
                         </div>
                         <div class="col">
                             <p>
-                                <a th:href="@{/magazzino/fornitori/edit/{id}/update_contatto (id=${entry.key.getPiva()})}"
+                                <a th:href="@{/magazzino/fornitori/edit/{id}/update_contatto/{contatto_id} (contatto_id=${contatto.getId()},id=${entry.key.getPiva()})}"
                                    class="btn btn-primary btn-sm"> aggiorna </a>
                             </p>
                         </div>

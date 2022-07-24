@@ -49,32 +49,26 @@
                 fornitura</a>
         </div>
     </div>
-    <div class="accordion accordion-flush" id="accordionFlushExample">
-        <th:block th:each="relazione: ${forniture}">
-            <div class="accordion-item">
-                <h2 class="accordion-header" th:id="${relazione.getProdotto().getId()}">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            th:data-bs-target="'#'+${relazione.getProdotto().getId()}+${relazione.getProdotto().getNome()}"
-                            aria-expanded="false"
-                            th:aria-controls="${relazione.getProdotto().getId()}+${relazione.getProdotto().getNome()}"
-                            th:text="${relazione.getProdotto().getNome()}">
 
-                    </button>
-                </h2>
-                <div th:id="${relazione.getProdotto().getId()}+${relazione.getProdotto().getNome()}"
-                     class="accordion-collapse collapse"
-                     th:aria-labelledby="${relazione.getProdotto().getId()}"
-                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-                        <span th:text="'marca: ' + ${relazione.getProdotto().getMarca()}"></span> <span>, </span>
-                        <span th:text="'tipologia: ' + ${relazione.getProdotto().getTipologia()}"></span>
-                        <span>,</span>
-                        <span th:text="'prezzo: ' + ${relazione.getPrezzoUnitario()}"></span> <span>,</span>
-                        <span th:text="'consegna: ' + ${relazione.getTempoConsegna()}"></span>
-                    </div>
-                </div>
-            </div>
-        </th:block>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        <ol>
+            <th:block th:each="relazione: ${forniture}">
+                <p>
+                <li>
+                    <span>Nome fornitore: </span><strong th:text="${relazione.getProdotto().getNome()}"></strong>
+                    <ul style="list-style-type: none">
+                        <li> <span> Marca: </span><strong th:text= "  ${relazione.getProdotto().getMarca()}"></strong></li>
+                        <li> <span> Tipologia: </span> <strong th:text="  ${relazione.getProdotto().getTipologia()}"></strong></li>
+                        <li> <span> Prezzo: </span> <strong th:text=" ${relazione.getPrezzoUnitario()} + ' €'"></strong></li>
+                        <li> <span> Tempo consegna: </span><strong th:text="${relazione.getTempoConsegna()} + ' giorno/i'"></strong></li>
+
+                    </ul>
+
+                </li>
+                </p>
+
+            </th:block>
+        </ol>
     </div>
 
 </div>

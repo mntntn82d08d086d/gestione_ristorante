@@ -21,6 +21,7 @@ public class CustomContattoRepositoryImpl implements CustomContattoRepository {
     public Optional<Contatto> saveContatto(Contatto contatto) {
         Optional<Contatto> ret = Optional.empty();
         try {
+            // find di entityManager
             TypedQuery<Contatto> query = entityManager.createQuery("SELECT c FROM Contatto c WHERE c.contatto = ?1", Contatto.class);
             Contatto existingContatto = query.setParameter(1, contatto.getContatto()).getSingleResult();
             if(existingContatto != null)

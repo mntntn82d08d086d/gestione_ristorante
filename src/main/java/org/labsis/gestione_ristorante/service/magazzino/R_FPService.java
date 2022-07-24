@@ -28,4 +28,5 @@ public interface R_FPService {
 
     Optional<R_FP> deleteFornitura(R_FPKey id);
 
+    Optional<List<R_FP>> deleteFornitureByFornitorePiva(String piva);
 }
