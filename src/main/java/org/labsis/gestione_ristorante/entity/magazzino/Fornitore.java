@@ -71,6 +71,18 @@ public class Fornitore extends AziendaAbstract {
     }
 
     @Transient
+    //@Override
+    public void updateContatto(Contatto contatto, Long id) {
+        for(Contatto c : contatti) {
+            if(c.getId().equals(id)) {
+                c.setTipologia(contatto.getTipologia());
+                c.setSuffix(contatto.getSuffix());
+                c.setContatto(contatto.getContatto());
+            }
+        }
+    }
+
+    @Transient
     @Override
     public void removeContattoByTipologia(String tipologia) {
         if(!contatti.isEmpty()) {

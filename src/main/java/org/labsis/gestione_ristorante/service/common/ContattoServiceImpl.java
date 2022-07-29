@@ -36,6 +36,7 @@ public class ContattoServiceImpl implements ContattoService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
     public Optional<Contatto> saveContatto(Contatto contatto) {
+
         return contattoRepository.saveContatto(contatto);
     }
 

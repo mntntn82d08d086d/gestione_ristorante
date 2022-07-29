@@ -158,25 +158,29 @@ public class FornitoreController {
 
     // TODO: da rivedere
     @PostMapping("/fornitori/edit/{id}/update_contatto/{contatto_id}")
-    public String updateContattoFornitore(@PathVariable("id") String id, @ModelAttribute("fornitore") Fornitore fornitore,
-                                          @PathVariable("contatto_id") Long contatto_id, @ModelAttribute("contatto") Contatto contatto, Model model) {
+    public String updateContattoFornitore(@PathVariable("id") String id, @PathVariable("contatto_id") String str_contatto_id,
+                                          @ModelAttribute("fornitore") Fornitore fornitore, @ModelAttribute("contatto") Contatto contatto, Model model) {
         Optional<Fornitore> opt = fornitoreService.getFornitoreByPiva(id);
         Fornitore existingFornitore = null;
+        Long contatto_id = null;
         if(opt.isPresent()){
             existingFornitore = opt.get();
+            contatto_id = Long.parseLong(str_contatto_id);
         }
-        // TODO: da rivedere
-        Set<Contatto> temp = existingFornitore.getContatti();
-        for(Contatto c : temp) {
-            if(c.getId().equals(contatto.getId())) {
-                temp.remove(c);
-            }
-        }
-        temp.add(contatto);
-        existingFornitore.setContatti(temp);
+        existingFornitore.updateContatto(contatto, contatto_id);
         contattoService.updateContatto(contatto, contatto_id);
+        // TODO: da eliminare
         //contattoService.saveContatto(contatto);
         //fornitoreService.updateFornitore(existingFornitore, id);
+        return REDIRECT_LISTA_FORNITORI;
+    }
+
+    // TODO: da implementare il verbo in HTML
+    @DeleteMapping("/fornitori/delete/{id}/delete_contatto/{contatto_id}")
+    public String deleteContattoFornitore(@PathVariable("id") String str_id, Model model) {
+        Long id = Long.parseLong(str_id);
+
+        contattoService.deleteContattoById(id);
         return REDIRECT_LISTA_FORNITORI;
     }
 

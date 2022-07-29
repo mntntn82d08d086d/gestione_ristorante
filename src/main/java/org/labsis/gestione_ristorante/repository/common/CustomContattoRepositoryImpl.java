@@ -28,6 +28,7 @@ public class CustomContattoRepositoryImpl implements CustomContattoRepository {
                 ret = Optional.of(existingContatto);
         } catch (NoResultException e) {
             entityManager.persist(contatto);
+            entityManager.flush();
             ret = Optional.of(contatto);
         }
         return ret;
@@ -38,9 +39,7 @@ public class CustomContattoRepositoryImpl implements CustomContattoRepository {
         Optional<Contatto> ret = Optional.empty();
         Contatto existingContatto = entityManager.find(Contatto.class, id);
         if (existingContatto != null) {
-            entityManager.remove(existingContatto);
-            entityManager.flush();
-            existingContatto.setId(contatto.getId());
+            //existingContatto.setId(contatto.getId());
             existingContatto.setTipologia(contatto.getTipologia());
             existingContatto.setSuffix(contatto.getSuffix());
             existingContatto.setContatto(contatto.getContatto());
